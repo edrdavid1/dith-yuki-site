@@ -14,7 +14,7 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/404'),
+      filter: (page) => !page.includes('/404') && !page.endsWith('/404/'),
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),

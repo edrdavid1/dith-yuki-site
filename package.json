@@ -11,7 +11,7 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "pages:deploy": "npm run build && wrangler pages deploy ./dist --project-name=dith-yuki-site"
+    "pages:deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

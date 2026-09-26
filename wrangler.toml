@@ -1,6 +1,8 @@
-# Cloudflare Pages (static). Git builds only need: build = `npm run build`, output = `dist`.
-# Leave the Cloudflare "Deploy command" empty — do not use `wrangler deploy` (that is for Workers).
-# Manual publish from a laptop: `npm run pages:deploy`
+# Static assets for `npx wrangler deploy` (Cloudflare build deploy command).
 name = "dith-yuki-site"
-pages_build_output_dir = "./dist"
 compatibility_date = "2026-09-26"
+
+[assets]
+directory = "./dist"
+html_handling = "auto-trailing-slash"
+not_found_handling = "404-page"
