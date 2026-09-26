@@ -1,0 +1,4 @@
+# Cloudflare Pages serves the prebuilt static site from dist/; no server adapter is needed.
+name = "dith-yuki-site"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-09-26"

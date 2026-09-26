@@ -1,0 +1,65 @@
+---
+interface Props {
+  platform: 'mac' | 'windows';
+  href: string;
+}
+
+const { platform, href } = Astro.props;
+const isMac = platform === 'mac';
+const titleId = `download-${platform}-title`;
+---
+
+<dialog
+  class="dl-dialog"
+  id={`download-${platform}`}
+  data-platform={platform}
+  aria-labelledby={titleId}
+>
+  <div class="dl-dialog-frame">
+    <div class="dl-dialog-panel">
+      <h2 id={titleId} class="visually-hidden">
+        {isMac ? 'Download Dither Yuki for Mac' : 'Download Dither Yuki for Windows'}
+      </h2>
+
+      <div class="dl-dialog-copy">
+        {isMac ? (
+          <>
+            <p>
+              I'm sorry for the extra step. Dither Yuki is currently not signed with an Apple Developer certificate, so macOS may show a security warning when you try to open the app.
+            </p>
+            <p>
+              This does not mean the application contains a virus. Dither Yuki is an independent open-source project, and you can review the source code on GitHub.
+            </p>
+            <p>
+              If macOS blocks the application, you can allow it in:<br />
+              System Settings → Privacy &amp; Security → Security → Open Anyway
+            </p>
+            <p>Thank you for your patience and for giving Dither Yuki a try.</p>
+          </>
+        ) : (
+          <>
+            <p>
+              I'm sorry for the extra step. Dither Yuki is currently not signed with a code-signing certificate, so Windows Defender or SmartScreen may show a security warning when you try to run the application.
+            </p>
+            <p>
+              This does not mean the application contains a virus. Dither Yuki is an independent open-source project, and you can review the source code on GitHub.
+            </p>
+            <p>
+              If Windows blocks the application, you can usually continue by clicking:<br />
+              More info → Run anyway
+            </p>
+          </>
+        )}
+      </div>
+
+      <div class="dl-dialog-actions">
+        <button type="button" class="dl-btn dl-btn-cancel" data-close-dialog>
+          Cancel
+        </button>
+        <a class="dl-btn dl-btn-download" href={href}>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+</dialog>

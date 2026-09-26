@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const description = 'Explore Dither Yuki features, supported formats, dithering algorithms, current limitations, and the product roadmap.';
+
+const capabilities = [
+  ['Documents', 'multi-tab projects, Save As, recent files, crash recovery, and unsaved-change protection'],
+  ['Import & Export', 'PNG, JPG, WEBP, BMP, TIFF, SVG, and ASCII export to TXT, ANSI, HTML, SVG, PNG, and JSON'],
+  ['Layers', 'non-destructive effects, opacity, 12 blend modes, and undo/redo'],
+  ['35+ algorithms', 'Bayer, Floyd–Steinberg, Atkinson, Sierra, halftone, stipple, ASCII, CRT, Glitch, Glow, Curves, Riemersma, and more'],
+  ['Color Lab', 'palette import/export, color quantization, harmonies, ramps, and multiple palette-generation modes'],
+  ['Patterns', 'a .dyuki pattern library and manager'],
+  ['Interface', 'flexible workspace layout, keyboard shortcuts, and in-app updates'],
+];
+
+const roadmap = [
+  'Video and animation support',
+  'CMYK and improved color management',
+  'More dithering algorithms and effects',
+  'Expanded palette and pattern tools',
+  'Performance improvements',
+  'Better cross-platform support',
+  'And much more',
+];
+---
+
+<Layout
+  variant="review"
+  title="Dither Yuki — Review"
+  description={description}
+  canonical="/review/"
+  image="/social-card.png"
+>
+  <div class="review-content">
+    <section class="review-intro reveal" aria-labelledby="review-title">
+      <h1 id="review-title"><strong>Dither Yuki</strong> is a beta-stage image dithering and palette studio built for experimenting with digital images, colors, and visual effects.</h1>
+      <p>The workflow covers everything from opening an image and building a layer stack to working with palettes, applying dithering algorithms, and exporting the result.</p>
+    </section>
+
+    <figure class="review-screenshot reveal reveal-media">
+      <img
+        src="/images/screnshot.png"
+        alt="Dither Yuki desktop application with layer controls, image preview, dithering effects, and color palette tools"
+        width="1317"
+        height="870"
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+
+    <article class="review-copy">
+      <section class="reveal" aria-labelledby="capabilities-title">
+        <h2 id="capabilities-title">What it can do</h2>
+        <ol>
+          {capabilities.map(([name, detail]) => <li><strong>{name}</strong> — {detail}</li>)}
+        </ol>
+      </section>
+
+      <section class="reveal" aria-labelledby="limitations-title">
+        <h2 id="limitations-title">Current limitations</h2>
+        <p>Dither Yuki is still in beta, so some features are intentionally outside its scope. It is not a painting, printing, batch-processing, or video tool, and there is currently no Linux version.</p>
+        <p>Some algorithms also have implementation limitations. Error-diffusion methods currently run on CPU, while ASCII and Riemersma operate on the full document rather than progressive tiles.</p>
+      </section>
+
+      <section class="reveal" aria-labelledby="idea-title">
+        <h2 id="idea-title">The idea</h2>
+        <p>Dither Yuki is built around a simple idea: <strong>a dedicated space for experimenting with dithering, palettes, and digital image processing</strong> without turning the workflow into a complicated production suite.</p>
+      </section>
+
+      <section class="reveal" aria-labelledby="next-title">
+        <h2 id="next-title">What's next</h2>
+        <p>Dither Yuki is still evolving, and there is a lot more planned for the future.</p>
+        <p>Right now, my main goal is to raise enough support for an Apple Developer Program membership. This will make it easier to distribute Dither Yuki on macOS and provide a smoother installation experience without unnecessary security warnings.</p>
+        <p>After that, I want to keep improving the existing tools and expand what Dither Yuki can do.</p>
+        <p>Planned features include:</p>
+        <ul>
+          {roadmap.map((item) => <li>{item}</li>)}
+        </ul>
+        <p>The goal is to keep growing Dither Yuki while preserving its main idea: a simple space to experiment, create, and play with images.</p>
+      </section>
+    </article>
+
+    <img
+      class="review-portrait reveal reveal-media"
+      src="/images/dither-face-2.png"
+      alt="Colorful dithered portrait artwork"
+      width="477"
+      height="615"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</Layout>

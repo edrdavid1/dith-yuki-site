@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const description = 'Dither Yuki is a desktop studio for dithering. Turn ordinary images into carefully crafted patterns, limited-color compositions, and retro-inspired visuals.';
+
+const softwareSchema = {
+  '@type': 'SoftwareApplication',
+  name: 'Dither Yuki',
+  applicationCategory: 'GraphicsApplication',
+  operatingSystem: 'macOS, Windows',
+  description,
+  creator: {
+    '@type': 'Person',
+    name: 'Dave',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: "L'eco non di Bergamo",
+    url: 'https://dith-yuki-site.pages.dev',
+    sameAs: [
+      'https://github.com/edrdavid1/dith-yuki',
+      'https://t.me/leco_di_Bergamo',
+    ],
+  },
+};
+
+const capabilities = [
+  ['Algorithms', '25+ methods — ordered, error-diffusion, halftone, stipple, ASCII, CRT, and experimental patterns'],
+  ['Color Lab', 'Palettes, quantization, harmonies, and ramps'],
+  ['Layers', 'Non-destructive stacks, opacity, and blend modes'],
+  ['Export', 'PNG, JPG, WEBP, BMP, TIFF, SVG, and ASCII formats'],
+];
+---
+
+<Layout
+  title="Dither Yuki — Home"
+  description={description}
+  image="/social-card.png"
+  schema={softwareSchema}
+>
+  <section slot="hero" class="hero" aria-labelledby="page-title">
+    <img
+      class="hero-art"
+      src="/images/hero-bg.png"
+      alt=""
+      width="1512"
+      height="988"
+      fetchpriority="high"
+      decoding="async"
+    />
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="hero-stack">
+      <h1 id="page-title">dither <em>yuki</em></h1>
+      <a class="hero-mark" href="#site-chrome" aria-label="Scroll to navigation">
+        <img
+          src="/images/hero-icon.svg"
+          alt=""
+          width="366"
+          height="346"
+          decoding="async"
+        />
+      </a>
+    </div>
+  </section>
+
+  <div class="page">
+    <section id="what-is-it" class="block intro reveal reveal-stagger" aria-labelledby="what-title">
+      <div class="intro-text">
+        <p class="kicker">01 — Product</p>
+        <h2 id="what-title">What is it</h2>
+        <p class="lead">
+          A desktop studio for dithering. Turn ordinary images into carefully crafted patterns, limited-color compositions, and retro-inspired visuals.
+        </p>
+        <p>
+          Explore dithering algorithms, build palettes, experiment with halftone and stipple effects, and keep everything organized in layers.
+        </p>
+      </div>
+
+      <figure class="intro-media">
+        <img
+          src="/images/head-dithered.png"
+          alt="A colorful portrait surrounded by dithered botanical details"
+          width="721"
+          height="902"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </section>
+
+    <section class="block statement reveal reveal-stagger" aria-labelledby="artists-title">
+      <h2 id="artists-title" class="statement-title">
+        <span class="statement-title-wide">FROM ARTISTS TO ARTISTS</span>
+      </h2>
+    </section>
+
+    <section id="features" class="block features reveal reveal-stagger" aria-labelledby="features-title">
+      <div class="features-head">
+        <p class="kicker">02 — Tools</p>
+        <h2 id="features-title">What we have</h2>
+        <p class="lead">
+          A focused studio for dithering, palettes, and digital image play — not a bloated production suite.
+        </p>
+      </div>
+
+      <ul class="feature-grid">
+        {capabilities.map(([name, detail]) => (
+          <li>
+            <strong>{name}</strong>
+            <span>{detail}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p class="features-more">
+        <a href="/review/">Read the full review →</a>
+      </p>
+    </section>
+
+    <section id="project" class="block about reveal reveal-stagger" aria-labelledby="about-title">
+      <div class="about-text">
+        <p class="kicker">03 — Maker</p>
+        <h2 id="about-title">Who we are</h2>
+        <div class="about-body">
+          <p>
+            Hi, I'm Dave — an artist and indie developer. I couldn't find a convenient tool for image dithering that suited my needs, so I decided to make my own. This project started as a personal tool that I want to keep developing and improving over time.
+          </p>
+          <p id="license">
+            Right now, my budget is very limited, so I can't afford the necessary developer accounts and licenses for macOS and Windows. Because of this, installing the app may come with additional security warnings.
+          </p>
+          <p>
+            If you like the project and want to help me make it better and keep developing it, you can support me through Ko-fi. Thanks for trying out my project!
+          </p>
+        </div>
+        <div class="support-cta">
+          <a class="coffee-link" href="https://ko-fi.com/ditheryuki" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Zm13 2h2a2 2 0 1 1 0 4h-2M7 4c0 1 1 1 1 2m4-2c0 1 1 1 1 2"/></svg>
+            Ko-fi
+          </a>
+          <aside class="support-notice" aria-labelledby="support-notice-title">
+            <h3 id="support-notice-title">Non-Commercial Support Notice</h3>
+            <p>This is a personal, non-commercial open-source pet project. All financial contributions made through Ko-fi (or PayPal) are strictly voluntary, non-refundable donations (gifts) to support the ongoing hosting and development of this free tool. No commercial goods, premium services, hidden features, or exclusive benefits are provided in exchange for your support. Thank you for keeping this project alive!</p>
+          </aside>
+        </div>
+      </div>
+
+      <figure class="about-media">
+        <img
+          src="/images/face-dithering.png"
+          alt="Dithered portrait showing the Dither Yuki visual style"
+          width="806"
+          height="1007"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </section>
+
+    <p class="signature reveal">
+      <span class="flag" aria-hidden="true"><i class="blue"></i><i class="brown"></i><i class="dark"></i></span>
+      <a href="https://t.me/leco_di_Bergamo" target="_blank" rel="noopener noreferrer">
+        L'eco non di Bergamo.<sup>1</sup>
+      </a>
+    </p>
+  </div>
+</Layout>

@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects
+# Keep trailing-slash URLs consistent with Astro static output.
+
+/home / 301
+/index.html / 301

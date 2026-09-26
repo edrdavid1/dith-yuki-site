@@ -1,0 +1,213 @@
+---
+import Layout from '../layouts/Layout.astro';
+import eulaText from '../../EULA.txt?raw';
+import sourceLicenseText from '../../LICENSE?raw';
+import flexlayoutLicenseText from '../../flexlayout-LICENSE.MIT.txt?raw';
+
+const description =
+  'License terms for Dither Yuki: the End User License Agreement for the app, the L\'eco non di Bergamo Software License for source code, website copyright, and third-party notices.';
+
+const githubLegal = 'https://github.com/edrdavid1/dith-yuki/tree/main/docs/legal';
+const githubLicense = 'https://github.com/edrdavid1/dith-yuki/blob/main/LICENSE';
+const githubEula = 'https://github.com/edrdavid1/dith-yuki/blob/main/docs/legal/USER_AGREEMENT.txt';
+---
+
+<Layout
+  variant="license"
+  title="Dither Yuki — License"
+  description={description}
+  canonical="/license/"
+  image="/social-card.png"
+>
+  <div class="license-content">
+    <header class="license-intro reveal">
+      <h1>License</h1>
+      <p class="license-lead">
+        Dither Yuki uses two related legal instruments: one for the compiled application, and one for the source code. Website artwork is copyrighted separately. Third-party components keep their own licenses.
+      </p>
+      <p class="license-updated">
+        End User License Agreement last updated: <strong>September 22, 2026</strong>
+      </p>
+      <p class="license-canonical">
+        Canonical copies live in the
+        <a href={githubLegal} target="_blank" rel="noopener noreferrer">project repository</a>.
+      </p>
+    </header>
+
+    <section class="license-map reveal reveal-stagger" aria-labelledby="map-title">
+      <h2 id="map-title">What applies where</h2>
+      <dl>
+        <div>
+          <dt>Compiled app</dt>
+          <dd>
+            <a href="#eula">End User License Agreement</a>
+            — install and use of macOS / Windows builds (including alpha).
+          </dd>
+        </div>
+        <div>
+          <dt>Source code</dt>
+          <dd>
+            <a href="#source-license">L'eco non di Bergamo Software License</a>
+            — repository and other source distributions.
+          </dd>
+        </div>
+        <div>
+          <dt>Your files</dt>
+          <dd>
+            You keep ownership of content you create, including <code>.dyproj</code> and <code>.dyuki</code> projects.
+          </dd>
+        </div>
+        <div>
+          <dt>This website</dt>
+          <dd>
+            <a href="#website">Website and artwork</a>
+            — site copy, screenshots, and original illustrations.
+          </dd>
+        </div>
+        <div>
+          <dt>Dependencies</dt>
+          <dd>
+            <a href="#third-party">Third-party notices</a>
+            — including FlexLayout (MIT).
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="license-sections">
+      <section class="reveal" id="eula" aria-labelledby="eula-title">
+        <span class="license-index" aria-hidden="true">01</span>
+        <div>
+          <h2 id="eula-title">End User License Agreement</h2>
+          <p>
+            Governs downloading, installing, and using the Dither Yuki application. Source code, where published, is licensed separately under the Software License below.
+          </p>
+
+          <ul class="license-points">
+            <li>Personal and commercial use of the app is allowed.</li>
+            <li>You may create, sell, and monetize your own projects and media.</li>
+            <li>Selling, renting, repackaging, or monetizing the app or its source code is not allowed.</li>
+            <li>Alpha builds are pre-release: expect bugs, crashes, and format changes; keep backups.</li>
+            <li>The software runs locally; no telemetry unless you opt in to a specific feature.</li>
+            <li>Governing law: Republic of Lithuania, subject to mandatory consumer protections where they apply.</li>
+          </ul>
+
+          <p class="license-source">
+            Full text:
+            <a href={githubEula} target="_blank" rel="noopener noreferrer">USER_AGREEMENT.txt</a>
+          </p>
+
+          <details class="license-document">
+            <summary>Read the full End User License Agreement</summary>
+            <pre>{eulaText}</pre>
+          </details>
+        </div>
+      </section>
+
+      <section class="reveal" id="source-license" aria-labelledby="source-license-title">
+        <span class="license-index" aria-hidden="true">02</span>
+        <div>
+          <h2 id="source-license-title">L'eco non di Bergamo Software License</h2>
+          <p>
+            Applies to the Dither Yuki source code. Copyright © 2026 David Murashka, operating as L'eco non di Bergamo. All rights reserved.
+          </p>
+
+          <ul class="license-points">
+            <li>Use for personal, educational, academic, internal, or commercial purposes is permitted.</li>
+            <li>User-generated content remains yours; the licensor claims no rights in your files.</li>
+            <li>Redistribution of the software itself must be free of charge and unmodified, with this license attached.</li>
+            <li>Selling the software, monetizing its source, or embedding it in another commercial product is prohibited.</li>
+            <li>No trademark rights are granted beyond identifying the origin of the software.</li>
+          </ul>
+
+          <p class="license-source">
+            Full text:
+            <a href={githubLicense} target="_blank" rel="noopener noreferrer">LICENSE</a>
+          </p>
+
+          <details class="license-document">
+            <summary>Read the full Software License</summary>
+            <pre>{sourceLicenseText}</pre>
+          </details>
+        </div>
+      </section>
+
+      <section class="reveal" id="website" aria-labelledby="website-title">
+        <span class="license-index" aria-hidden="true">03</span>
+        <div>
+          <h2 id="website-title">Website and artwork</h2>
+          <p>
+            Unless a third-party notice says otherwise, the text, layout, screenshots, illustrations, and other original materials on this website are © 2026 David Murashka / L'eco non di Bergamo. All rights reserved.
+          </p>
+          <p>
+            You may share links to this site. Reuse, redistribution, or commercial exploitation of the site materials requires prior permission, except where fair dealing / fair use or another statutory exception applies.
+          </p>
+        </div>
+      </section>
+
+      <section class="reveal" id="third-party" aria-labelledby="third-party-title">
+        <span class="license-index" aria-hidden="true">04</span>
+        <div>
+          <h2 id="third-party-title">Third-party notices</h2>
+          <p>
+            Dither Yuki includes open-source components. Their licenses remain in force. The notice below is preserved from the application’s legal audit record.
+          </p>
+
+          <h3>FlexLayout React 0.7.15 — MIT License</h3>
+          <p>
+            Copyright (c) 2017 Caplin Systems Ltd. Snapshot taken 4 September 2026.
+            Package metadata for this version lists ISC, while the published package’s <code>LICENSE</code> file is MIT; the license file is treated as the compliance source of truth.
+          </p>
+
+          <details class="license-document">
+            <summary>Read the FlexLayout MIT License</summary>
+            <pre>{flexlayoutLicenseText}</pre>
+          </details>
+
+          <details class="license-document license-audit">
+            <summary>View the frozen package audit record</summary>
+            <dl>
+              <dt>Package</dt>
+              <dd><code>flexlayout-react</code> 0.7.15</dd>
+              <dt>npm gitHead</dt>
+              <dd><code>88cbbf55d005a94e9fc469c5ad7fd56fc363d31b</code></dd>
+              <dt>Tarball</dt>
+              <dd>
+                <a href="https://registry.npmjs.org/flexlayout-react/-/flexlayout-react-0.7.15.tgz">
+                  flexlayout-react-0.7.15.tgz
+                </a>
+              </dd>
+              <dt>dist.integrity</dt>
+              <dd>
+                <code>sha512-ydTMdEoQO5BniylxVkSxa59rEY0+96lqqRII+QK+yq6028eHywPuxZawt4g45y5pMb9ptP4N9HPAQXAFsxwowQ==</code>
+              </dd>
+              <dt>SHA-256 of LICENSE</dt>
+              <dd><code>59391baaf80d3af529e3f08adffc813fe54373e6365a2ae5ba3a991e9c25d16f</code></dd>
+            </dl>
+            <p>
+              Also kept in the app repo as
+              <code>docs/legal/flexlayout-license-snapshot.md</code>
+              and
+              <code>docs/legal/flexlayout-LICENSE.MIT.txt</code>.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="reveal" id="contact" aria-labelledby="contact-license-title">
+        <span class="license-index" aria-hidden="true">05</span>
+        <div>
+          <h2 id="contact-license-title">Questions</h2>
+          <p>
+            For licensing questions, contact
+            <a href="https://t.me/leco_di_Bergamo" target="_blank" rel="noopener noreferrer">L'eco non di Bergamo</a>
+            on Telegram, or open an issue on
+            <a href="https://github.com/edrdavid1/dith-yuki" target="_blank" rel="noopener noreferrer">GitHub</a>.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <p class="license-back reveal"><a href="/">← Back to Dither Yuki</a></p>
+  </div>
+</Layout>
