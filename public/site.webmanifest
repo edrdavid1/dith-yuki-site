@@ -1,0 +1,21 @@
+{
+  "name": "Dither Yuki",
+  "short_name": "Dither Yuki",
+  "description": "A desktop studio for dithering.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ddd9ce",
+  "theme_color": "#ddd9ce",
+  "icons": [
+    {
+      "src": "/android-chrome-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
