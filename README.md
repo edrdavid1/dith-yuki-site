@@ -25,10 +25,16 @@ npm run preview
 
 ## Публикация на Cloudflare Pages
 
-1. Подключите репозиторий [edrdavid1/dith-yuki-site](https://github.com/edrdavid1/dith-yuki-site) в Cloudflare Pages.
-2. Укажите команду сборки `npm run build` и каталог результата `dist` (это также указано в `wrangler.toml`, проект `dith-yuki-site`).
-3. Canonical / sitemap / robots по умолчанию используют `https://dith-yuki-site.pages.dev`. При кастомном домене задайте переменную окружения `SITE=https://your.domain` в Cloudflare Pages (Production). На preview-сборках подхватывается `CF_PAGES_URL`.
-4. Файлы `public/_headers` и `public/_redirects` применяются Cloudflare Pages автоматически.
+1. Подключите репозиторий [edrdavid1/dith-yuki-site](https://github.com/edrdavid1/dith-yuki-site) в **Cloudflare Pages** (не Workers).
+2. Настройки сборки:
+   - **Build command:** `npm run build`
+   - **Build output directory:** `dist`
+   - **Deploy command:** оставьте **пустым**
+3. Не указывайте `npx wrangler deploy` — это команда для Workers и ломает Pages-деплой (`Missing entry-point to Worker script`).
+4. Canonical / sitemap / robots по умолчанию используют `https://dith-yuki-site.pages.dev`. При кастомном домене задайте `SITE=https://your.domain` в Production environment variables. На preview подхватывается `CF_PAGES_URL`.
+5. `public/_headers` и `public/_redirects` применяются автоматически.
+
+Ручной деплой с машины: `npm run pages:deploy` (нужен `wrangler` login / API token).
 
 ## SEO и контент
 

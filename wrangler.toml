@@ -1,4 +1,6 @@
-# Cloudflare Pages serves the prebuilt static site from dist/; no server adapter is needed.
+# Cloudflare Pages (static). Git builds only need: build = `npm run build`, output = `dist`.
+# Leave the Cloudflare "Deploy command" empty — do not use `wrangler deploy` (that is for Workers).
+# Manual publish from a laptop: `npm run pages:deploy`
 name = "dith-yuki-site"
 pages_build_output_dir = "./dist"
 compatibility_date = "2026-09-26"
