@@ -773,34 +773,88 @@ a:focus-visible,
 }
 
 .support-cta {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.9rem;
+  display: grid;
+  justify-items: start;
+  gap: 0.75rem;
   margin-top: 1.2rem;
 }
 
-.support-cta .coffee-link {
-  flex: 0 0 auto;
-}
-
 .support-notice {
-  max-width: 27rem;
-  padding-top: 0.12rem;
+  max-width: 28rem;
   color: var(--ink-faint);
-  font-size: 0.68rem;
-  line-height: 1.35;
+  font-size: 0.78rem;
+  line-height: 1.45;
 }
 
-.support-notice h3 {
-  margin: 0 0 0.2rem;
+.support-notice summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  list-style: none;
+  color: var(--ink-faint);
+  cursor: pointer;
+  user-select: none;
+  text-underline-offset: 0.18em;
+  transition: color 150ms ease;
+}
+
+.support-notice summary::-webkit-details-marker {
+  display: none;
+}
+
+.support-notice summary::after {
+  display: inline-block;
+  margin-left: 0.15rem;
+  color: currentColor;
+  content: "▸";
+  font-size: 0.7em;
+  transform: translateY(0.05em);
+  transition: transform 180ms var(--ease);
+}
+
+.support-notice[open] summary::after {
+  transform: rotate(90deg) translateX(0.05em);
+}
+
+.support-notice summary:hover,
+.support-notice[open] summary {
   color: var(--ink-soft);
-  font-size: inherit;
-  font-weight: 700;
-  line-height: inherit;
+  text-decoration: underline;
 }
 
-.support-notice p {
+.support-notice-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  opacity: 0.9;
+}
+
+.support-notice-body {
+  margin-top: 0.55rem;
+  padding: 0.65rem 0.75rem;
+  border-left: 2px solid rgb(20 22 18 / 16%);
+  background: rgb(255 255 255 / 28%);
+}
+
+.support-notice-body p {
   margin: 0;
+  max-width: 32rem;
+  color: var(--ink-faint);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.support-notice-body p + p {
+  margin-top: 0.55rem;
+}
+
+.support-notice-body a {
+  color: var(--ink-soft);
+  text-underline-offset: 0.15em;
+}
+
+.support-notice-body a:hover {
+  color: var(--ink);
 }
 
 .signature {
@@ -1389,14 +1443,6 @@ a:focus-visible,
     align-self: flex-end;
     margin: 0;
     transform: none;
-  }
-
-  .support-cta {
-    flex-wrap: wrap;
-  }
-
-  .support-notice {
-    flex-basis: 100%;
   }
 
   .intro-media {
