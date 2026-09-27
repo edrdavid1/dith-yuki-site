@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const description = 'Dither Yuki is a desktop studio for dithering. Turn ordinary images into carefully crafted patterns, limited-color compositions, and retro-inspired visuals.';
+const description = 'Dither Yuki is a desktop image dithering studio for turning photos into dithered art and ASCII images. Explore error-diffusion and ordered dithering, build color palettes, and export pixel-style results.';
 
 const softwareSchema = {
   '@type': 'SoftwareApplication',
@@ -9,6 +9,13 @@ const softwareSchema = {
   applicationCategory: 'GraphicsApplication',
   operatingSystem: 'macOS, Windows',
   description,
+  featureList: [
+    'Image dithering with ordered and error-diffusion algorithms',
+    'ASCII art image conversion and export',
+    'Color palette creation and quantization',
+    'Halftone, stipple, and pixel-art effects',
+    'Layer-based image editing and export',
+  ],
   creator: {
     '@type': 'Person',
     name: 'Dave',
@@ -33,7 +40,7 @@ const capabilities = [
 ---
 
 <Layout
-  title="Dither Yuki — Dithering & Palette Studio"
+  title="Dither Yuki — Image Dithering & ASCII Art Studio"
   description={description}
   image="/images/git-hub-cover.png?v=3"
   imageAlt="Dither Yuki — a colorful pixel-dithered dog portrait on a dark background"
@@ -71,7 +78,7 @@ const capabilities = [
         <p class="kicker">01 — Product</p>
         <h2 id="what-title">What is it</h2>
         <p class="lead">
-          A desktop studio for dithering. Turn ordinary images into carefully crafted patterns, limited-color compositions, and retro-inspired visuals.
+          Dither Yuki is a desktop image dithering studio for turning photos into dithered art and ASCII images. Experiment with ordered and error-diffusion dithering, build color palettes, and create halftone, stipple, and pixel-style results.
         </p>
         <p>
           Explore dithering algorithms, build palettes, experiment with halftone and stipple effects, and keep everything organized in layers.

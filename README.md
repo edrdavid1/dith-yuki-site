@@ -43,3 +43,4 @@ npm run preview
 - Социальная карточка: `public/social-card.png` (1200×630).
 - `@astrojs/sitemap` и `src/pages/robots.txt.ts` генерируют sitemap и robots при сборке.
 - После Production-деплоя добавьте в Google Search Console свойство типа **Domain** для `ditheryuki.com`, подтвердите владение DNS TXT-записью у регистратора / DNS-провайдера и отправьте `https://ditheryuki.com/sitemap-index.xml`. После этого запросите проверку главной, `/review/` и `/license/`; индексация зависит от решения поисковика и не происходит мгновенно.
+- Bing принимает тот же стандартный XML sitemap — отдельный файл или специальный Bing-формат не нужны. После Production-деплоя добавьте и подтвердите сайт в [Bing Webmaster Tools](https://www.bing.com/webmasters/), затем отправьте `https://ditheryuki.com/sitemap-index.xml`; ссылка Sitemap в `robots.txt` уже доступна и для Bingbot.
