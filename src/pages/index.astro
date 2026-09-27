@@ -16,7 +16,7 @@ const softwareSchema = {
   publisher: {
     '@type': 'Organization',
     name: "L'eco non di Bergamo",
-    url: 'https://dith-yuki-site.pages.dev',
+    url: Astro.site?.href ?? 'https://ditheryuki.com/',
     sameAs: [
       'https://github.com/edrdavid1/dith-yuki',
       'https://t.me/leco_di_Bergamo',

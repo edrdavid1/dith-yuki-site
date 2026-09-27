@@ -467,6 +467,12 @@ a:focus-visible,
   padding: 0;
   background: transparent;
   color: var(--ink);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dl-dialog::-webkit-scrollbar {
+  display: none;
 }
 
 .dl-dialog::backdrop {
@@ -474,20 +480,13 @@ a:focus-visible,
 }
 
 .dl-dialog-frame {
-  border: 1.5px solid var(--ink);
+  border: 0;
   background: var(--paper);
   padding: 0.55rem;
 }
 
 .dl-dialog-panel {
-  border: 3px solid var(--ink);
-  box-shadow:
-    1px 0 0 var(--ink),
-    -1px 0 0 var(--ink),
-    0 1px 0 var(--ink),
-    0 -1px 0 var(--ink),
-    inset 1px 0 0 rgb(20 22 18 / 35%),
-    inset -1px 0 0 rgb(20 22 18 / 25%);
+  border: 1px solid var(--ink);
   padding: clamp(1.25rem, 3vw, 1.75rem);
 }
 

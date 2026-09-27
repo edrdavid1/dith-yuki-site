@@ -2,11 +2,8 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
-// Prefer an explicit SITE (custom domain), then Cloudflare Pages URL, then the default pages.dev host.
-const site =
-  process.env.SITE ||
-  process.env.CF_PAGES_URL ||
-  'https://dith-yuki-site.pages.dev';
+// Keep canonicals, sitemap, and robots on the public domain, including preview builds.
+const site = process.env.SITE || 'https://ditheryuki.com';
 
 export default defineConfig({
   site,
