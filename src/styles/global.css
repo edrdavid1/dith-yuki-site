@@ -337,13 +337,19 @@ a:focus-visible,
 }
 
 .hero-mark img {
+  display: block;
   width: 100%;
   height: auto;
+  animation: mark-float 3.2s ease-in-out 1.1s infinite;
 }
 
 .hero-mark:hover {
   transform: translateY(4px) scale(1.03);
   filter: drop-shadow(0 12px 28px rgb(0 0 0 / 45%));
+}
+
+.hero-mark:hover img {
+  animation-play-state: paused;
 }
 
 /* ── Nav ──────────────────────────────────────────────── */
@@ -1293,6 +1299,12 @@ a:focus-visible,
 @keyframes mark-in {
   from { opacity: 0; transform: translate3d(0, 0.7rem, 0) scale(0.94); }
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes mark-float {
+  0%,
+  100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, 0.55rem, 0); }
 }
 
 /* ── Responsive ───────────────────────────────────────── */
