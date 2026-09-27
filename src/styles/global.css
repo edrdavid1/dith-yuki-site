@@ -1430,6 +1430,10 @@ a:focus-visible,
     gap: 0.5rem;
   }
 
+  .nav-btn {
+    justify-content: center;
+  }
+
   .nav-btn:nth-child(3) {
     grid-column: 1 / -1;
   }
