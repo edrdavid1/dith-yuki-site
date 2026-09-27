@@ -15,19 +15,20 @@ interface Props {
   description: string;
   canonical?: string;
   image?: string;
+  imageAlt?: string;
   schema?: Parameters<typeof SEO>[0]['schema'];
   robots?: string;
   variant?: 'home' | 'review' | 'license';
 }
 
-const { title, description, canonical, image, schema, robots, variant = 'home' } = Astro.props;
+const { title, description, canonical, image, imageAlt, schema, robots, variant = 'home' } = Astro.props;
 const year = new Date().getFullYear();
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <SEO title={title} description={description} canonical={canonical} image={image} locale="en_US" schema={schema} robots={robots} />
+    <SEO title={title} description={description} canonical={canonical} image={image} imageAlt={imageAlt} locale="en_US" schema={schema} robots={robots} />
   </head>
   <body class:list={[`${variant}-page`]}>
     <a class="skip-link" href="#main-content">Skip to content</a>
