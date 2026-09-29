@@ -991,6 +991,23 @@ a:focus-visible,
   line-height: 1.35;
 }
 
+.footer-contact {
+  margin: 0.15rem 0 0;
+  font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.95rem);
+  line-height: 1.35;
+}
+
+.footer-contact a {
+  color: rgb(255 255 255 / 88%);
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+}
+
+.footer-contact a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
 .footer-nav {
   display: flex;
   flex-wrap: wrap;
