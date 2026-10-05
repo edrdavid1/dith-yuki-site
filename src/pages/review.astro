@@ -40,7 +40,7 @@ const schema = breadcrumbSchema(Astro.site, [
   imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
   schema={schema}
 >
-  <div class="review-content">
+  <div class="editorial-content review-article">
     <PageHero
       title="Review"
       titleId="review-title"
@@ -54,6 +54,10 @@ const schema = breadcrumbSchema(Astro.site, [
     />
 
     <figure class="review-screenshot reveal reveal-media">
+      <div class="review-shot-heading">
+        <span class="editorial-section-index">App preview</span>
+        <span>Desktop workspace</span>
+      </div>
       <img
         src="/images/screnshot.webp"
         alt="Dither Yuki desktop application with layer controls, image preview, dithering effects, and color palette tools"
@@ -62,37 +66,66 @@ const schema = breadcrumbSchema(Astro.site, [
         fetchpriority="high"
         decoding="async"
       />
+      <figcaption>Layers, live preview, dithering effects, and Color Lab in one workspace.</figcaption>
     </figure>
 
-    <article class="review-copy">
+    <nav class="editorial-toc reveal" aria-label="On this page">
+      <a href="#capabilities-title">Capabilities</a>
+      <a href="#limitations-title">Limits</a>
+      <a href="#idea-title">Idea</a>
+      <a href="#next-title">Roadmap</a>
+      <a href="#continue-title">Continue</a>
+    </nav>
+
+    <article class="editorial-copy review-copy">
       <section class="reveal" aria-labelledby="capabilities-title">
+        <p class="editorial-section-index">01 — Capabilities</p>
         <h2 id="capabilities-title">What it can do</h2>
-        <ol>
-          {capabilities.map(([name, detail]) => <li><strong>{name}</strong> — {detail}</li>)}
-        </ol>
+        <ul class="review-capability-list">
+          {capabilities.map(([name, detail]) => (
+            <li>
+              <strong>{name}</strong>
+              <span>{detail}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section class="reveal" aria-labelledby="limitations-title">
+        <p class="editorial-section-index">02 — Limits</p>
         <h2 id="limitations-title">Current limitations</h2>
         <p>Dither Yuki is still in beta, so some features are intentionally outside its scope. It is not a painting, printing, batch-processing, or video tool, and there is currently no Linux version.</p>
         <p>Some algorithms also have implementation limitations. Error-diffusion methods currently run on CPU, while ASCII and Riemersma operate on the full document rather than progressive tiles.</p>
       </section>
 
       <section class="reveal" aria-labelledby="idea-title">
+        <p class="editorial-section-index">03 — Idea</p>
         <h2 id="idea-title">The idea</h2>
         <p>Dither Yuki is built around a simple idea: <strong>a dedicated space for experimenting with dithering, palettes, and digital image processing</strong> without turning the workflow into a complicated production suite.</p>
       </section>
 
       <section class="reveal" aria-labelledby="next-title">
+        <p class="editorial-section-index">04 — Roadmap</p>
         <h2 id="next-title">What's next</h2>
         <p>Dither Yuki is still evolving, and there is a lot more planned for the future.</p>
         <p>Right now, my main goal is to raise enough support for an Apple Developer Program membership. This will make it easier to distribute Dither Yuki on macOS and provide a smoother installation experience without unnecessary security warnings.</p>
         <p>After that, I want to keep improving the existing tools and expand what Dither Yuki can do.</p>
         <p>Planned features include:</p>
-        <ul>
+        <ol class="review-roadmap-list">
           {roadmap.map((item) => <li>{item}</li>)}
-        </ul>
+        </ol>
         <p>The goal is to keep growing Dither Yuki while preserving its main idea: a simple space to experiment, create, and play with images.</p>
+      </section>
+
+      <section class="review-conclusion reveal" aria-labelledby="continue-title">
+        <p class="editorial-section-index">05 — Continue</p>
+        <h2 id="continue-title">Keep exploring</h2>
+        <p>Try the app, dig into how dithering works, or follow the making-of notes.</p>
+        <p class="review-cta-links">
+          <a class="dither-cta-primary" href="/">Try Dither Yuki →</a>
+          <a href="/dithering/">Read about dithering →</a>
+          <a href="/diary/">Open the diary →</a>
+        </p>
       </section>
     </article>
   </div>
