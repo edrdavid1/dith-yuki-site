@@ -1,0 +1,343 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { breadcrumbSchema } from '../lib/seo';
+
+const description = 'How mathematics turns limitations into art: discover the history, algorithms, and visual language of image dithering, with Dither Yuki.';
+const pageUrl = new URL('/dithering/', Astro.site ?? 'https://ditheryuki.com').href;
+
+const schema = [
+  breadcrumbSchema(Astro.site, [
+    { name: 'Home', path: '/' },
+    { name: 'Dithering', path: '/dithering/' },
+  ]),
+  {
+    '@type': 'Article',
+    headline: 'Dithering: How Mathematics Turns Limitations into Art',
+    description,
+    inLanguage: 'en',
+    mainEntityOfPage: pageUrl,
+    author: {
+      '@type': 'Person',
+      name: 'Dave',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: "L'eco non di Bergamo",
+      url: Astro.site?.href ?? 'https://ditheryuki.com/',
+    },
+    image: new URL('/social-card.png', Astro.site ?? 'https://ditheryuki.com').href,
+  },
+];
+---
+
+<Layout
+  variant="dithering"
+  type="article"
+  title="Dithering: How Mathematics Turns Limitations into Art — Dither Yuki"
+  description={description}
+  canonical="/dithering/"
+  image="/social-card.png"
+  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  schema={schema}
+>
+  <div class="editorial-content dithering-article">
+    <PageHero
+      title="Dithering"
+      titleId="dithering-title"
+      deck="How mathematics turns limitations into art — controlled noise, ordered patterns, and error that becomes texture."
+      note="Drag the handle. Switch algorithms. Watch the error travel."
+      meta={[
+        { label: 'Form', value: 'Field guide' },
+        { label: 'Focus', value: 'History · algorithms · demos' },
+        { label: 'Tools', value: 'Interactive canvas labs' },
+      ]}
+    />
+
+    <figure class="dither-live dither-live--hero reveal" data-demo="compare" aria-labelledby="demo-compare-title">
+      <div class="dither-slot-heading">
+        <span class="dither-slot-index" id="demo-compare-title">DEMO 01 / LIVE COMPARE</span>
+        <span class="dither-slot-status" data-algo-label>Floyd–Steinberg</span>
+      </div>
+
+      <div class="dither-compare" style="--split: 52%">
+        <canvas data-canvas="after" aria-label="Dithered result"></canvas>
+        <div class="dither-compare-after">
+          <canvas data-canvas="before" aria-label="Original continuous-tone image"></canvas>
+        </div>
+        <div class="dither-compare-labels" aria-hidden="true">
+          <span>Original</span>
+          <span>Dithered</span>
+        </div>
+        <label class="dither-compare-range">
+          <span class="visually-hidden">Reveal dithered result</span>
+          <input type="range" min="0" max="100" value="52" />
+        </label>
+      </div>
+
+        <div class="dither-chip-row" role="group" aria-label="Choose dithering algorithm">
+          <button type="button" data-algo="threshold">Threshold</button>
+          <button type="button" data-algo="bayer">Bayer</button>
+          <button type="button" data-algo="floyd" aria-pressed="true">Floyd–Steinberg</button>
+          <button type="button" data-algo="atkinson">Atkinson</button>
+          <button type="button" data-algo="jarvis">Jarvis</button>
+          <button type="button" data-algo="stucki">Stucki</button>
+          <button type="button" data-algo="sierra">Sierra</button>
+        </div>
+      <div class="dither-slot-footer">
+        <span>Drag to compare · click an algorithm to re-dither</span>
+        <span>Photo source · 2-color palette</span>
+      </div>
+    </figure>
+
+    <nav class="dither-toc reveal" aria-label="On this page">
+      <a href="#history-title">Origins</a>
+      <a href="#colors-title">Ordered</a>
+      <a href="#error-title">Error diffusion</a>
+      <a href="#atkinson-title">Atkinson</a>
+      <a href="#style-title">Style</a>
+      <a href="#approaches-title">Methods</a>
+      <a href="#why-yuki-title">Dither Yuki</a>
+    </nav>
+
+    <article class="editorial-copy dithering-copy">
+      <section class="reveal" aria-labelledby="history-title">
+        <p class="dither-section-index">01 — Origins</p>
+        <h2 id="history-title">From vibration to digital images</h2>
+        <p>The word <em>dither</em> is related to the Middle English <em>didderen</em> — “to tremble” or “to shake.”</p>
+        <p>One of the well-known early applications of this principle dates back to World War II. Mechanical computing devices used in aviation could operate more accurately because of vibration: it reduced the effects of friction and “sticking” between moving parts. Small vibration motors were later used to create this effect.</p>
+        <p>But true digital dithering came later. In 1961, Lawrence Roberts explored the use of pseudorandom noise to reduce visible quantization patterns in television images in his MIT master's thesis.</p>
+      </section>
+
+      <div class="dither-timeline reveal" data-demo="timeline">
+        <div class="dither-timeline-years" role="group" aria-label="Dithering timeline">
+          <button type="button" data-year="1940s">1940s</button>
+          <button type="button" data-year="1961">1961</button>
+          <button type="button" data-year="1973">1973</button>
+          <button type="button" data-year="1976" aria-pressed="true">1976</button>
+          <button type="button" data-year="1984">1984</button>
+          <button type="button" data-year="2018+">2018+</button>
+        </div>
+        <p class="dither-timeline-panel" data-timeline-panel>Floyd &amp; Steinberg diffuse quantization error to neighbors — soft, organic texture.</p>
+      </div>
+
+      <section class="reveal" aria-labelledby="colors-title">
+        <p class="dither-section-index">02 — Ordered patterns</p>
+        <h2 id="colors-title">When the colors ran out</h2>
+        <p>In 1973, Bryce Bayer introduced his method of <strong>ordered dithering</strong>. Instead of using random noise, the image is processed with a predefined threshold matrix. The matrix repeats across the image and determines where different pixel values should appear.</p>
+        <p>The result is that a limited set of colors can visually produce a much wider range of shades.</p>
+        <p>One important detail: this is not the same <strong>Bayer filter</strong> used in digital camera sensors. The names are connected because both inventions were created by Bryce Bayer.</p>
+      </section>
+
+      <figure class="dither-live reveal" data-demo="ordered" aria-labelledby="demo-ordered-title">
+        <div class="dither-slot-heading">
+          <span class="dither-slot-index" id="demo-ordered-title">DEMO 02 / ORDERED DITHERING</span>
+          <span class="dither-slot-status">Direct reduction ↔ Bayer matrix</span>
+        </div>
+        <div class="dither-color-steps" role="group" aria-label="Palette size">
+          <button type="button" data-colors="256" data-color-step="256">256</button>
+          <button type="button" data-colors="16" data-color-step="16">16</button>
+          <button type="button" data-colors="4" aria-pressed="true" data-color-step="4" class="is-active">4</button>
+          <button type="button" data-colors="2" data-color-step="2">2</button>
+        </div>
+        <div class="dither-compare-strip">
+          <div>
+            <canvas data-canvas="none" aria-label="Color reduction without dithering"></canvas>
+            <span>No dithering</span>
+          </div>
+          <div>
+            <canvas data-canvas="bayer" aria-label="Bayer ordered dithering"></canvas>
+            <span>Bayer matrix</span>
+          </div>
+        </div>
+        <div class="dither-slot-footer">
+          <span>Same source · change palette size above</span>
+          <span>Bands vanish when the pattern arrives</span>
+        </div>
+      </figure>
+
+      <section class="reveal" aria-labelledby="error-title">
+        <p class="dither-section-index">03 — Error diffusion</p>
+        <h2 id="error-title">An error that becomes an image</h2>
+        <p>In 1976, Robert Floyd and Louis Steinberg introduced <strong>Floyd–Steinberg dithering</strong>. Instead of processing each pixel independently, the algorithm calculates the quantization error and distributes it to neighboring pixels.</p>
+        <p>If a pixel should be gray but the device can only display black or white, the difference does not simply disappear. It becomes information for the pixels that follow.</p>
+        <p class="dither-formula"><code>7/16 · 3/16 · 5/16 · 1/16</code></p>
+        <p>This simple formula gave rise to an entire family of error-diffusion algorithms.</p>
+      </section>
+
+      <figure class="dither-live dither-live--process reveal" data-demo="error" aria-labelledby="demo-error-title">
+        <div class="dither-slot-heading">
+          <span class="dither-slot-index" id="demo-error-title">DEMO 03 / FOLLOW THE ERROR</span>
+          <span class="dither-slot-status" data-status>Ready</span>
+        </div>
+        <div class="dither-chip-row" role="group" aria-label="Choose error-diffusion kernel">
+          <button type="button" data-kernel="floyd" aria-pressed="true">Floyd–Steinberg</button>
+          <button type="button" data-kernel="atkinson">Atkinson</button>
+          <button type="button" data-kernel="jarvis">Jarvis</button>
+          <button type="button" data-kernel="stucki">Stucki</button>
+          <button type="button" data-kernel="sierra">Sierra</button>
+          <button type="button" data-kernel="sierra2">Sierra-2</button>
+          <button type="button" data-kernel="burkes">Burkes</button>
+          <button type="button" data-kernel="sierra-lite">Sierra Lite</button>
+        </div>
+        <div class="dither-error-stage">
+          <canvas aria-label="Animated error diffusion"></canvas>
+          <div class="dither-error-side">
+            <p class="dither-error-kernel-name" data-kernel-name>Floyd–Steinberg</p>
+            <p class="dither-error-caption">Error leaves <b>X</b> and lands on the lit neighbors</p>
+            <div class="dither-error-diagram" data-kernel-diagram aria-hidden="true"></div>
+            <p class="dither-error-formula" data-kernel-formula><code>7/16 · 3/16 · 5/16 · 1/16</code></p>
+            <p class="dither-error-flow" data-kernel-flow>Waiting to start…</p>
+          </div>
+        </div>
+        <div class="dither-live-actions">
+          <button type="button" class="dither-action-btn" data-play>Pause</button>
+        </div>
+        <div class="dither-slot-footer">
+          <span>Quantize → calculate error → distribute → continue</span>
+          <span data-kernel-note>Scanline animation</span>
+        </div>
+      </figure>
+
+      <section class="reveal" aria-labelledby="atkinson-title">
+        <p class="dither-section-index">04 — A Macintosh signature</p>
+        <h2 id="atkinson-title">Apple and Atkinson</h2>
+        <p>In the early 1980s, Bill Atkinson developed his own dithering algorithm for the Macintosh. It distributed only part of the error — six eighths — leaving the remaining 25% undistributed. This helped produce the distinctive high-contrast and textured look of the Macintosh's monochrome display.</p>
+        <p>Dithering was no longer just a way to compensate for hardware limitations. It was becoming part of a visual language.</p>
+      </section>
+
+      <figure class="dither-comparison-slot dither-comparison-slot--live reveal" data-demo="pair" aria-label="Floyd–Steinberg and Atkinson comparison">
+        <div>
+          <canvas data-canvas="floyd" aria-label="Floyd–Steinberg dithered sample"></canvas>
+          <span>Floyd–Steinberg <small>softer transitions</small></span>
+        </div>
+        <div>
+          <canvas data-canvas="atkinson" aria-label="Atkinson dithered sample"></canvas>
+          <span>Atkinson <small>higher contrast</small></span>
+        </div>
+        <figcaption>Same source, same two-color palette — only the error kernel changes.</figcaption>
+      </figure>
+
+      <section class="reveal" aria-labelledby="style-title">
+        <p class="dither-section-index">05 — From tool to style</p>
+        <h2 id="style-title">From limitation to style</h2>
+        <p>During the era of EGA and other limited-color graphics systems, dithering became an important tool for artists. One well-known example is the work of Mark Ferrari for Lucasfilm Games, where limited palettes were transformed into much richer-looking images through dithering.</p>
+        <p>Later, the technique outlived the hardware limitations that created the need for it.</p>
+        <p>Lucas Pope's <em>Return of the Obra Dinn</em> uses dithering not because the game lacks colors, but because that is how the game is meant to look. In 2021, developer Surma published an article titled <strong>Ditherpunk</strong>, helping popularize the name for this kind of visual aesthetic.</p>
+      </section>
+
+      <section class="reveal" aria-labelledby="perception-title">
+        <p class="dither-section-index">06 — The perceptual trick</p>
+        <h2 id="perception-title">Why does it work?</h2>
+        <p>An image may contain fewer available colors or shades than needed for an exact reproduction. Dithering distributes those limited values across space so that, over a small area, the image is perceived as something in between.</p>
+        <p>Two colors can become a third color in perception.</p>
+        <p>Black and white become gray.<br />Two nearby colors begin to look like a new shade.<br />A lack of information becomes texture.</p>
+        <p>Mathematics does not eliminate the limitation — it learns how to work with it.</p>
+      </section>
+
+      <figure class="dither-scales reveal" data-demo="scales" aria-label="Dithered pattern at three viewing scales">
+        <div class="dither-scales-grid">
+          <figure>
+            <canvas data-scale="4" aria-label="Enlarged dither pattern"></canvas>
+            <figcaption>Close — pure pixels</figcaption>
+          </figure>
+          <figure>
+            <canvas data-scale="2" aria-label="Medium scale dither pattern"></canvas>
+            <figcaption>1× — texture reads</figcaption>
+          </figure>
+          <figure>
+            <canvas data-scale="1" aria-label="Reduced dither pattern that blends"></canvas>
+            <figcaption>Far — tones blend</figcaption>
+          </figure>
+        </div>
+      </figure>
+
+      <section class="reveal" aria-labelledby="approaches-title">
+        <p class="dither-section-index">07 — A family of methods</p>
+        <h2 id="approaches-title">The main approaches</h2>
+
+        <div class="dither-method-grid">
+          <div>
+            <h3>Threshold</h3>
+            <p>Each pixel is compared against a fixed threshold. Sharp black-and-white, no intermediate shades.</p>
+          </div>
+          <div>
+            <h3>Random</h3>
+            <p>The threshold changes randomly from pixel to pixel. Grainy, less structured.</p>
+          </div>
+          <div>
+            <h3>Ordered</h3>
+            <p>A repeating threshold matrix (Bayer). Predictable, fast, instantly recognizable.</p>
+          </div>
+          <div>
+            <h3>Error diffusion</h3>
+            <p>Error spills to neighbors: Floyd–Steinberg, Atkinson, Jarvis, Sierra, Stucki…</p>
+          </div>
+        </div>
+        <p>Each one has its own balance between detail, contrast, texture, and computational cost. Specialized cousins — halftone, stipple, ASCII — treat dithering as a foundation for print, CRT, and glitch aesthetics.</p>
+      </section>
+
+      <figure class="dither-live dither-live--lab reveal" data-demo="lab" aria-labelledby="demo-lab-title">
+        <div class="dither-slot-heading">
+          <span class="dither-slot-index" id="demo-lab-title">DEMO 04 / MINI LAB</span>
+          <span class="dither-slot-status">Play with the knobs</span>
+        </div>
+        <div class="dither-lab-layout">
+          <canvas aria-label="Interactive dithering preview"></canvas>
+          <div class="dither-lab-controls">
+            <label class="dither-lab-field">
+              <span class="dither-lab-field-head">Algorithm</span>
+              <select name="algo">
+                <option value="threshold">Threshold</option>
+                <option value="random">Random</option>
+                <option value="bayer">Bayer</option>
+                <option value="floyd" selected>Floyd–Steinberg</option>
+                <option value="atkinson">Atkinson</option>
+                <option value="jarvis">Jarvis</option>
+                <option value="stucki">Stucki</option>
+                <option value="sierra">Sierra</option>
+                <option value="sierra2">Sierra-2</option>
+                <option value="burkes">Burkes</option>
+                <option value="sierra-lite">Sierra Lite</option>
+              </select>
+            </label>
+            <label class="dither-lab-field">
+              <span class="dither-lab-field-head">Palette <b data-out="colors">4</b></span>
+              <span class="dither-slider" data-slider="colors">
+                <input name="colors" type="range" min="2" max="16" value="4" />
+                <i class="dither-slider-ticks" aria-hidden="true"></i>
+              </span>
+            </label>
+            <label class="dither-lab-field">
+              <span class="dither-lab-field-head">Intensity <b data-out="intensity">1.00</b></span>
+              <span class="dither-slider" data-slider="intensity">
+                <input name="intensity" type="range" min="0.25" max="1.5" step="0.05" value="1" />
+                <i class="dither-slider-ticks dither-slider-ticks--fine" aria-hidden="true"></i>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="dither-slot-footer">
+          <span>Threshold · Bayer · Floyd–Steinberg · Atkinson · Random</span>
+          <span>Then open the full app</span>
+        </div>
+      </figure>
+
+      <section class="dithering-conclusion reveal" aria-labelledby="why-yuki-title">
+        <p class="dither-section-index">08 — Make it your own</p>
+        <h2 id="why-yuki-title">So why Dither Yuki?</h2>
+        <p>Because dithering stopped being just a way to “cheat” limited hardware a long time ago.</p>
+        <p>Today, it is a visual tool in its own right.</p>
+        <p>Dither Yuki was created as a space for experimenting with these limitations — turning limited palettes, individual pixels, and mathematical algorithms into deliberate visual aesthetics.</p>
+        <p class="dithering-cta-links">
+          <a class="dither-cta-primary" href="/" >Try Dither Yuki →</a>
+          <a href="/review/">Explore features →</a>
+        </p>
+      </section>
+    </article>
+  </div>
+
+  <script>
+    import '../scripts/dither-demos.ts';
+  </script>
+</Layout>

@@ -16,19 +16,46 @@ interface Props {
   canonical?: string;
   image?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  type?: 'website' | 'article';
   schema?: Parameters<typeof SEO>[0]['schema'];
   robots?: string;
-  variant?: 'home' | 'review' | 'license';
+  variant?: 'home' | 'review' | 'dithering' | 'diary' | 'license';
 }
 
-const { title, description, canonical, image, imageAlt, schema, robots, variant = 'home' } = Astro.props;
+const {
+  title,
+  description,
+  canonical,
+  image,
+  imageAlt,
+  imageWidth,
+  imageHeight,
+  type = 'website',
+  schema,
+  robots,
+  variant = 'home',
+} = Astro.props;
 const year = new Date().getFullYear();
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <SEO title={title} description={description} canonical={canonical} image={image} imageAlt={imageAlt} locale="en_US" schema={schema} robots={robots} />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={image}
+      imageAlt={imageAlt}
+      imageWidth={imageWidth}
+      imageHeight={imageHeight}
+      type={type}
+      locale="en_US"
+      schema={schema}
+      robots={robots}
+    />
   </head>
   <body class:list={[`${variant}-page`]}>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -47,6 +74,12 @@ const year = new Date().getFullYear();
                 <a href="/review/" aria-current={variant === 'review' ? 'page' : undefined}>review</a>
               </li>
               <li>
+                <a href="/dithering/" aria-current={variant === 'dithering' ? 'page' : undefined}>dithering</a>
+              </li>
+              <li>
+                <a href="/diary/" aria-current={variant === 'diary' ? 'page' : undefined}>diary</a>
+              </li>
+              <li>
                 <a href="/license/" aria-current={variant === 'license' ? 'page' : undefined}>license</a>
               </li>
             </ul>
@@ -59,7 +92,7 @@ const year = new Date().getFullYear();
                 aria-haspopup="dialog"
               >
                 <span>Download for Mac</span>
-                <img src="/images/macos.png" alt="" aria-hidden="true" width="42" height="42" />
+                <img src="/images/macos.webp" alt="" aria-hidden="true" width="42" height="42" />
               </button>
               <button
                 type="button"
@@ -68,7 +101,7 @@ const year = new Date().getFullYear();
                 aria-haspopup="dialog"
               >
                 <span>Download for Windows</span>
-                <img src="/images/windows.png" alt="" aria-hidden="true" width="42" height="42" />
+                <img src="/images/windows.webp" alt="" aria-hidden="true" width="42" height="42" />
               </button>
               <a class="nav-btn" href="https://github.com/edrdavid1/dith-yuki" target="_blank" rel="noopener noreferrer">
                 <span>GitHub</span>
@@ -83,8 +116,8 @@ const year = new Date().getFullYear();
         <slot />
       </main>
 
-      <footer class="site-footer reveal">
-        <img class="footer-art" src="/images/footer-bg.png" alt="" width="1512" height="246" loading="lazy" decoding="async" />
+      <footer class="site-footer">
+        <img class="footer-art" src="/images/footer-bg.webp" alt="" width="1512" height="246" loading="lazy" decoding="async" />
         <div class="footer-panel">
           <div class="footer-meta">
             <p class="footer-brand">Dither Yuki</p>
@@ -100,6 +133,8 @@ const year = new Date().getFullYear();
           <nav class="footer-nav" aria-label="Footer">
             <a href="/">Home</a>
             <a href="/review/">Review</a>
+            <a href="/dithering/">Dithering</a>
+            <a href="/diary/">Diary</a>
             <a href="/license/">License</a>
             <a href="https://github.com/edrdavid1/dith-yuki" target="_blank" rel="noopener noreferrer">GitHub</a>
           </nav>

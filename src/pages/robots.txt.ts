@@ -8,7 +8,6 @@ export const GET: APIRoute = ({ site }) => {
     'Allow: /',
     'Disallow: /cdn-cgi/',
     '',
-    `Host: ${origin.host}`,
     `Sitemap: ${sitemapUrl.href}`,
     '',
   ].join('\n');

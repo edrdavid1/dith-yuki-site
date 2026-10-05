@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { breadcrumbSchema } from '../lib/seo';
 
 const description = 'Review Dither Yuki image dithering tools: ordered and error-diffusion algorithms, ASCII art conversion, palettes, halftone and stipple effects, supported exports, limitations, and roadmap.';
 
@@ -22,6 +24,11 @@ const roadmap = [
   'Better cross-platform support',
   'And much more',
 ];
+
+const schema = breadcrumbSchema(Astro.site, [
+  { name: 'Home', path: '/' },
+  { name: 'Review', path: '/review/' },
+]);
 ---
 
 <Layout
@@ -29,21 +36,29 @@ const roadmap = [
   title="Image Dithering & ASCII Art Tools — Dither Yuki Review"
   description={description}
   canonical="/review/"
-  image="/images/git-hub-cover.png?v=3"
-  imageAlt="Dither Yuki — a colorful pixel-dithered dog portrait on a dark background"
+  image="/social-card.png"
+  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  schema={schema}
 >
   <div class="review-content">
-    <section class="review-intro reveal" aria-labelledby="review-title">
-      <h1 id="review-title"><strong>Dither Yuki</strong> is a beta-stage image dithering and palette studio built for experimenting with digital images, colors, and visual effects.</h1>
-      <p>The workflow covers image dithering from start to finish: open a photo, apply ordered or error-diffusion algorithms, turn images into ASCII art, build a layer stack and color palette, then export the result.</p>
-    </section>
+    <PageHero
+      title="Review"
+      titleId="review-title"
+      deck="Dither Yuki is a beta-stage image dithering and palette studio built for experimenting with digital images, colors, and visual effects."
+      note="Open a photo, apply ordered or error-diffusion algorithms, turn images into ASCII art, build a layer stack and color palette, then export the result."
+      meta={[
+        { label: 'Status', value: 'Beta' },
+        { label: 'Platforms', value: 'macOS · Windows' },
+        { label: 'Scope', value: 'Tools · limits · roadmap' },
+      ]}
+    />
 
     <figure class="review-screenshot reveal reveal-media">
       <img
-        src="/images/screnshot.png"
+        src="/images/screnshot.webp"
         alt="Dither Yuki desktop application with layer controls, image preview, dithering effects, and color palette tools"
-        width="1317"
-        height="870"
+        width="2624"
+        height="1824"
         fetchpriority="high"
         decoding="async"
       />
@@ -83,7 +98,7 @@ const roadmap = [
 
     <img
       class="review-portrait reveal reveal-media"
-      src="/images/dither-face-2.png"
+      src="/images/dither-face-2.webp"
       alt="Colorful dithered portrait artwork"
       width="477"
       height="615"

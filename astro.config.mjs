@@ -13,8 +13,16 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.includes('/404') && !page.endsWith('/404/'),
       changefreq: 'weekly',
-      priority: 0.7,
       lastmod: new Date(),
+      serialize(item) {
+        const path = new URL(item.url).pathname;
+        const priority =
+          path === '/' ? 1.0
+          : path.startsWith('/dithering') || path.startsWith('/review') ? 0.9
+          : path.startsWith('/diary') ? 0.8
+          : 0.5;
+        return { ...item, priority };
+      },
     }),
   ],
   vite: {

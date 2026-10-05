@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { breadcrumbSchema } from '../lib/seo';
 import eulaText from '../../EULA.txt?raw';
 import sourceLicenseText from '../../LICENSE?raw';
 import flexlayoutLicenseText from '../../flexlayout-LICENSE.MIT.txt?raw';
@@ -10,6 +12,11 @@ const description =
 const githubLegal = 'https://github.com/edrdavid1/dith-yuki/tree/main/docs/legal';
 const githubLicense = 'https://github.com/edrdavid1/dith-yuki/blob/main/LICENSE';
 const githubEula = 'https://github.com/edrdavid1/dith-yuki/blob/main/docs/legal/USER_AGREEMENT.txt';
+
+const schema = breadcrumbSchema(Astro.site, [
+  { name: 'Home', path: '/' },
+  { name: 'License', path: '/license/' },
+]);
 ---
 
 <Layout
@@ -17,23 +24,26 @@ const githubEula = 'https://github.com/edrdavid1/dith-yuki/blob/main/docs/legal/
   title="Dither Yuki — Software License & EULA"
   description={description}
   canonical="/license/"
-  image="/images/git-hub-cover.png?v=3"
-  imageAlt="Dither Yuki — a colorful pixel-dithered dog portrait on a dark background"
+  image="/social-card.png"
+  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  schema={schema}
 >
   <div class="license-content">
-    <header class="license-intro reveal">
-      <h1>License</h1>
-      <p class="license-lead">
-        Dither Yuki uses two related legal instruments: one for the compiled application, and one for the source code. Website artwork is copyrighted separately. Third-party components keep their own licenses.
-      </p>
-      <p class="license-updated">
-        End User License Agreement last updated: <strong>September 22, 2026</strong>
-      </p>
-      <p class="license-canonical">
+    <PageHero
+      title="License"
+      titleId="license-title"
+      deck="Dither Yuki uses two related legal instruments: one for the compiled application, and one for the source code. Website artwork is copyrighted separately. Third-party components keep their own licenses."
+      meta={[
+        { label: 'EULA updated', value: 'September 22, 2026' },
+        { label: 'App', value: 'End User License' },
+        { label: 'Source', value: 'Software License' },
+      ]}
+    >
+      <p class="page-hero-note">
         Canonical copies live in the{' '}
         <a href={githubLegal} target="_blank" rel="noopener noreferrer">project repository</a>.
       </p>
-    </header>
+    </PageHero>
 
     <section class="license-map reveal reveal-stagger" aria-labelledby="map-title">
       <h2 id="map-title">What applies where</h2>

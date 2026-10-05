@@ -1,0 +1,38 @@
+---
+interface MetaItem {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  title: string;
+  titleId?: string;
+  deck: string;
+  note?: string;
+  meta?: MetaItem[];
+}
+
+const { title, titleId, deck, note, meta } = Astro.props;
+---
+
+<header class="page-hero reveal">
+  <div class="page-hero-mark" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <h1 id={titleId}>{title}</h1>
+  <p class="page-hero-deck">{deck}</p>
+  {note && <p class="page-hero-note">{note}</p>}
+  {
+    meta && meta.length > 0 && (
+      <dl class="page-hero-meta">
+        {meta.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+  <slot />
+</header>

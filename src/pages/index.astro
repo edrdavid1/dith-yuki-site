@@ -42,14 +42,14 @@ const capabilities = [
 <Layout
   title="Dither Yuki — Image Dithering & ASCII Art Studio"
   description={description}
-  image="/images/git-hub-cover.png?v=3"
-  imageAlt="Dither Yuki — a colorful pixel-dithered dog portrait on a dark background"
+  image="/social-card.png"
+  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
   schema={softwareSchema}
 >
   <section slot="hero" class="hero" aria-labelledby="page-title">
     <img
       class="hero-art"
-      src="/images/hero-bg.png"
+      src="/images/hero-bg.webp"
       alt=""
       width="1512"
       height="988"
@@ -74,6 +74,28 @@ const capabilities = [
 
   <div class="page">
     <section id="what-is-it" class="block intro reveal reveal-stagger" aria-labelledby="what-title">
+      <figure class="intro-media">
+        <img
+          class="intro-media-back"
+          src="/images/img_b.webp"
+          alt="Dithered sunflower rendered in a limited palette"
+          width="1612"
+          height="1558"
+          loading="lazy"
+          decoding="async"
+        />
+        <img
+          class="intro-media-front"
+          src="/images/img_f.webp"
+          alt=""
+          width="1612"
+          height="1558"
+          loading="lazy"
+          decoding="async"
+          aria-hidden="true"
+        />
+      </figure>
+
       <div class="intro-text">
         <p class="kicker">01 — Product</p>
         <h2 id="what-title">What is it</h2>
@@ -84,23 +106,6 @@ const capabilities = [
           Explore dithering algorithms, build palettes, experiment with halftone and stipple effects, and keep everything organized in layers.
         </p>
       </div>
-
-      <figure class="intro-media">
-        <img
-          src="/images/head-dithered.png"
-          alt="A colorful portrait surrounded by dithered botanical details"
-          width="721"
-          height="902"
-          loading="lazy"
-          decoding="async"
-        />
-      </figure>
-    </section>
-
-    <section class="block statement reveal reveal-stagger" aria-labelledby="artists-title">
-      <h2 id="artists-title" class="statement-title">
-        <span class="statement-title-wide">FROM ARTISTS TO ARTISTS</span>
-      </h2>
     </section>
 
     <section id="features" class="block features reveal reveal-stagger" aria-labelledby="features-title">
@@ -127,57 +132,54 @@ const capabilities = [
     </section>
 
     <section id="project" class="block about reveal reveal-stagger" aria-labelledby="about-title">
-      <div class="about-text">
-        <p class="kicker">03 — Maker</p>
-        <h2 id="about-title">Who we are</h2>
-        <div class="about-body">
-          <p>
-            Hi, I'm Dave — an artist and indie developer. I couldn't find a convenient tool for image dithering that suited my needs, so I decided to make my own. This project started as a personal tool that I want to keep developing and improving over time.
-          </p>
-          <p id="license">
-            Right now, my budget is very limited, so I can't afford the necessary developer accounts and licenses for macOS and Windows. Because of this, installing the app may come with additional security warnings.
-          </p>
-          <p>
-            If you like the project and want to help me make it better and keep developing it, you can support me through Ko-fi. Thanks for trying out my project!
-          </p>
-        </div>
-        <div class="support-cta">
-          <a class="coffee-link" href="https://ko-fi.com/ditheryuki" target="_blank" rel="noopener noreferrer">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Zm13 2h2a2 2 0 1 1 0 4h-2M7 4c0 1 1 1 1 2m4-2c0 1 1 1 1 2"/></svg>
-            Ko-fi
-          </a>
-          <details class="support-notice">
-            <summary>
-              <span class="support-notice-icon" aria-hidden="true">
-                <svg viewBox="0 0 16 16" width="14" height="14">
-                  <circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.25" />
-                  <path d="M8 7.25v3.5M8 5.2v.2" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" />
-                </svg>
-              </span>
-              <span>Terms &amp; Non-Commercial Notice</span>
-            </summary>
-            <div class="support-notice-body">
-              <p>
-                This is a personal, non-commercial source-available project. The source code is licensed under the{' '}
-                <a href="/license/">L'eco non di Bergamo Software License</a>,
-                which restricts commercial redistribution and incorporation into other products.
-              </p>
-              <p>
-                All contributions through Ko-fi (or PayPal) are voluntary, non-refundable gifts supporting this free tool;
-                no goods, premium services, hidden features, or exclusive benefits are provided in return.
-                Thank you for keeping this project alive!
-              </p>
-            </div>
-          </details>
-        </div>
+      <p class="kicker">03 — Maker</p>
+      <h2 id="about-title">Who we are</h2>
+      <div class="about-body">
+        <p>
+          Hi, I'm Dave — an artist and indie developer. I couldn't find a convenient tool for image dithering that suited my needs, so I decided to make my own. This project started as a personal tool that I want to keep developing and improving over time.
+        </p>
+        <p id="license">
+          Right now, my budget is very limited, so I can't afford the necessary developer accounts and licenses for macOS and Windows. Because of this, installing the app may come with additional security warnings.
+        </p>
+        <p>
+          If you like the project and want to help me make it better and keep developing it, you can support me through Ko-fi. Thanks for trying out my project!
+        </p>
       </div>
-
+      <div class="support-cta">
+        <a class="coffee-link" href="https://ko-fi.com/ditheryuki" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Zm13 2h2a2 2 0 1 1 0 4h-2M7 4c0 1 1 1 1 2m4-2c0 1 1 1 1 2"/></svg>
+          Ko-fi
+        </a>
+        <details class="support-notice">
+          <summary>
+            <span class="support-notice-icon" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="14" height="14">
+                <circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.25" />
+                <path d="M8 7.25v3.5M8 5.2v.2" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" />
+              </svg>
+            </span>
+            <span>Terms &amp; Non-Commercial Notice</span>
+          </summary>
+          <div class="support-notice-body">
+            <p>
+              This is a personal, non-commercial source-available project. The source code is licensed under the{' '}
+              <a href="/license/">L'eco non di Bergamo Software License</a>,
+              which restricts commercial redistribution and incorporation into other products.
+            </p>
+            <p>
+              All contributions through Ko-fi (or PayPal) are voluntary, non-refundable gifts supporting this free tool;
+              no goods, premium services, hidden features, or exclusive benefits are provided in return.
+              Thank you for keeping this project alive!
+            </p>
+          </div>
+        </details>
+      </div>
       <figure class="about-media">
         <img
-          src="/images/face-dithering.png"
+          src="/images/face-dithering.webp"
           alt="Dithered portrait showing the Dither Yuki visual style"
-          width="806"
-          height="1007"
+          width="748"
+          height="1024"
           loading="lazy"
           decoding="async"
         />
@@ -191,4 +193,33 @@ const capabilities = [
       </a>
     </p>
   </div>
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const back = document.querySelector('.intro-media-back');
+
+    if (!reduceMotion && back instanceof HTMLElement) {
+      let ticking = false;
+
+      const update = () => {
+        const maxScroll = Math.max(
+          1,
+          document.documentElement.scrollHeight - window.innerHeight,
+        );
+        const deg = (window.scrollY / maxScroll) * 360;
+        back.style.transform = `rotate(${deg}deg)`;
+        ticking = false;
+      };
+
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(update);
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+    }
+  </script>
 </Layout>
