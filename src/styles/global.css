@@ -1150,6 +1150,10 @@ a:focus-visible,
   margin: clamp(1.35rem, 3.2vw, 2.25rem) auto clamp(3rem, 7vw, 5rem);
 }
 
+.review-content {
+  overflow: visible;
+}
+
 .review-screenshot {
   margin: clamp(1.75rem, 4vw, 2.75rem) 0;
   border: 2px solid var(--ink);
@@ -2608,12 +2612,6 @@ a:focus-visible,
   }
 }
 
-.review-portrait {
-  display: block;
-  width: min(58%, 300px);
-  margin: -12.25rem 0 0 auto;
-}
-
 /* ── License ──────────────────────────────────────────── */
 
 .license-index {
@@ -2968,10 +2966,6 @@ a:focus-visible,
 
   .license-back {
     margin-left: 2.8rem;
-  }
-
-  .review-portrait {
-    width: min(70%, 260px);
   }
 
   .dl-dialog {
