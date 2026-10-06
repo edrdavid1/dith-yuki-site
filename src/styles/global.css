@@ -1070,7 +1070,8 @@ a:focus-visible,
 .review-page .chrome,
 .dithering-page .chrome,
 .diary-page .chrome,
-.license-page .chrome {
+.license-page .chrome,
+.not-found-page .chrome {
   border-bottom: 0;
   background: transparent;
 }
@@ -1078,7 +1079,8 @@ a:focus-visible,
 .review-page .site-nav,
 .dithering-page .site-nav,
 .diary-page .site-nav,
-.license-page .site-nav {
+.license-page .site-nav,
+.not-found-page .site-nav {
   flex-wrap: wrap;
   min-height: 3.15rem;
   padding-block: 0.45rem;
@@ -1087,14 +1089,16 @@ a:focus-visible,
 .review-page .nav-links,
 .dithering-page .nav-links,
 .diary-page .nav-links,
-.license-page .nav-links {
+.license-page .nav-links,
+.not-found-page .nav-links {
   gap: clamp(0.85rem, 2.2vw, 1.5rem);
 }
 
 .review-page .nav-links a,
 .dithering-page .nav-links a,
 .diary-page .nav-links a,
-.license-page .nav-links a {
+.license-page .nav-links a,
+.not-found-page .nav-links a {
   font-size: clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
 }
 
@@ -1105,7 +1109,9 @@ a:focus-visible,
 .diary-page .nav-links a[aria-current="page"]::after,
 .diary-page .nav-links a:hover::after,
 .license-page .nav-links a[aria-current="page"]::after,
-.license-page .nav-links a:hover::after {
+.license-page .nav-links a:hover::after,
+.not-found-page .nav-links a[aria-current="page"]::after,
+.not-found-page .nav-links a:hover::after {
   bottom: -0.22rem;
   height: 1px;
 }
@@ -1113,7 +1119,8 @@ a:focus-visible,
 .review-page .nav-btn,
 .dithering-page .nav-btn,
 .diary-page .nav-btn,
-.license-page .nav-btn {
+.license-page .nav-btn,
+.not-found-page .nav-btn {
   min-height: 2.15rem;
   padding: 0.12rem 0.5rem;
   font-size: clamp(0.7rem, 0.68rem + 0.15vw, 0.8rem);
@@ -1126,7 +1133,9 @@ a:focus-visible,
 .diary-page .nav-btn svg,
 .diary-page .nav-btn img,
 .license-page .nav-btn svg,
-.license-page .nav-btn img {
+.license-page .nav-btn img,
+.not-found-page .nav-btn svg,
+.not-found-page .nav-btn img {
   width: 1.2rem;
   height: 1.2rem;
 }
@@ -1134,7 +1143,8 @@ a:focus-visible,
 .review-page .nav-btn:hover,
 .dithering-page .nav-btn:hover,
 .diary-page .nav-btn:hover,
-.license-page .nav-btn:hover {
+.license-page .nav-btn:hover,
+.not-found-page .nav-btn:hover {
   transform: none;
   box-shadow: none;
 }
@@ -2073,7 +2083,7 @@ a:focus-visible,
 }
 
 .dither-slider[data-slider="intensity"] {
-  --tick-intervals: 25;
+  --tick-intervals: 14;
 }
 
 .dither-slider input[type="range"] {
@@ -2997,7 +3007,8 @@ a:focus-visible,
   .review-page .site-nav,
   .dithering-page .site-nav,
   .diary-page .site-nav,
-  .license-page .site-nav {
+  .license-page .site-nav,
+  .not-found-page .site-nav {
     gap: 2rem;
     padding-block: 1.5rem;
   }

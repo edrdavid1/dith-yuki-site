@@ -3,16 +3,181 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  variant="home"
+  variant="not-found"
   title="Dither Yuki — Not found"
   description="This page does not exist on the Dither Yuki site."
   robots="noindex,follow"
 >
   <div class="page">
-    <section class="review-intro" aria-labelledby="not-found-title">
-      <h1 id="not-found-title">Page not found</h1>
-      <p>That URL is not part of this site.</p>
-      <p class="license-back" style="margin-left: 0"><a href="/">← Back to Dither Yuki</a></p>
+    <section class="not-found" aria-labelledby="not-found-title">
+      <div class="not-found-art" aria-hidden="true">
+        <span class="not-found-pixel not-found-pixel--blue"></span>
+        <span class="not-found-pixel not-found-pixel--brown"></span>
+        <span class="not-found-code">404</span>
+        <span class="not-found-art-label">signal lost</span>
+      </div>
+
+      <div class="not-found-copy">
+        <p class="not-found-kicker">Error 404 <span aria-hidden="true">·</span> Route not found</p>
+        <h1 id="not-found-title">This page slipped out of the frame.</h1>
+        <p>That URL isn’t part of this site. Let’s get you back to the pixels.</p>
+        <a class="not-found-link" href="/">
+          <span>Back to Dither Yuki</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
     </section>
   </div>
 </Layout>
+
+<style>
+  .not-found {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(17rem, 0.95fr);
+    gap: clamp(1.5rem, 5vw, 4.5rem);
+    align-items: center;
+    min-height: min(58vh, 42rem);
+    margin: clamp(1rem, 3vw, 2rem) auto clamp(3rem, 7vw, 5rem);
+    padding-block: clamp(1rem, 3vw, 2rem);
+  }
+
+  .not-found-art {
+    position: relative;
+    display: grid;
+    min-height: clamp(18rem, 35vw, 27rem);
+    place-items: center;
+    overflow: hidden;
+    border: var(--ui-border-width) solid var(--ink);
+    background:
+      radial-gradient(circle at 50% 48%, rgb(60 158 205 / 13%), transparent 52%),
+      linear-gradient(rgb(20 22 18 / 5%) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(20 22 18 / 5%) 1px, transparent 1px),
+      var(--paper-lift);
+    background-size: auto, 1.5rem 1.5rem, 1.5rem 1.5rem, auto;
+  }
+
+  .not-found-code {
+    position: relative;
+    z-index: 1;
+    margin-inline-end: 0.12em;
+    color: var(--ink);
+    font-family: var(--display);
+    font-size: clamp(6rem, 12vw, 9rem);
+    font-weight: 800;
+    letter-spacing: -0.12em;
+    line-height: 0.78;
+    text-shadow:
+      5px 5px 0 rgb(60 158 205 / 45%),
+      10px 10px 0 rgb(185 157 107 / 32%);
+  }
+
+  .not-found-pixel {
+    position: absolute;
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .not-found-pixel--blue {
+    top: 16%;
+    left: 14%;
+    background: var(--accent-blue);
+    box-shadow: 1.05rem 1.05rem 0 rgb(60 158 205 / 35%);
+  }
+
+  .not-found-pixel--brown {
+    right: 15%;
+    bottom: 17%;
+    background: var(--accent-brown);
+    box-shadow: -1.05rem -1.05rem 0 rgb(185 157 107 / 35%);
+  }
+
+  .not-found-art-label {
+    position: absolute;
+    right: 0.8rem;
+    bottom: 0.7rem;
+    color: var(--ink-faint);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .not-found-copy {
+    max-width: 32rem;
+  }
+
+  .not-found-kicker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0 0 0.9rem;
+    color: var(--accent-forest);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .not-found-copy h1 {
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 4.5vw, 4.4rem);
+    font-weight: 700;
+    letter-spacing: -0.055em;
+    line-height: 0.98;
+  }
+
+  .not-found-copy > p:not(.not-found-kicker) {
+    max-width: 28rem;
+    margin: 1rem 0 0;
+    color: var(--ink-soft);
+    font-size: clamp(1rem, 0.96rem + 0.18vw, 1.1rem);
+    line-height: 1.55;
+  }
+
+  .not-found-link {
+    display: inline-flex;
+    min-height: 2.8rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    border: var(--ui-border-width) solid var(--ink);
+    padding: 0.55rem 0.8rem;
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+      background-color 150ms ease,
+      color 150ms ease,
+      transform 150ms var(--ease),
+      box-shadow 150ms ease;
+  }
+
+  .not-found-link:hover {
+    transform: translateY(-2px);
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: 3px 3px 0 rgb(60 158 205 / 55%);
+  }
+
+  @media (max-width: 720px) {
+    .not-found {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      min-height: 0;
+    }
+
+    .not-found-art {
+      min-height: clamp(13rem, 52vw, 19rem);
+    }
+
+    .not-found-code {
+      font-size: clamp(5rem, 26vw, 9rem);
+    }
+
+    .not-found-copy h1 {
+      max-width: 14ch;
+      font-size: clamp(2.4rem, 10vw, 3.5rem);
+    }
+  }
+</style>
