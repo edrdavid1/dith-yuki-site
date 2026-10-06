@@ -114,7 +114,6 @@ function inlineParts(text: string) {
   });
 }
 
-const publishedCount = entries.filter((entry) => entry.status === 'published').length;
 const pageUrl = new URL('/diary/', Astro.site ?? 'https://ditheryuki.com').href;
 
 const schema = [
@@ -168,11 +167,6 @@ const schema = [
       title="Diary"
       titleId="diary-title"
       deck="A developer’s notebook for Dither Yuki — process, experiments, and the quiet decisions behind the pixels."
-      meta={[
-        { label: 'Author', value: 'Dave' },
-        { label: 'Form', value: 'Indie notes' },
-        { label: 'Entries', value: `${publishedCount} published · ${entries.length - publishedCount} open` },
-      ]}
     />
 
     <div class="diary-layout">
