@@ -104,6 +104,21 @@ const entries: Entry[] = [
   {
     id: '005',
     dateLabel: 'Note 005',
+    title: 'GPU — Why It Exists and Why You Don\'t See It',
+    tag: 'GPU',
+    status: 'published',
+    paragraphs: [
+      'One of the most interesting parts of developing Dither Yuki has been working with the GPU. At first, I thought moving the computations to the GPU would automatically make everything faster. It turned out to be more complicated.',
+      'The first version processed each tile separately: send it to the GPU, process it, and bring the result back. On a typical viewport, this took around **90 ms** compared to **14 ms** on the CPU. Most of the time was spent on data transfers, memory allocation, and synchronization. With dozens of tiles, that overhead quickly outweighed the benefits of parallel processing.',
+      'So I changed the entire approach. The image is now uploaded to the GPU once and stays there while the whole filter stack is processed. This greatly reduces the amount of data moving between the CPU and GPU and lets the GPU handle the work it\'s actually good at.',
+      'After that, I tested when the GPU actually performs better than the CPU. Another important detail appeared: for already loaded, **“warm”** tiles, the GPU is significantly faster, while the first access to a new, **“cold”** tile takes extra time because the data has to be uploaded.',
+      'So I decided to remove the manual GPU switch. Dither Yuki now automatically chooses between the CPU and GPU for each tile based on the current state of the data.',
+      'The user simply sees a fast preview, while the choice between CPU and GPU happens automatically dozens of times per second.',
+    ],
+  },
+  {
+    id: '006',
+    dateLabel: 'Note 006',
     title: 'Waiting for the next entry',
     tag: 'Soon',
     status: 'awaiting',
