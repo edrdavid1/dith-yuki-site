@@ -185,6 +185,30 @@ const year = new Date().getFullYear();
         nodes.forEach((node) => node.classList.add('is-visible'));
       }
 
+      const homeHero = document.querySelector<HTMLElement>('.home-page .hero');
+      if (homeHero) {
+        const updateHomeNav = () => {
+          const isMobile = window.matchMedia('(max-width: 720px)').matches;
+          document.body.classList.toggle(
+            'home-nav-visible',
+            !isMobile || window.scrollY > 0,
+          );
+        };
+        updateHomeNav();
+        window.addEventListener('scroll', updateHomeNav, { passive: true });
+        window.addEventListener('resize', updateHomeNav);
+
+        const heroMark = document.querySelector<HTMLAnchorElement>('.hero-mark');
+        heroMark?.addEventListener('click', (event) => {
+          if (!window.matchMedia('(max-width: 720px)').matches) return;
+          event.preventDefault();
+          document.querySelector('.home-mobile-actions')?.scrollIntoView({
+            behavior: reduce ? 'auto' : 'smooth',
+            block: 'start',
+          });
+        });
+      }
+
       const dialogs = [...document.querySelectorAll('dialog.dl-dialog')].filter(
         (node) => node instanceof HTMLDialogElement,
       );
