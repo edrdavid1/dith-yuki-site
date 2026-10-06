@@ -164,10 +164,10 @@ a:focus-visible,
 
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 1.15rem, 0);
+  transform: translate3d(0, 0.85rem, 0);
   transition:
-    opacity 720ms var(--ease),
-    transform 720ms var(--ease);
+    opacity 780ms var(--ease),
+    transform 780ms var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -177,7 +177,7 @@ a:focus-visible,
 }
 
 .reveal-media {
-  transform: translate3d(0, 1.35rem, 0) scale(0.985);
+  transform: translate3d(0, 1.05rem, 0) scale(0.988);
 }
 
 .reveal-media.is-visible {
@@ -194,7 +194,6 @@ a:focus-visible,
 .reveal-stagger > .intro-text,
 .reveal-stagger > .intro-media,
 .reveal-stagger > .kicker,
-.reveal-stagger > .about-media,
 .reveal-stagger > .features-head,
 .reveal-stagger > .features-more,
 .reveal-stagger > h2,
@@ -204,16 +203,15 @@ a:focus-visible,
 .reveal-stagger dl > div,
 .reveal-stagger > .license-index + div {
   opacity: 0;
-  transform: translate3d(0, 0.9rem, 0);
+  transform: translate3d(0, 0.7rem, 0);
   transition:
-    opacity 640ms var(--ease),
-    transform 640ms var(--ease);
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease);
 }
 
 .reveal-stagger.is-visible > .intro-text,
 .reveal-stagger.is-visible > .intro-media,
 .reveal-stagger.is-visible > .kicker,
-.reveal-stagger.is-visible > .about-media,
 .reveal-stagger.is-visible > .features-head,
 .reveal-stagger.is-visible > .features-more,
 .reveal-stagger.is-visible > h2,
@@ -234,39 +232,47 @@ a:focus-visible,
 .reveal-stagger.is-visible .feature-grid > li:nth-child(1),
 .reveal-stagger.is-visible dl > div:nth-child(1),
 .reveal-stagger.is-visible > .license-index + div {
-  transition-delay: 50ms;
+  transition-delay: 40ms;
 }
 
 .reveal-stagger.is-visible > .intro-media,
-.reveal-stagger.is-visible > .about-media,
 .reveal-stagger.is-visible > .features-more,
 .reveal-stagger.is-visible .coffee-link,
 .reveal-stagger.is-visible .about-body > p:nth-child(2),
 .reveal-stagger.is-visible .feature-grid > li:nth-child(2),
 .reveal-stagger.is-visible dl > div:nth-child(2) {
-  transition-delay: 140ms;
+  transition-delay: 110ms;
 }
 
 .reveal-stagger.is-visible .about-body > p:nth-child(3),
 .reveal-stagger.is-visible .feature-grid > li:nth-child(3),
 .reveal-stagger.is-visible dl > div:nth-child(3) {
-  transition-delay: 220ms;
+  transition-delay: 180ms;
 }
 
 .reveal-stagger.is-visible .feature-grid > li:nth-child(4),
 .reveal-stagger.is-visible dl > div:nth-child(4) {
-  transition-delay: 300ms;
+  transition-delay: 250ms;
 }
 
 .reveal-stagger.is-visible .feature-grid > li:nth-child(n + 5),
 .reveal-stagger.is-visible dl > div:nth-child(n + 5) {
-  transition-delay: 360ms;
+  transition-delay: 320ms;
 }
 
-/* Keep the about portrait planted on the footer — fade only, no lift */
-.reveal-stagger > .about-media,
-.reveal-stagger.is-visible > .about-media {
+/*
+  Elements that visually rest on the footer (homepage portrait).
+  Fade only — never lift — and stay hidden until the footer gate opens.
+*/
+.reveal-planted {
+  opacity: 0;
   transform: none;
+  transition: opacity 920ms var(--ease);
+  transition-delay: var(--reveal-delay, 120ms);
+}
+
+.reveal-planted.is-visible {
+  opacity: 1;
 }
 
 /* ── Hero (Figma: full-bleed classical banner) ────────── */
@@ -3205,10 +3211,10 @@ a:focus-visible,
   }
 
   .reveal,
+  .reveal-planted,
   .reveal-stagger > .intro-text,
   .reveal-stagger > .intro-media,
   .reveal-stagger > .kicker,
-  .reveal-stagger > .about-media,
   .reveal-stagger > .features-head,
   .reveal-stagger > .features-more,
   .reveal-stagger > h2,

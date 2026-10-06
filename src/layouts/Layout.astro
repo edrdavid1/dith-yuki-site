@@ -153,19 +153,26 @@ const year = new Date().getFullYear();
 
     <script>
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const nodes = document.querySelectorAll('.reveal');
+      const revealNodes = [...document.querySelectorAll<HTMLElement>('.reveal')];
+      const planted = [...document.querySelectorAll<HTMLElement>('[data-reveal-with="footer"]')];
+      const footer = document.querySelector<HTMLElement>('.site-footer');
+
+      const reveal = (node: HTMLElement) => {
+        if (node.classList.contains('is-visible')) return;
+        node.style.willChange = 'opacity, transform';
+        node.classList.add('is-visible');
+        const clear = () => {
+          node.style.willChange = 'auto';
+        };
+        node.addEventListener('transitionend', clear, { once: true });
+        window.setTimeout(clear, 1400);
+      };
+
+      const revealPlanted = () => {
+        planted.forEach((node) => reveal(node));
+      };
 
       if (!reduce) {
-        const reveal = (node: HTMLElement) => {
-          node.style.willChange = 'opacity, transform';
-          node.classList.add('is-visible');
-          const clear = () => {
-            node.style.willChange = 'auto';
-          };
-          node.addEventListener('transitionend', clear, { once: true });
-          window.setTimeout(clear, 1200);
-        };
-
         if ('IntersectionObserver' in window) {
           const observer = new IntersectionObserver(
             (entries) => {
@@ -175,14 +182,34 @@ const year = new Date().getFullYear();
                 observer.unobserve(entry.target);
               }
             },
-            { threshold: 0.14, rootMargin: '0px 0px -8% 0px' },
+            { threshold: 0.12, rootMargin: '0px 0px -6% 0px' },
           );
-          nodes.forEach((node) => observer.observe(node));
+
+          revealNodes.forEach((node) => observer.observe(node));
+
+          // Portrait stands on the footer — only appear once the footer is in view.
+          if (footer && planted.length) {
+            const footerGate = new IntersectionObserver(
+              (entries) => {
+                for (const entry of entries) {
+                  if (!entry.isIntersecting) continue;
+                  revealPlanted();
+                  footerGate.disconnect();
+                }
+              },
+              { threshold: 0.05, rootMargin: '0px 0px 0px 0px' },
+            );
+            footerGate.observe(footer);
+          } else {
+            revealPlanted();
+          }
         } else {
-          nodes.forEach((node) => reveal(node as HTMLElement));
+          revealNodes.forEach((node) => reveal(node));
+          revealPlanted();
         }
       } else {
-        nodes.forEach((node) => node.classList.add('is-visible'));
+        revealNodes.forEach((node) => node.classList.add('is-visible'));
+        planted.forEach((node) => node.classList.add('is-visible'));
       }
 
       const homeHero = document.querySelector<HTMLElement>('.home-page .hero');
