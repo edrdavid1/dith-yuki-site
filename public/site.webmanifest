@@ -1,7 +1,7 @@
 {
   "name": "Dither Yuki",
   "short_name": "Dither Yuki",
-  "description": "A desktop studio for dithering.",
+  "description": "Desktop image dithering and ASCII art studio by David Murashka / L'eco non di Bergamo. Floyd–Steinberg, Atkinson, Bayer, palettes, and more.",
   "start_url": "/",
   "display": "browser",
   "background_color": "#ddd9ce",

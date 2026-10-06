@@ -46,6 +46,7 @@
 
 html {
   background: var(--paper);
+  background-color: var(--paper);
   overflow-x: hidden;
   scroll-padding-top: 1rem;
   scrollbar-width: none;
@@ -64,6 +65,7 @@ body {
   background:
     radial-gradient(circle at 10% 0%, rgb(255 255 255 / 22%), transparent 26%),
     linear-gradient(180deg, var(--paper-lift), var(--paper) 20%, var(--paper-deep));
+  background-color: var(--paper);
   color: var(--ink);
   font-size: clamp(1rem, 0.96rem + 0.18vw, 1.1rem);
   line-height: 1.5;
@@ -2972,7 +2974,7 @@ a:focus-visible,
     z-index: 100;
     border-top: var(--ui-border-width) solid var(--ink);
     border-bottom: 0;
-    background: rgb(221 217 206 / 96%);
+    background: var(--paper);
     backdrop-filter: blur(12px);
     padding-bottom: env(safe-area-inset-bottom);
   }
@@ -3054,7 +3056,7 @@ a:focus-visible,
     bottom: 0;
     left: 0;
     border-top: var(--ui-border-width) solid var(--ink);
-    background: rgb(221 217 206 / 96%);
+    background: var(--paper);
   }
 
   .review-page .nav-btn[data-open-dialog],

@@ -1,9 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
-import { breadcrumbSchema } from '../lib/seo';
+import { DEFAULT_IMAGE_ALT, breadcrumbSchema } from '../lib/seo';
 
-const description = 'Review Dither Yuki image dithering tools: ordered and error-diffusion algorithms, ASCII art conversion, palettes, halftone and stipple effects, supported exports, limitations, and roadmap.';
+const description =
+  'Review Dither Yuki by David Murashka / L\'eco non di Bergamo.¹ Desktop dithering tools for Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, ASCII art, color palettes, halftone, stipple, exports, limits, and roadmap.';
 
 const capabilities = [
   ['Documents', 'multi-tab projects, Save As, recent files, crash recovery, and unsaved-change protection'],
@@ -33,11 +34,11 @@ const schema = breadcrumbSchema(Astro.site, [
 
 <Layout
   variant="review"
-  title="Image Dithering & ASCII Art Tools — Dither Yuki Review"
+  title="Dither Yuki Review — Floyd–Steinberg, Bayer, ASCII & Palette Tools"
   description={description}
   canonical="/review/"
   image="/social-card.png"
-  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  imageAlt={DEFAULT_IMAGE_ALT}
   schema={schema}
 >
   <div class="editorial-content review-article">

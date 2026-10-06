@@ -1,0 +1,12 @@
+/* TEAM */
+Developer: David Murashka
+Studio: L'eco non di Bergamo.¹
+Site: Dither Yuki
+Contact: support@ditheryuki.com
+Telegram: https://t.me/leco_di_Bergamo
+GitHub: https://github.com/edrdavid1/dith-yuki
+
+/* SITE */
+Standards: HTML5, CSS, Astro
+Software: Dither Yuki — image dithering, Floyd-Steinberg, Atkinson, Bayer, ASCII art
+Language: English

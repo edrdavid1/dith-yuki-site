@@ -1,9 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
-import { breadcrumbSchema } from '../lib/seo';
+import {
+  DEFAULT_IMAGE_ALT,
+  breadcrumbSchema,
+  organizationSchema,
+  personSchema,
+} from '../lib/seo';
 
-const description = 'Notes from the making of Dither Yuki: the ideas, experiments, and ongoing work behind an independent image-dithering studio.';
+const description =
+  'Project diary for Dither Yuki by David Murashka / L\'eco non di Bergamo.¹ Notes on dithering engines, Floyd–Steinberg tiling, palette mapping, architecture, and building an independent image-dithering studio.';
 
 type Entry = {
   id: string;
@@ -127,15 +133,11 @@ const schema = [
     description,
     url: pageUrl,
     inLanguage: 'en',
-    author: {
-      '@type': 'Person',
-      name: 'Dave',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: "L'eco non di Bergamo",
-      url: Astro.site?.href ?? 'https://ditheryuki.com/',
-    },
+    keywords:
+      'Dither Yuki diary, dithering engine, Floyd-Steinberg tiles, palette mapping, David Murashka, L\'eco non di Bergamo',
+    author: personSchema(),
+    creator: personSchema(),
+    publisher: organizationSchema(Astro.site),
     blogPost: entries
       .filter((entry) => entry.status === 'published')
       .map((entry) => ({
@@ -143,10 +145,9 @@ const schema = [
         headline: entry.title,
         url: `${pageUrl}#note-${entry.id}`,
         articleSection: entry.tag,
-        author: {
-          '@type': 'Person',
-          name: 'Dave',
-        },
+        author: personSchema(),
+        creator: personSchema(),
+        publisher: organizationSchema(Astro.site),
       })),
   },
 ];
@@ -155,11 +156,11 @@ const schema = [
 <Layout
   variant="diary"
   type="article"
-  title="Project Diary — Dither Yuki"
+  title="Project Diary — Dither Yuki by David Murashka / L'eco non di Bergamo"
   description={description}
   canonical="/diary/"
   image="/social-card.png"
-  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  imageAlt={DEFAULT_IMAGE_ALT}
   schema={schema}
 >
   <div class="diary-shell">

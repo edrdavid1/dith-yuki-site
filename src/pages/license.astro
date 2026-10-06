@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
-import { breadcrumbSchema } from '../lib/seo';
+import { DEFAULT_IMAGE_ALT, breadcrumbSchema } from '../lib/seo';
 import eulaText from '../../EULA.txt?raw';
 import sourceLicenseText from '../../LICENSE?raw';
 import flexlayoutLicenseText from '../../flexlayout-LICENSE.MIT.txt?raw';
 
 const description =
-  'License terms for Dither Yuki: the End User License Agreement for the app, the L\'eco non di Bergamo Software License for source code, website copyright, and third-party notices.';
+  'License terms for Dither Yuki by David Murashka / L\'eco non di Bergamo.¹ End User License Agreement, L\'eco non di Bergamo Software License for source code, website copyright, and third-party notices.';
 
 const githubLegal = 'https://github.com/edrdavid1/dith-yuki/tree/main/docs/legal';
 const githubLicense = 'https://github.com/edrdavid1/dith-yuki/blob/main/LICENSE';
@@ -21,11 +21,11 @@ const schema = breadcrumbSchema(Astro.site, [
 
 <Layout
   variant="license"
-  title="Dither Yuki — Software License & EULA"
+  title="Dither Yuki License & EULA — David Murashka / L'eco non di Bergamo"
   description={description}
   canonical="/license/"
   image="/social-card.png"
-  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  imageAlt={DEFAULT_IMAGE_ALT}
   schema={schema}
 >
   <div class="license-content">

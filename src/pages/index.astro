@@ -1,35 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import {
+  DEFAULT_IMAGE_ALT,
+  DEFAULT_SITE_DESCRIPTION,
+  softwareApplicationSchema,
+} from '../lib/seo';
 
-const description = 'Dither Yuki is a desktop image dithering studio for turning photos into dithered art and ASCII images. Explore error-diffusion and ordered dithering, build color palettes, and export pixel-style results.';
+const description = DEFAULT_SITE_DESCRIPTION;
 
-const softwareSchema = {
-  '@type': 'SoftwareApplication',
-  name: 'Dither Yuki',
-  applicationCategory: 'GraphicsApplication',
-  operatingSystem: 'macOS, Windows',
-  description,
-  featureList: [
-    'Image dithering with ordered and error-diffusion algorithms',
-    'ASCII art image conversion and export',
-    'Color palette creation and quantization',
-    'Halftone, stipple, and pixel-art effects',
-    'Layer-based image editing and export',
-  ],
-  creator: {
-    '@type': 'Person',
-    name: 'Dave',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: "L'eco non di Bergamo",
-    url: Astro.site?.href ?? 'https://ditheryuki.com/',
-    sameAs: [
-      'https://github.com/edrdavid1/dith-yuki',
-      'https://t.me/leco_di_Bergamo',
-    ],
-  },
-};
+const softwareSchema = softwareApplicationSchema(Astro.site, description);
 
 const capabilities = [
   ['Algorithms', '25+ methods — ordered, error-diffusion, halftone, stipple, ASCII, CRT, and experimental patterns'],
@@ -43,7 +22,7 @@ const capabilities = [
   title="Dither Yuki — Image Dithering & ASCII Art Studio"
   description={description}
   image="/social-card.png"
-  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  imageAlt={DEFAULT_IMAGE_ALT}
   schema={softwareSchema}
 >
   <section slot="hero" class="hero" aria-labelledby="page-title">
@@ -151,7 +130,7 @@ const capabilities = [
       <h2 id="about-title">Who we are</h2>
       <div class="about-body">
         <p>
-          Hi, I'm Dave — an artist and indie developer. I couldn't find a convenient tool for image dithering that suited my needs, so I decided to make my own. This project started as a personal tool that I want to keep developing and improving over time.
+          Hi, I'm David Murashka (Dave) — an artist and indie developer behind L'eco non di Bergamo.¹ I couldn't find a convenient tool for image dithering that suited my needs, so I decided to make my own. This project started as a personal tool that I want to keep developing and improving over time.
         </p>
         <p id="license">
           Right now, my budget is very limited, so I can't afford the necessary developer accounts and licenses for macOS and Windows. Because of this, installing the app may come with additional security warnings.

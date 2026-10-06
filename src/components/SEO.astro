@@ -1,4 +1,16 @@
 ---
+import {
+  DITHERING_KEYWORDS,
+  DEFAULT_IMAGE_ALT,
+  DEFAULT_SITE_DESCRIPTION,
+  ORG_NAME,
+  ORG_NAME_MARK,
+  PERSON_NAME,
+  SITE_NAME,
+  organizationSchema,
+  personSchema,
+} from '../lib/seo';
+
 interface SchemaNode {
   '@context'?: string;
   '@type': string;
@@ -16,6 +28,7 @@ interface Props {
   type?: 'website' | 'article';
   locale?: string;
   robots?: string;
+  keywords?: string;
   schema?: SchemaNode | SchemaNode[];
 }
 
@@ -24,12 +37,13 @@ const {
   description,
   canonical,
   image = '/social-card.png',
-  imageAlt = 'Dither Yuki — desktop studio for dithering',
+  imageAlt = DEFAULT_IMAGE_ALT,
   imageWidth = 1200,
   imageHeight = 630,
   type = 'website',
   locale = 'en_US',
   robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+  keywords = DITHERING_KEYWORDS,
   schema,
 } = Astro.props;
 
@@ -38,22 +52,22 @@ const canonicalUrl = canonical ? new URL(canonical, siteUrl) : new URL(Astro.url
 // Strip cache-busting query params from share images.
 const imagePath = image.split('?')[0] || '/social-card.png';
 const imageUrl = new URL(imagePath, siteUrl);
-const siteName = 'Dither Yuki';
 
 const websiteSchema: SchemaNode = {
   '@type': 'WebSite',
-  name: siteName,
+  name: SITE_NAME,
+  alternateName: ['Dith Yuki', 'DitherYuki'],
   url: siteUrl.href,
-  description: 'Desktop image dithering and ASCII art studio for macOS and Windows.',
+  description: DEFAULT_SITE_DESCRIPTION,
   inLanguage: 'en',
-  publisher: {
-    '@type': 'Organization',
-    name: "L'eco non di Bergamo",
-    url: siteUrl.href,
-    sameAs: [
-      'https://github.com/edrdavid1/dith-yuki',
-      'https://t.me/leco_di_Bergamo',
-    ],
+  keywords: DITHERING_KEYWORDS,
+  creator: personSchema(),
+  publisher: organizationSchema(Astro.site),
+  about: {
+    '@type': 'Thing',
+    name: 'Image dithering',
+    description:
+      'Ordered and error-diffusion dithering algorithms including Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, Burkes, Riemersma, halftone, stipple, and ASCII art conversion.',
   },
 };
 
@@ -63,23 +77,32 @@ const webPageSchema: SchemaNode = {
   url: canonicalUrl.href,
   name: title,
   description,
+  keywords,
   isPartOf: {
     '@type': 'WebSite',
-    name: siteName,
+    name: SITE_NAME,
     url: siteUrl.href,
   },
   inLanguage: 'en',
+  author: personSchema(),
+  creator: personSchema(),
+  publisher: organizationSchema(Astro.site),
+  copyrightHolder: organizationSchema(Astro.site),
+  copyrightYear: new Date().getFullYear(),
   primaryImageOfPage: {
     '@type': 'ImageObject',
     url: imageUrl.href,
     width: imageWidth,
     height: imageHeight,
+    caption: imageAlt,
   },
 };
 
 const schemas = [
   websiteSchema,
   webPageSchema,
+  personSchema(),
+  organizationSchema(Astro.site),
   ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
 ];
 
@@ -88,17 +111,24 @@ const jsonLd = (value: SchemaNode) =>
 ---
 <title>{title}</title>
 <meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
 <meta name="robots" content={robots} />
 <meta name="googlebot" content={robots} />
-<meta name="author" content="L'eco non di Bergamo" />
+<meta name="author" content={`${PERSON_NAME} / ${ORG_NAME}`} />
+<meta name="creator" content={PERSON_NAME} />
+<meta name="publisher" content={ORG_NAME_MARK} />
+<meta name="copyright" content={`© ${new Date().getFullYear()} ${PERSON_NAME}, ${ORG_NAME_MARK}`} />
+<meta name="application-name" content={SITE_NAME} />
+<meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 <meta name="generator" content={Astro.generator} />
 <meta name="format-detection" content="telephone=no,address=no,email=no" />
 <link rel="canonical" href={canonicalUrl.href} />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ddd9ce" />
 <meta name="color-scheme" content="light" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="manifest" href="/site.webmanifest" />
+<link rel="author" href="/humans.txt" />
 
 <link rel="icon" href="/favicon.ico" sizes="48x48" />
 <link rel="icon" href="/android-chrome-192.png" type="image/png" sizes="192x192" />
@@ -116,12 +146,18 @@ const jsonLd = (value: SchemaNode) =>
 <meta property="og:url" content={canonicalUrl.href} />
 <meta property="og:type" content={type} />
 <meta property="og:locale" content={locale} />
-<meta property="og:site_name" content={siteName} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="article:author" content={PERSON_NAME} />
+<meta property="article:publisher" content={ORG_NAME} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl.href} />
 <meta name="twitter:image:alt" content={imageAlt} />
+<meta name="twitter:label1" content="Creator" />
+<meta name="twitter:data1" content={PERSON_NAME} />
+<meta name="twitter:label2" content="Studio" />
+<meta name="twitter:data2" content={ORG_NAME_MARK} />
 
 {schemas.map((item) => <script type="application/ld+json" set:html={jsonLd(item)} />)}

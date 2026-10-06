@@ -1,9 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/PageHero.astro';
-import { breadcrumbSchema } from '../lib/seo';
+import {
+  DEFAULT_IMAGE_ALT,
+  breadcrumbSchema,
+  organizationSchema,
+  personSchema,
+} from '../lib/seo';
 
-const description = 'How mathematics turns limitations into art: discover the history, algorithms, and visual language of image dithering, with Dither Yuki.';
+const description =
+  'Learn image dithering with Dither Yuki: Floyd–Steinberg, Atkinson, Bayer ordered dithering, Jarvis–Judice–Ninke, Stucki, Sierra, Burkes, error diffusion, halftone, stipple, ditherpunk, and ASCII art — by David Murashka / L\'eco non di Bergamo.¹';
 const pageUrl = new URL('/dithering/', Astro.site ?? 'https://ditheryuki.com').href;
 
 const schema = [
@@ -17,15 +23,18 @@ const schema = [
     description,
     inLanguage: 'en',
     mainEntityOfPage: pageUrl,
-    author: {
-      '@type': 'Person',
-      name: 'Dave',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: "L'eco non di Bergamo",
-      url: Astro.site?.href ?? 'https://ditheryuki.com/',
-    },
+    keywords:
+      'Floyd-Steinberg, Atkinson dithering, Bayer dithering, Jarvis Judice Ninke, Stucki, Sierra, Burkes, error diffusion, ordered dithering, ditherpunk, ASCII art, David Murashka, L\'eco non di Bergamo',
+    about: [
+      { '@type': 'Thing', name: 'Floyd–Steinberg dithering' },
+      { '@type': 'Thing', name: 'Atkinson dithering' },
+      { '@type': 'Thing', name: 'Bayer ordered dithering' },
+      { '@type': 'Thing', name: 'Error diffusion' },
+      { '@type': 'Thing', name: 'Ditherpunk' },
+    ],
+    author: personSchema(),
+    creator: personSchema(),
+    publisher: organizationSchema(Astro.site),
     image: new URL('/social-card.png', Astro.site ?? 'https://ditheryuki.com').href,
   },
 ];
@@ -34,11 +43,11 @@ const schema = [
 <Layout
   variant="dithering"
   type="article"
-  title="Dithering: How Mathematics Turns Limitations into Art — Dither Yuki"
+  title="Dithering Algorithms Guide — Floyd–Steinberg, Bayer, Atkinson | Dither Yuki"
   description={description}
   canonical="/dithering/"
   image="/social-card.png"
-  imageAlt="Dither Yuki — desktop image dithering and ASCII art studio"
+  imageAlt={DEFAULT_IMAGE_ALT}
   schema={schema}
 >
   <div class="editorial-content dithering-article">

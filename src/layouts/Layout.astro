@@ -19,6 +19,7 @@ interface Props {
   imageWidth?: number;
   imageHeight?: number;
   type?: 'website' | 'article';
+  keywords?: string;
   schema?: Parameters<typeof SEO>[0]['schema'];
   robots?: string;
   variant?: 'home' | 'review' | 'dithering' | 'diary' | 'license' | 'not-found';
@@ -33,6 +34,7 @@ const {
   imageWidth,
   imageHeight,
   type = 'website',
+  keywords,
   schema,
   robots,
   variant = 'home',
@@ -53,6 +55,7 @@ const year = new Date().getFullYear();
       imageHeight={imageHeight}
       type={type}
       locale="en_US"
+      keywords={keywords}
       schema={schema}
       robots={robots}
     />
@@ -124,7 +127,7 @@ const year = new Date().getFullYear();
             <p class="footer-copy">
               <span aria-hidden="true">©</span>
               <span class="sr-only">Copyright</span>
-              {year} L'eco non di Bergamo.<sup>1</sup> All rights reserved.
+              {year} David Murashka / L'eco non di Bergamo.<sup>1</sup> All rights reserved.
             </p>
             <p class="footer-contact">
               <a href="mailto:support@ditheryuki.com">support@ditheryuki.com</a>
