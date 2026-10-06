@@ -94,14 +94,48 @@ a {
 }
 
 button,
-a {
+a,
+summary,
+select,
+label,
+[role="button"] {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+a[href],
+button:not(:disabled),
+summary,
+select,
+label[for],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="range"],
+input[type="checkbox"],
+input[type="radio"],
+[role="button"],
+.nav-btn,
+.coffee-link,
+.dl-btn,
+.dither-cta-primary,
+.dither-action-btn,
+.hero-mark {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
 }
 
 a:focus-visible,
 .nav-btn:focus-visible,
 .coffee-link:focus-visible,
-.hero-mark:focus-visible {
+.hero-mark:focus-visible,
+.dl-btn:focus-visible,
+.dither-cta-primary:focus-visible,
+summary:focus-visible {
   outline: 3px solid var(--accent-blue);
   outline-offset: 4px;
 }
@@ -348,6 +382,7 @@ a:focus-visible,
   margin-top: 0.35rem;
   filter: drop-shadow(0 8px 24px rgb(0 0 0 / 35%));
   text-decoration: none;
+  cursor: pointer;
   animation: mark-in 1000ms var(--ease) 100ms both;
   transition: transform 220ms var(--ease), filter 220ms ease;
 }
@@ -789,6 +824,7 @@ a:focus-visible,
   padding: 0.45rem 0.95rem;
   font-size: 0.98rem;
   text-decoration: none;
+  cursor: pointer;
   transition:
     background-color 150ms ease,
     color 150ms ease,
@@ -2216,6 +2252,7 @@ a:focus-visible,
   border: var(--ui-border-width) solid var(--ink);
   padding: 0.35rem 0.9rem;
   text-decoration: none;
+  cursor: pointer;
   transition:
     background-color 150ms ease,
     color 150ms ease,
@@ -3199,6 +3236,81 @@ a:focus-visible,
 @media (max-width: 360px) {
   .home-mobile-actions {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Desktop press: settle the lift without a sticky hover flash */
+@media (hover: hover) and (pointer: fine) {
+  .nav-btn:active,
+  .coffee-link:active,
+  .dither-cta-primary:active,
+  .dl-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  .hero-mark:active {
+    transform: translateY(2px) scale(1.01);
+  }
+}
+
+/*
+  Touch / coarse pointers: :hover is unreliable, so :active becomes the main feedback.
+  Inverted fill + slight press-in reads clearly on mobile.
+*/
+@media (hover: none), (pointer: coarse) {
+  .nav-btn:active,
+  .coffee-link:active,
+  .dither-cta-primary:active,
+  .dl-btn:active,
+  .dither-chip-row button:active,
+  .dither-color-steps button:active,
+  .dither-timeline-years button:active,
+  .dither-action-btn:active {
+    transform: scale(0.965);
+    background: var(--ink);
+    color: var(--paper);
+    box-shadow: none;
+    transition-duration: 80ms;
+  }
+
+  .dither-timeline-years button:active {
+    border-color: var(--ink);
+  }
+
+  .hero-mark:active {
+    transform: scale(0.96) translateY(3px);
+    filter: drop-shadow(0 4px 14px rgb(0 0 0 / 42%));
+    transition-duration: 90ms;
+  }
+
+  .hero-mark:active img {
+    animation-play-state: paused;
+  }
+
+  .nav-links a:active,
+  .footer-nav a:active,
+  .footer-contact a:active,
+  .editorial-toc a:active,
+  .dither-toc a:active,
+  .diary-index a:active,
+  .diary-closing a:active,
+  .features-more a:active,
+  .review-cta-links a:active,
+  .dithering-cta-links a:active,
+  .license-back a:active,
+  .license-map a:active,
+  .license-document summary:active,
+  .support-notice summary:active,
+  .signature a:active,
+  .skip-link:active,
+  .not-found-link:active {
+    opacity: 0.55;
+  }
+
+  .support-notice summary:active,
+  .license-document summary:active {
+    color: var(--ink);
   }
 }
 
