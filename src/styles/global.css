@@ -2352,7 +2352,6 @@ a:focus-visible,
   margin: 0 0 clamp(1.75rem, 4vw, 2.75rem);
   padding: 0 0 clamp(1.5rem, 3.5vw, 2.25rem);
   border-bottom: 1px solid rgb(20 22 18 / 12%);
-  scroll-margin-top: 5rem;
 }
 
 .diary-entry:last-of-type {
@@ -2399,6 +2398,7 @@ a:focus-visible,
 .diary-entry-meta h2 {
   margin: 0;
   max-width: 18rem;
+  scroll-margin-top: 5rem;
   font-family: var(--display);
   font-size: clamp(1.55rem, 1.25rem + 1.2vw, 2.15rem);
   font-weight: 700;
@@ -2512,21 +2512,20 @@ a:focus-visible,
 
   .diary-layout {
     grid-template-columns: 1fr;
-    gap: 1.15rem;
+    gap: 2.5rem;
   }
 
   .diary-index {
-    position: sticky;
-    top: 0;
-    z-index: 30;
+    position: static;
+    z-index: auto;
+    width: 100%;
     min-width: 0;
-    margin: 0 -0.15rem;
-    padding: 0.55rem 0.15rem 0.75rem;
-    border-bottom: 1px solid rgb(20 22 18 / 14%);
-    background:
-      linear-gradient(180deg, rgb(232 227 214 / 97%) 70%, rgb(221 217 206 / 92%));
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 18px -14px rgb(20 22 18 / 35%);
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .diary-index-label {
@@ -2534,72 +2533,98 @@ a:focus-visible,
   }
 
   .diary-index ol {
-    display: flex;
-    gap: 0.55rem;
-    max-width: 100%;
-    overflow-x: auto;
-    overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 0.15rem;
-    padding: 0.1rem 0.15rem 0.2rem;
-    mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 1.5rem), transparent);
-    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 1.5rem), transparent);
-    scrollbar-width: none;
-  }
-
-  .diary-index ol::-webkit-scrollbar {
-    display: none;
+    display: block;
+    width: 100%;
+    max-width: none;
+    overflow: visible;
+    padding: 0;
+    border-top: 1px solid rgb(20 22 18 / 18%);
+    mask-image: none;
+    -webkit-mask-image: none;
   }
 
   .diary-index li {
-    flex: 0 0 auto;
+    display: block;
+    width: 100%;
     min-width: 0;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    flex: none;
+    flex-basis: auto;
   }
 
   .diary-index a {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-content: start;
-    gap: 0.1rem 0.55rem;
-    min-width: 11.25rem;
-    max-width: 14rem;
-    min-height: 4.1rem;
-    padding: 0.7rem 0.8rem;
-    border: 1px solid rgb(20 22 18 / 22%);
-    background:
-      radial-gradient(circle at 12% 18%, rgb(60 158 205 / 16%), transparent 46%),
-      var(--paper-lift);
-    box-shadow: 2px 2px 0 rgb(20 22 18 / 8%);
-    scroll-snap-align: start;
-    transition: border-color 150ms ease, color 150ms ease, transform 150ms var(--ease);
+    grid-template-columns: 3.5ch minmax(0, 1fr) auto;
+    column-gap: 0.9rem;
+    row-gap: 0;
+    align-items: baseline;
+    width: 100%;
+    min-width: 0;
+    min-height: 48px;
+    max-width: none;
+    margin: 0;
+    padding: 0.85rem 0;
+    border: 0;
+    border-bottom: 1px solid rgb(20 22 18 / 18%);
+    background: transparent;
+    box-shadow: none;
+    flex: none;
+    flex-basis: auto;
+    scroll-snap-align: none;
+    transition: color 150ms ease;
   }
 
   .diary-index a:hover,
   .diary-index a:focus-visible {
-    border-color: var(--ink);
-    transform: translateY(-1px);
+    border-bottom-color: rgb(20 22 18 / 18%);
+    transform: none;
+  }
+
+  .diary-index a:hover .diary-index-title,
+  .diary-index a:focus-visible .diary-index-title {
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
   .diary-index a[data-status="awaiting"] {
-    opacity: 1;
-    border-style: dashed;
+    opacity: 0.55;
+    border-style: solid;
     background: transparent;
     box-shadow: none;
   }
 
+  .diary-index a[aria-disabled="true"] {
+    pointer-events: none;
+    cursor: default;
+  }
+
   .diary-index-num {
-    grid-row: 1 / span 2;
-    padding-top: 0.12rem;
+    grid-row: auto;
+    align-self: baseline;
+    margin-left: 0;
+    padding: 0;
     font-weight: 700;
+    font-variant-numeric: tabular-nums;
   }
 
   .diary-index-title {
+    min-width: 0;
+    color: var(--ink);
     font-size: 0.9rem;
     line-height: 1.2;
+    overflow-wrap: anywhere;
   }
 
   .diary-index-tag {
-    font-size: 0.66rem;
+    grid-column: auto;
+    justify-self: end;
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.8em;
+    letter-spacing: 0.04em;
+    opacity: 0.55;
   }
 
   .diary-index-note {
@@ -2615,11 +2640,11 @@ a:focus-visible,
   .diary-entry {
     margin-bottom: 1.5rem;
     padding-bottom: 1.45rem;
-    scroll-margin-top: 7.5rem;
   }
 
   .diary-entry-meta h2 {
     max-width: none;
+    scroll-margin-top: 7.5rem;
   }
 
   .diary-entry-body {
@@ -2643,13 +2668,6 @@ a:focus-visible,
 
   .diary-page .page-hero-deck {
     font-size: 0.98rem;
-  }
-
-  .diary-index a {
-    min-width: 10.5rem;
-    max-width: 12.5rem;
-    min-height: 3.9rem;
-    padding: 0.65rem 0.75rem;
   }
 
   .diary-entry-head {

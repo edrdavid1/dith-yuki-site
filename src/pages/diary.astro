@@ -170,13 +170,18 @@ const schema = [
     />
 
     <div class="diary-layout">
-      <aside class="diary-index" aria-label="Diary index">
+      <nav class="diary-index" aria-label="Index">
         <p class="diary-index-label">Index</p>
         <ol>
           {
             entries.map((entry) => (
               <li>
-                <a href={`#note-${entry.id}`} data-status={entry.status}>
+                <a
+                  href={entry.status === 'published' ? `#note-${entry.id}` : undefined}
+                  data-status={entry.status}
+                  aria-disabled={entry.status === 'awaiting' ? 'true' : undefined}
+                  tabindex={entry.status === 'awaiting' ? -1 : undefined}
+                >
                   <span class="diary-index-num">{entry.id}</span>
                   <span class="diary-index-title">{entry.title}</span>
                   <span class="diary-index-tag">{entry.tag}</span>
@@ -186,15 +191,14 @@ const schema = [
           }
         </ol>
         <p class="diary-index-note">More notes arrive when the work has something to say.</p>
-      </aside>
+      </nav>
 
       <div class="diary-stream">
         {
           entries.map((entry, index) => (
             <article
               class:list={['diary-entry', 'reveal', entry.status === 'awaiting' && 'diary-entry--awaiting']}
-              id={`note-${entry.id}`}
-              aria-labelledby={`note-title-${entry.id}`}
+              aria-labelledby={`note-${entry.id}`}
               style={`--reveal-delay: ${index * 60}ms`}
             >
               <header class="diary-entry-head">
@@ -213,7 +217,7 @@ const schema = [
                       </>
                     )}
                   </p>
-                  <h2 id={`note-title-${entry.id}`}>{entry.title}</h2>
+                  <h2 id={`note-${entry.id}`}>{entry.title}</h2>
                 </div>
               </header>
 
