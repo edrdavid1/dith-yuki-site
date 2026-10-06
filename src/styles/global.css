@@ -3023,7 +3023,11 @@ a:focus-visible,
   .intro {
     display: flex;
     flex-direction: column-reverse;
-    gap: 1.15rem;
+    gap: 2rem;
+  }
+
+  .features {
+    margin-top: 1.1rem;
   }
 
   .intro-media {
