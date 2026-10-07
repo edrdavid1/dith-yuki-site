@@ -425,19 +425,25 @@ function initCompareSlider(root: HTMLElement) {
   const chips = root.querySelectorAll<HTMLButtonElement>('[data-algo]');
   if (!stage || !before || !after || !range) return;
 
-  const w = 720;
-  const h = 405;
-  before.width = after.width = w;
-  before.height = after.height = h;
+  const originalWidth = 1440;
+  const originalHeight = 810;
+  before.width = originalWidth;
+  before.height = originalHeight;
+
+  const ditherWidth = 720;
+  const ditherHeight = 405;
+  after.width = ditherWidth;
+  after.height = ditherHeight;
+
   const bctx = before.getContext('2d', { willReadFrequently: true })!;
   const actx = after.getContext('2d', { willReadFrequently: true })!;
 
   let algo: Algo = 'floyd';
-  let source: ImageData | null = null;
+  let ditherSource: ImageData | null = null;
 
   const render = () => {
-    if (!source) return;
-    actx.putImageData(ditherImageData(source, algo, { colors: 2, intensity: 1 }), 0, 0);
+    if (!ditherSource) return;
+    actx.putImageData(ditherImageData(ditherSource, algo, { colors: 2, intensity: 1 }), 0, 0);
     if (label) label.textContent = labelMap[algo];
   };
 
@@ -455,9 +461,12 @@ function initCompareSlider(root: HTMLElement) {
     });
   });
 
-  void createDemoSource(w, h).then((image) => {
-    source = image;
-    bctx.putImageData(source, 0, 0);
+  void Promise.all([
+    createDemoSource(originalWidth, originalHeight),
+    createDemoSource(ditherWidth, ditherHeight),
+  ]).then(([originalImage, ditherImage]) => {
+    bctx.putImageData(originalImage, 0, 0);
+    ditherSource = ditherImage;
     render();
   });
 }

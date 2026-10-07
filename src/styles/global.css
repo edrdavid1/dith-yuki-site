@@ -1573,6 +1573,10 @@ summary:focus-visible {
   image-rendering: pixelated;
 }
 
+.dither-compare [data-canvas="before"] {
+  image-rendering: auto;
+}
+
 .dither-compare > canvas {
   position: absolute;
   inset: 0;
