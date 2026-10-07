@@ -1,34 +1,49 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHero from '../components/PageHero.astro';
-import { DEFAULT_IMAGE_ALT, breadcrumbSchema } from '../lib/seo';
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { DEFAULT_IMAGE_ALT, breadcrumbSchema } from "../lib/seo";
 
 const description =
-  'Review Dither Yuki by David Murashka / L\'eco non di Bergamo.¹ Desktop dithering tools for Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, ASCII art, color palettes, halftone, stipple, exports, limits, and roadmap.';
+  "Review Dither Yuki by David Murashka / L'eco non di Bergamo.¹ Desktop dithering tools for Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, ASCII art, color palettes, halftone, stipple, exports, limits, and roadmap.";
 
 const capabilities = [
-  ['Documents', 'multi-tab projects, Save As, recent files, crash recovery, and unsaved-change protection'],
-  ['Import & Export', 'PNG, JPG, WEBP, BMP, TIFF, SVG, and ASCII export to TXT, ANSI, HTML, SVG, PNG, and JSON'],
-  ['Layers', 'non-destructive effects, opacity, 12 blend modes, and undo/redo'],
-  ['35+ algorithms', 'Bayer, Floyd–Steinberg, Atkinson, Sierra, halftone, stipple, ASCII, CRT, Glitch, Glow, Curves, Riemersma, and more'],
-  ['Color Lab', 'palette import/export, color quantization, harmonies, ramps, and multiple palette-generation modes'],
-  ['Patterns', 'a .dyuki pattern library and manager'],
-  ['Interface', 'flexible workspace layout, keyboard shortcuts, and in-app updates'],
+  [
+    "Documents",
+    "multi-tab projects, Save As, recent files, crash recovery, and unsaved-change protection",
+  ],
+  [
+    "Import & Export",
+    "PNG, JPG, WEBP, BMP, TIFF, SVG, and ASCII export to TXT, ANSI, HTML, SVG, PNG, and JSON",
+  ],
+  ["Layers", "non-destructive effects, opacity, 12 blend modes, and undo/redo"],
+  [
+    "35+ algorithms",
+    "Bayer, Floyd–Steinberg, Atkinson, Sierra, halftone, stipple, ASCII, CRT, Glitch, Glow, Curves, Riemersma, and more",
+  ],
+  [
+    "Color Lab",
+    "palette import/export, color quantization, harmonies, ramps, and multiple palette-generation modes",
+  ],
+  ["Patterns", "a .dyuki pattern library and manager"],
+  [
+    "Interface",
+    "flexible workspace layout, keyboard shortcuts, and in-app updates",
+  ],
 ];
 
 const roadmap = [
-  'Video and animation support',
-  'CMYK and improved color management',
-  'More dithering algorithms and effects',
-  'Expanded palette and pattern tools',
-  'Performance improvements',
-  'Better cross-platform support',
-  'And much more',
+  "CMYK and improved color management",
+  "More dithering algorithms and effects",
+  "Expanded palette and pattern tools",
+  "Performance improvements",
+  "Video and animation support",
+  "Better cross-platform support",
+  "And much more",
 ];
 
 const schema = breadcrumbSchema(Astro.site, [
-  { name: 'Home', path: '/' },
-  { name: 'Review', path: '/review/' },
+  { name: "Home", path: "/" },
+  { name: "Review", path: "/review/" },
 ]);
 ---
 
@@ -62,7 +77,9 @@ const schema = breadcrumbSchema(Astro.site, [
         fetchpriority="high"
         decoding="async"
       />
-      <figcaption>Layers, live preview, dithering effects, and Color Lab in one workspace.</figcaption>
+      <figcaption>
+        Layers, live preview, dithering effects, and Color Lab in one workspace.
+      </figcaption>
     </figure>
 
     <nav class="editorial-toc reveal" aria-label="On this page">
@@ -78,45 +95,80 @@ const schema = breadcrumbSchema(Astro.site, [
         <p class="editorial-section-index">01 — Capabilities</p>
         <h2 id="capabilities-title">What it can do</h2>
         <ul class="review-capability-list">
-          {capabilities.map(([name, detail]) => (
-            <li>
-              <strong>{name}</strong>
-              <span>{detail}</span>
-            </li>
-          ))}
+          {
+            capabilities.map(([name, detail]) => (
+              <li>
+                <strong>{name}</strong>
+                <span>{detail}</span>
+              </li>
+            ))
+          }
         </ul>
       </section>
 
       <section class="reveal" aria-labelledby="limitations-title">
         <p class="editorial-section-index">02 — Limits</p>
         <h2 id="limitations-title">Current limitations</h2>
-        <p>Dither Yuki is still in beta, so some features are intentionally outside its scope. It is not a painting, printing, batch-processing, or video tool, and there is currently no Linux version.</p>
-        <p>Some algorithms also have implementation limitations. Error-diffusion methods currently run on CPU, while ASCII and Riemersma operate on the full document rather than progressive tiles.</p>
+        <p>
+          Dither Yuki is still in beta, so some features are intentionally
+          outside its scope. It is not a painting, printing, batch-processing,
+          or video tool, and there is currently no Linux version.
+        </p>
+        <p>
+          Some algorithms also have implementation limitations. Error-diffusion
+          methods currently run on CPU, while ASCII and Riemersma operate on the
+          full document rather than progressive tiles.
+        </p>
       </section>
 
       <section class="reveal" aria-labelledby="idea-title">
         <p class="editorial-section-index">03 — Idea</p>
         <h2 id="idea-title">The idea</h2>
-        <p>Dither Yuki is built around a simple idea: <strong>a dedicated space for experimenting with dithering, palettes, and digital image processing</strong> without turning the workflow into a complicated production suite.</p>
+        <p>
+          Dither Yuki is built around a simple idea: <strong
+            >a dedicated space for experimenting with dithering, palettes, and
+            digital image processing</strong
+          > without turning the workflow into a complicated production suite.
+        </p>
       </section>
 
       <section class="reveal" aria-labelledby="next-title">
         <p class="editorial-section-index">04 — Roadmap</p>
         <h2 id="next-title">What's next</h2>
-        <p>Dither Yuki is still evolving, and there is a lot more planned for the future.</p>
-        <p>Right now, my main goal is to raise enough support for an Apple Developer Program membership. This will make it easier to distribute Dither Yuki on macOS and provide a smoother installation experience without unnecessary security warnings.</p>
-        <p>After that, I want to keep improving the existing tools and expand what Dither Yuki can do.</p>
+        <p>
+          Dither Yuki is still evolving, and there is a lot more planned for the
+          future.
+        </p>
+        <p>
+          Right now, my main goal is to raise enough support for an Apple
+          Developer Program membership. This will make it easier to distribute
+          Dither Yuki on macOS and provide a smoother installation experience
+          without unnecessary security warnings.
+        </p>
+        <p>
+          After that, I want to keep improving the existing tools and expand
+          what Dither Yuki can do.
+        </p>
         <p>Planned features include:</p>
         <ol class="review-roadmap-list">
           {roadmap.map((item) => <li>{item}</li>)}
         </ol>
-        <p>The goal is to keep growing Dither Yuki while preserving its main idea: a simple space to experiment, create, and play with images.</p>
+        <p>
+          The goal is to keep growing Dither Yuki while preserving its main
+          idea: a simple space to experiment, create, and play with images.
+        </p>
       </section>
 
-      <section class="review-conclusion reveal" aria-labelledby="continue-title">
+      <section
+        class="review-conclusion reveal"
+        aria-labelledby="continue-title"
+      >
         <p class="editorial-section-index">05 — Continue</p>
         <h2 id="continue-title">Keep exploring</h2>
-        <p>Try the app, dig into how dithering works, or follow the making-of notes.</p>
+        <p>
+          Try the app, dig into how dithering works, or follow the making-of
+          notes.
+        </p>
         <p class="review-cta-links">
           <a class="dither-cta-primary" href="/">Try Dither Yuki →</a>
           <a href="/dithering/">Read about dithering →</a>
