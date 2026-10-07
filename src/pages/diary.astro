@@ -1,22 +1,22 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageHero from '../components/PageHero.astro';
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
 import {
   DEFAULT_IMAGE_ALT,
   breadcrumbSchema,
   organizationSchema,
   personSchema,
-} from '../lib/seo';
+} from "../lib/seo";
 
 const description =
-  'Project diary for Dither Yuki by David Murashka / L\'eco non di Bergamo.¹ Notes on dithering engines, Floyd–Steinberg tiling, palette mapping, architecture, and building an independent image-dithering studio.';
+  "Project diary for Dither Yuki by David Murashka / L'eco non di Bergamo.¹ Notes on dithering engines, Floyd–Steinberg tiling, palette mapping, architecture, and building an independent image-dithering studio.";
 
 type Entry = {
   id: string;
   dateLabel: string;
   title: string;
   tag: string;
-  status: 'published' | 'awaiting';
+  status: "published" | "awaiting";
   paragraphs: string[];
 };
 
@@ -27,136 +27,151 @@ type Entry = {
  */
 const entries: Entry[] = [
   {
-    id: '001',
-    dateLabel: 'Note 001',
-    title: 'The third attempt',
-    tag: 'Origin',
-    status: 'published',
+    id: "001",
+    dateLabel: "Note 001",
+    title: "The third attempt",
+    tag: "Origin",
+    status: "published",
     paragraphs: [
-      'Dither Yuki has already gone through two previous attempts.',
-      'I actually released the first one. It was also built with Tauri and focused on dithering and retro palettes. I used it myself and showed it to other people, but over time it became clear that it was more of a prototype than a proper tool.',
-      'The second version never left development. I started moving some of the logic into the backend and learning how to better separate the frontend and backend. Along the way, I ran into new architectural problems and realized that I still didn\'t fully understand how an application like this should be structured. So instead of adding another layer of fixes, I stopped development and decided to first understand what I was doing wrong.',
-      'And this is the third attempt.',
-      'The main problem with the first version was where the computations were happening. All the heavy work — dithering, palette application, filters — was running directly in the frontend using JavaScript/TypeScript. Small images were fine, but larger ones could freeze the interface for several seconds.',
-      'There were no layers either: just one canvas with one operation on top of it. Undo was also very simple — it stored a full copy of the image for every step, so memory usage could grow very quickly.',
-      'At some point, it became clear that the architecture itself was limiting where I could take the project.',
-      'So I decided to rewrite the third version from scratch.',
-      'Now the heavy computations run in Rust, images are processed in tiles and progressively, and undo works with the document structure instead of storing copies of every pixel.',
-      'I’ll talk more about each of these decisions in separate posts. For me, the important part is that the current Dither Yuki exists because of those two earlier attempts.',
-      'The first taught me how to build the product. The second taught me more about backend development and architecture. The third is an attempt to put all of that together while learning from my previous mistakes.',
+      "Dither Yuki has already gone through two previous attempts.",
+      "I actually released the first one. It was also built with Tauri and focused on dithering and retro palettes. I used it myself and showed it to other people, but over time it became clear that it was more of a prototype than a proper tool.",
+      "The second version never left development. I started moving some of the logic into the backend and learning how to better separate the frontend and backend. Along the way, I ran into new architectural problems and realized that I still didn't fully understand how an application like this should be structured. So instead of adding another layer of fixes, I stopped development and decided to first understand what I was doing wrong.",
+      "And this is the third attempt.",
+      "The main problem with the first version was where the computations were happening. All the heavy work — dithering, palette application, filters — was running directly in the frontend using JavaScript/TypeScript. Small images were fine, but larger ones could freeze the interface for several seconds.",
+      "There were no layers either: just one canvas with one operation on top of it. Undo was also very simple — it stored a full copy of the image for every step, so memory usage could grow very quickly.",
+      "At some point, it became clear that the architecture itself was limiting where I could take the project.",
+      "So I decided to rewrite the third version from scratch.",
+      "Now the heavy computations run in Rust, images are processed in tiles and progressively, and undo works with the document structure instead of storing copies of every pixel.",
+      "I’ll talk more about each of these decisions in separate posts. For me, the important part is that the current Dither Yuki exists because of those two earlier attempts.",
+      "The first taught me how to build the product. The second taught me more about backend development and architecture. The third is an attempt to put all of that together while learning from my previous mistakes.",
     ],
   },
   {
-    id: '002',
-    dateLabel: 'Note 002',
-    title: 'Tiles, not one giant canvas',
-    tag: 'Engine',
-    status: 'published',
+    id: "002",
+    dateLabel: "Note 002",
+    title: "Tiles, not one giant canvas",
+    tag: "Engine",
+    status: "published",
     paragraphs: [
-      'One of the first architectural questions I faced when rebuilding the engine was simple: how do I process large images without freezing the interface?',
-      'The obvious approach is to keep the entire image as one large pixel array and recalculate it whenever something changes. That\'s how the old version worked. But if a user moves a slider, why recalculate tens of millions of pixels they aren\'t even looking at?',
-      'So I decided to split the image into smaller tiles — **256×256 pixels** in my case, with a small border for filters that need neighboring pixels.',
-      'The engine now prioritizes tiles that are currently visible, starting from the center of the screen. Finished areas appear immediately while the rest are processed in the background.',
-      'But splitting the image into tiles isn\'t enough. The engine also needs to know which tiles are outdated.',
-      'For this, I use a **generation** system. Every document change increments its generation number, and each processed tile remembers which generation it belongs to.',
-      'When the generation changes, old tiles are marked as outdated and queued for recalculation. This prevents the engine from showing an old result instead of the current one.',
+      "One of the first architectural questions I faced when rebuilding the engine was simple: how do I process large images without freezing the interface?",
+      "The obvious approach is to keep the entire image as one large pixel array and recalculate it whenever something changes. That's how the old version worked. But if a user moves a slider, why recalculate tens of millions of pixels they aren't even looking at?",
+      "So I decided to split the image into smaller tiles — **256×256 pixels** in my case, with a small border for filters that need neighboring pixels.",
+      "The engine now prioritizes tiles that are currently visible, starting from the center of the screen. Finished areas appear immediately while the rest are processed in the background.",
+      "But splitting the image into tiles isn't enough. The engine also needs to know which tiles are outdated.",
+      "For this, I use a **generation** system. Every document change increments its generation number, and each processed tile remembers which generation it belongs to.",
+      "When the generation changes, old tiles are marked as outdated and queued for recalculation. This prevents the engine from showing an old result instead of the current one.",
     ],
   },
   {
-    id: '003',
-    dateLabel: 'Note 003',
-    title: 'The bug that was there from the beginning',
-    tag: 'Debug',
-    status: 'published',
+    id: "003",
+    dateLabel: "Note 003",
+    title: "The bug that was there from the beginning",
+    tag: "Debug",
+    status: "published",
     paragraphs: [
-      'This is the story of one of the most interesting bugs I encountered while developing Dither Yuki. It was especially tricky because it managed to mislead me more than once.',
-      'It started with a report about Floyd–Steinberg: visible tile boundaries were appearing in the image. You could actually see where one 256×256 block ended and the next one began — directly in the dithering pattern.',
-      'The first test gave me an interesting clue: with **pixel_size = 1**, the seams disappeared completely. That pointed to the problem being related to how larger pixels were processed.',
-      'The cause turned out to be at the tile boundaries. Floyd–Steinberg distributes quantization error to neighboring pixels, so when the image is split into tiles, some of that error has to cross from one tile into the next. I used a small buffer at the tile edges for this.',
-      'With a larger **pixel_size**, the algorithm could jump across several pixels at once. The buffer had a fixed size and sometimes wasn\'t large enough to hold all the error. Part of it was cut off at the tile boundary, creating a repeating seam every 256 pixels.',
-      'The most interesting part appeared during testing. With **pixel_size = 2**, there were no visible seams. At first everything looked correct, but it turned out to be a coincidence: the overflow happened to fit into the existing buffer. With another value, the bug appeared again.',
-      'The fix itself was fairly simple: the size of the boundary buffer is now calculated based on **pixel_size** and the reach of the specific error-diffusion algorithm.',
+      "This is the story of one of the most interesting bugs I encountered while developing Dither Yuki. It was especially tricky because it managed to mislead me more than once.",
+      "It started with a report about Floyd–Steinberg: visible tile boundaries were appearing in the image. You could actually see where one 256×256 block ended and the next one began — directly in the dithering pattern.",
+      "The first test gave me an interesting clue: with **pixel_size = 1**, the seams disappeared completely. That pointed to the problem being related to how larger pixels were processed.",
+      "The cause turned out to be at the tile boundaries. Floyd–Steinberg distributes quantization error to neighboring pixels, so when the image is split into tiles, some of that error has to cross from one tile into the next. I used a small buffer at the tile edges for this.",
+      "With a larger **pixel_size**, the algorithm could jump across several pixels at once. The buffer had a fixed size and sometimes wasn't large enough to hold all the error. Part of it was cut off at the tile boundary, creating a repeating seam every 256 pixels.",
+      "The most interesting part appeared during testing. With **pixel_size = 2**, there were no visible seams. At first everything looked correct, but it turned out to be a coincidence: the overflow happened to fit into the existing buffer. With another value, the bug appeared again.",
+      "The fix itself was fairly simple: the size of the boundary buffer is now calculated based on **pixel_size** and the reach of the specific error-diffusion algorithm.",
     ],
   },
   {
-    id: '004',
-    dateLabel: 'Note 004',
-    title: 'Three Ways to Map Colors to a Palette',
-    tag: 'Palettes',
-    status: 'published',
+    id: "004",
+    dateLabel: "Note 004",
+    title: "Three Ways to Map Colors to a Palette",
+    tag: "Palettes",
+    status: "published",
     paragraphs: [
-      'When dithering works with a limited palette — for example, four Game Boy shades or the sixteen colors of the Apple II — one simple question comes up: which palette color should be used for each pixel?',
-      'The first mode is **Strict**. For each source color, the two closest palette colors are found, and a dithering pattern is created between them. The result uses only colors from the actual palette.',
-      'While testing a portrait, I noticed something strange: the cheeks became almost completely flat, even though dithering worked normally in other parts of the image.',
-      'The problem was the palette itself. There simply wasn\'t a suitable second color close to the pink skin tone. The closest options were white and a cool lavender, both too far from the original color. There was no good pair for the dithering to create an intermediate tone.',
-      'That led to the second mode: **Guided**.',
-      'Instead of looking for the closest palette colors, Guided quantizes each color channel separately within the range covered by the palette. This can produce intermediate shades that technically don\'t exist in the palette. The transitions become richer, and the image often feels more alive.',
-      'The third mode, **Mixed**, was an attempt to combine both approaches.',
-      'First, the color goes through Guided to produce a better intermediate value. That result is then matched to the two closest palette colors and passed through the same dithering mechanism used by Strict.',
-      'The first version of Mixed still produced flat areas. The reason turned out to be simple: in the final step, I was choosing a single closest color instead of using a pair. I replaced that step with the same mechanism already used by Strict.',
-      'So Dither Yuki now has three different ways to approach the same problem:',
-      '**Strict** — only palette colors.',
-      '**Guided** — richer intermediate shades.',
-      '**Mixed** — a combination of both.',
-      'P.S. There is also a fourth mode, **Simple**, but it was added later'
+      "When dithering works with a limited palette — for example, four Game Boy shades or the sixteen colors of the Apple II — one simple question comes up: which palette color should be used for each pixel?",
+      "The first mode is **Strict**. For each source color, the two closest palette colors are found, and a dithering pattern is created between them. The result uses only colors from the actual palette.",
+      "While testing a portrait, I noticed something strange: the cheeks became almost completely flat, even though dithering worked normally in other parts of the image.",
+      "The problem was the palette itself. There simply wasn't a suitable second color close to the pink skin tone. The closest options were white and a cool lavender, both too far from the original color. There was no good pair for the dithering to create an intermediate tone.",
+      "That led to the second mode: **Guided**.",
+      "Instead of looking for the closest palette colors, Guided quantizes each color channel separately within the range covered by the palette. This can produce intermediate shades that technically don't exist in the palette. The transitions become richer, and the image often feels more alive.",
+      "The third mode, **Mixed**, was an attempt to combine both approaches.",
+      "First, the color goes through Guided to produce a better intermediate value. That result is then matched to the two closest palette colors and passed through the same dithering mechanism used by Strict.",
+      "The first version of Mixed still produced flat areas. The reason turned out to be simple: in the final step, I was choosing a single closest color instead of using a pair. I replaced that step with the same mechanism already used by Strict.",
+      "So Dither Yuki now has three different ways to approach the same problem:",
+      "**Strict** — only palette colors.",
+      "**Guided** — richer intermediate shades.",
+      "**Mixed** — a combination of both.",
+      "P.S. There is also a fourth mode, **Simple**, but it was added later",
     ],
   },
   {
-    id: '005',
-    dateLabel: 'Note 005',
-    title: 'GPU — Why It Exists and Why You Don\'t See It',
-    tag: 'GPU',
-    status: 'published',
+    id: "005",
+    dateLabel: "Note 005",
+    title: "GPU — Why It Exists and Why You Don't See It",
+    tag: "GPU",
+    status: "published",
     paragraphs: [
-      'One of the most interesting parts of developing Dither Yuki has been working with the GPU. At first, I thought moving the computations to the GPU would automatically make everything faster. It turned out to be more complicated.',
-      'The first version processed each tile separately: send it to the GPU, process it, and bring the result back. On a typical viewport, this took around **90 ms** compared to **14 ms** on the CPU. Most of the time was spent on data transfers, memory allocation, and synchronization. With dozens of tiles, that overhead quickly outweighed the benefits of parallel processing.',
-      'So I changed the entire approach. The image is now uploaded to the GPU once and stays there while the whole filter stack is processed. This greatly reduces the amount of data moving between the CPU and GPU and lets the GPU handle the work it\'s actually good at.',
-      'After that, I tested when the GPU actually performs better than the CPU. Another important detail appeared: for already loaded, **“warm”** tiles, the GPU is significantly faster, while the first access to a new, **“cold”** tile takes extra time because the data has to be uploaded.',
-      'So I decided to remove the manual GPU switch. Dither Yuki now automatically chooses between the CPU and GPU for each tile based on the current state of the data.',
-      'The user simply sees a fast preview, while the choice between CPU and GPU happens automatically dozens of times per second.',
+      "One of the most interesting parts of developing Dither Yuki has been working with the GPU. At first, I thought moving the computations to the GPU would automatically make everything faster. It turned out to be more complicated.",
+      "The first version processed each tile separately: send it to the GPU, process it, and bring the result back. On a typical viewport, this took around **90 ms** compared to **14 ms** on the CPU. Most of the time was spent on data transfers, memory allocation, and synchronization. With dozens of tiles, that overhead quickly outweighed the benefits of parallel processing.",
+      "So I changed the entire approach. The image is now uploaded to the GPU once and stays there while the whole filter stack is processed. This greatly reduces the amount of data moving between the CPU and GPU and lets the GPU handle the work it's actually good at.",
+      "After that, I tested when the GPU actually performs better than the CPU. Another important detail appeared: for already loaded, **“warm”** tiles, the GPU is significantly faster, while the first access to a new, **“cold”** tile takes extra time because the data has to be uploaded.",
+      "So I decided to remove the manual GPU switch. Dither Yuki now automatically chooses between the CPU and GPU for each tile based on the current state of the data.",
+      "The user simply sees a fast preview, while the choice between CPU and GPU happens automatically dozens of times per second.",
     ],
   },
   {
-    id: '006',
-    dateLabel: 'Note 006',
-    title: 'Waiting for the next entry',
-    tag: 'Soon',
-    status: 'awaiting',
+    id: "006",
+    dateLabel: "Note 006",
+    title: "Why Some Things Can't Be Accelerated on the GPU",
+    tag: "GPU",
+    status: "published",
+    paragraphs: [
+      "After getting GPU acceleration working, one exception remained: Floyd–Steinberg and other error-diffusion algorithms — Atkinson, Jarvis–Judice–Ninke, Stucki, and others — still ran on the CPU.",
+      "The reason comes from the structure of the algorithm itself. Each pixel receives part of the error from previous pixels, so the next step depends on the result of the previous one. This kind of chain is a poor match for the massive parallelism GPUs are designed for.",
+      "I decided to investigate whether a parallel version was possible. The idea was to process pixels along anti-diagonals: pixels on the same diagonal are independent and can be processed simultaneously, while each following diagonal receives data from the previous one.",
+      "This approach can run on the GPU, but there is another problem: the result differs from the classic Floyd–Steinberg algorithm. It becomes a similar algorithm with a different noise distribution.",
+      "For Dither Yuki, this matters. I want the algorithm selected by the user to remain the algorithm they actually selected. Because of that, error diffusion remains on the CPU.",
+      "These algorithms use a **wavefront approach** at document boundaries. It allows independent sections to be processed in parallel while preserving the original error-propagation order wherever the next step depends on it.",
+    ],
+  },
+  {
+    id: "007",
+    dateLabel: "Note 006",
+    title: "Waiting for the next entry",
+    tag: "Soon",
+    status: "awaiting",
     paragraphs: [],
   },
 ];
 
 function inlineParts(text: string) {
   return text.split(/(\*\*[^*]+\*\*)/g).map((part) => {
-    if (part.startsWith('**') && part.endsWith('**')) {
-      return { type: 'strong' as const, text: part.slice(2, -2) };
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return { type: "strong" as const, text: part.slice(2, -2) };
     }
-    return { type: 'text' as const, text: part };
+    return { type: "text" as const, text: part };
   });
 }
 
-const pageUrl = new URL('/diary/', Astro.site ?? 'https://ditheryuki.com').href;
+const pageUrl = new URL("/diary/", Astro.site ?? "https://ditheryuki.com").href;
 
 const schema = [
   breadcrumbSchema(Astro.site, [
-    { name: 'Home', path: '/' },
-    { name: 'Diary', path: '/diary/' },
+    { name: "Home", path: "/" },
+    { name: "Diary", path: "/diary/" },
   ]),
   {
-    '@type': 'Blog',
-    name: 'Dither Yuki Project Diary',
+    "@type": "Blog",
+    name: "Dither Yuki Project Diary",
     description,
     url: pageUrl,
-    inLanguage: 'en',
+    inLanguage: "en",
     keywords:
-      'Dither Yuki diary, dithering engine, Floyd-Steinberg tiles, palette mapping, David Murashka, L\'eco non di Bergamo',
+      "Dither Yuki diary, dithering engine, Floyd-Steinberg tiles, palette mapping, David Murashka, L'eco non di Bergamo",
     author: personSchema(),
     creator: personSchema(),
     publisher: organizationSchema(Astro.site),
     blogPost: entries
-      .filter((entry) => entry.status === 'published')
+      .filter((entry) => entry.status === "published")
       .map((entry) => ({
-        '@type': 'BlogPosting',
+        "@type": "BlogPosting",
         headline: entry.title,
         url: `${pageUrl}#note-${entry.id}`,
         articleSection: entry.tag,
@@ -193,10 +208,16 @@ const schema = [
             entries.map((entry) => (
               <li>
                 <a
-                  href={entry.status === 'published' ? `#note-${entry.id}` : undefined}
+                  href={
+                    entry.status === "published"
+                      ? `#note-${entry.id}`
+                      : undefined
+                  }
                   data-status={entry.status}
-                  aria-disabled={entry.status === 'awaiting' ? 'true' : undefined}
-                  tabindex={entry.status === 'awaiting' ? -1 : undefined}
+                  aria-disabled={
+                    entry.status === "awaiting" ? "true" : undefined
+                  }
+                  tabindex={entry.status === "awaiting" ? -1 : undefined}
                 >
                   <span class="diary-index-num">{entry.id}</span>
                   <span class="diary-index-title">{entry.title}</span>
@@ -206,14 +227,20 @@ const schema = [
             ))
           }
         </ol>
-        <p class="diary-index-note">More notes arrive when the work has something to say.</p>
+        <p class="diary-index-note">
+          More notes arrive when the work has something to say.
+        </p>
       </nav>
 
       <div class="diary-stream">
         {
           entries.map((entry, index) => (
             <article
-              class:list={['diary-entry', 'reveal', entry.status === 'awaiting' && 'diary-entry--awaiting']}
+              class:list={[
+                "diary-entry",
+                "reveal",
+                entry.status === "awaiting" && "diary-entry--awaiting",
+              ]}
               aria-labelledby={`note-${entry.id}`}
               style={`--reveal-delay: ${index * 60}ms`}
             >
@@ -226,7 +253,7 @@ const schema = [
                     <span>{entry.dateLabel}</span>
                     <span aria-hidden="true">·</span>
                     <span>{entry.tag}</span>
-                    {entry.status === 'awaiting' && (
+                    {entry.status === "awaiting" && (
                       <>
                         <span aria-hidden="true">·</span>
                         <span>Awaiting text</span>
@@ -237,22 +264,31 @@ const schema = [
                 </div>
               </header>
 
-              {entry.status === 'published' ? (
+              {entry.status === "published" ? (
                 <div class="diary-entry-body">
                   {entry.paragraphs.map((paragraph) => (
                     <p>
                       {inlineParts(paragraph).map((part) =>
-                        part.type === 'strong' ? <strong>{part.text}</strong> : part.text,
+                        part.type === "strong" ? (
+                          <strong>{part.text}</strong>
+                        ) : (
+                          part.text
+                        ),
                       )}
                     </p>
                   ))}
                 </div>
               ) : (
-                <div class="diary-entry-body diary-entry-body--blank" aria-label="Placeholder for upcoming diary text">
-                  <p class="diary-blank-line"></p>
-                  <p class="diary-blank-line"></p>
-                  <p class="diary-blank-line diary-blank-line--short"></p>
-                  <p class="diary-blank-caption">Text for this note will be added later.</p>
+                <div
+                  class="diary-entry-body diary-entry-body--blank"
+                  aria-label="Placeholder for upcoming diary text"
+                >
+                  <p class="diary-blank-line" />
+                  <p class="diary-blank-line" />
+                  <p class="diary-blank-line diary-blank-line--short" />
+                  <p class="diary-blank-caption">
+                    Text for this note will be added later.
+                  </p>
                 </div>
               )}
             </article>
