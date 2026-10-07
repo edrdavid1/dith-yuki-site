@@ -62,9 +62,7 @@ html::-webkit-scrollbar {
 body {
   min-width: 320px;
   margin: 0;
-  background:
-    radial-gradient(circle at 10% 0%, rgb(255 255 255 / 22%), transparent 26%),
-    linear-gradient(180deg, var(--paper-lift), var(--paper) 20%, var(--paper-deep));
+  background: var(--paper);
   background-color: var(--paper);
   color: var(--ink);
   font-size: clamp(1rem, 0.96rem + 0.18vw, 1.1rem);
