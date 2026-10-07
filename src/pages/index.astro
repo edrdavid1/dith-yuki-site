@@ -288,29 +288,68 @@ const capabilities = [
       "(prefers-reduced-motion: reduce)",
     ).matches;
     const back = document.querySelector(".intro-media-back");
+    const supportsScrollTimeline =
+      typeof CSS !== "undefined" &&
+      typeof CSS.supports === "function" &&
+      CSS.supports("animation-timeline: scroll()");
+    // Touch / coarse pointers + JS style writes during scroll are a common
+    // Safari jank source; keep the effect only when CSS can drive it.
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
-    if (!reduceMotion && back instanceof HTMLElement) {
+    if (
+      !reduceMotion &&
+      !supportsScrollTimeline &&
+      !coarsePointer &&
+      back instanceof HTMLElement
+    ) {
       let ticking = false;
+      let active = true;
+      let maxScroll = 1;
 
-      const update = () => {
-        const maxScroll = Math.max(
+      const measure = () => {
+        maxScroll = Math.max(
           1,
           document.documentElement.scrollHeight - window.innerHeight,
         );
+      };
+
+      const update = () => {
+        if (!active) {
+          ticking = false;
+          return;
+        }
         const deg = (window.scrollY / maxScroll) * 360;
-        back.style.transform = `rotate(${deg}deg)`;
+        back.style.transform = `translateZ(0) rotate(${deg}deg)`;
         ticking = false;
       };
 
       const onScroll = () => {
-        if (ticking) return;
+        if (ticking || !active) return;
         ticking = true;
         window.requestAnimationFrame(update);
       };
 
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll, { passive: true });
+      const onResize = () => {
+        measure();
+        onScroll();
+      };
+
+      measure();
       update();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onResize, { passive: true });
+
+      if ("IntersectionObserver" in window) {
+        const figure = back.closest(".intro-media") ?? back;
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            active = Boolean(entry?.isIntersecting);
+            if (active) onScroll();
+          },
+          { rootMargin: "20% 0px" },
+        );
+        observer.observe(figure);
+      }
     }
   </script>
 </Layout>

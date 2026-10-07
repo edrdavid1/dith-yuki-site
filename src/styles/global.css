@@ -638,6 +638,7 @@ summary:focus-visible {
   margin: 0;
   width: min(100%, 420px);
   justify-self: start;
+  isolation: isolate;
 }
 
 .intro-media img {
@@ -648,8 +649,30 @@ summary:focus-visible {
 }
 
 .intro-media-back {
+  transform: translateZ(0);
   transform-origin: center center;
-  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Compositor-driven path: avoids scroll-listener jank on Safari 18+. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .intro-media-back {
+      animation: intro-back-spin linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0% 100%;
+    }
+  }
+}
+
+@keyframes intro-back-spin {
+  from {
+    transform: translateZ(0) rotate(0deg);
+  }
+  to {
+    transform: translateZ(0) rotate(360deg);
+  }
 }
 
 .intro-media-front {
