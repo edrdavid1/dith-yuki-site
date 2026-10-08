@@ -284,21 +284,9 @@ const capabilities = [
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
-    const back = document.querySelector(".intro-media-back");
-    const supportsScrollTimeline =
-      typeof CSS !== "undefined" &&
-      typeof CSS.supports === "function" &&
-      CSS.supports("animation-timeline: scroll()");
-    // Touch / coarse pointers + JS style writes during scroll are a common
-    // Safari jank source; keep the effect only when CSS can drive it.
-    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const back = document.querySelector<HTMLElement>(".intro-media-back");
 
-    if (
-      !reduceMotion &&
-      !supportsScrollTimeline &&
-      !coarsePointer &&
-      back instanceof HTMLElement
-    ) {
+    if (!reduceMotion && back) {
       let ticking = false;
       let active = true;
       let maxScroll = 1;
@@ -315,7 +303,8 @@ const capabilities = [
           ticking = false;
           return;
         }
-        const deg = (window.scrollY / maxScroll) * 360;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const deg = (scrollY / maxScroll) * 360;
         back.style.transform = `translateZ(0) rotate(${deg}deg)`;
         ticking = false;
       };
