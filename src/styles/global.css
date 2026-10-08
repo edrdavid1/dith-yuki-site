@@ -47,7 +47,9 @@
 html {
   background: var(--paper);
   background-color: var(--paper);
-  overflow-x: hidden;
+  /* clip doesn't create a scroll container (unlike hidden),
+     so CSS animation-timeline: scroll() can bind to the viewport. */
+  overflow-x: clip;
   scroll-padding-top: 1rem;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -649,11 +651,28 @@ summary:focus-visible {
 }
 
 .intro-media-back {
-  transform: translateZ(0);
+  transform: translateZ(0) rotate(0deg);
   transform-origin: center center;
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* CSS-driven compositor path (Chrome 115+, Firefox 110+, Safari 18+).
+   Runs entirely on the GPU/compositor thread — zero jank. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .intro-media-back {
+      animation: intro-back-spin linear both;
+      animation-timeline: scroll();
+      animation-range: 0% 100%;
+    }
+  }
+}
+
+@keyframes intro-back-spin {
+  from { transform: translateZ(0) rotate(0deg); }
+  to   { transform: translateZ(0) rotate(360deg); }
 }
 
 .intro-media-front {

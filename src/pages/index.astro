@@ -281,15 +281,26 @@ const capabilities = [
   </div>
 
   <script>
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const back = document.querySelector<HTMLElement>(".intro-media-back");
+    (() => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const supportsScrollTimeline =
+        typeof CSS !== "undefined" &&
+        typeof CSS.supports === "function" &&
+        CSS.supports("animation-timeline: scroll()");
 
-    if (!reduceMotion && back) {
-      let ticking = false;
+      // CSS compositor path handles it natively — no JS needed.
+      if (reduceMotion || supportsScrollTimeline) return;
+
+      const back = document.querySelector<HTMLElement>(".intro-media-back");
+      if (!back) return;
+
       let active = true;
       let maxScroll = 1;
+      let currentDeg = 0;
+      let targetDeg = 0;
+      let rafId: number | null = null;
 
       const measure = () => {
         maxScroll = Math.max(
@@ -298,32 +309,30 @@ const capabilities = [
         );
       };
 
-      const update = () => {
-        if (!active) {
-          ticking = false;
-          return;
+      const animate = () => {
+        const diff = targetDeg - currentDeg;
+        currentDeg += diff * 0.12;
+        back.style.transform = `translateZ(0) rotate(${currentDeg}deg)`;
+        if (Math.abs(diff) > 0.05 && active) {
+          rafId = requestAnimationFrame(animate);
+        } else {
+          rafId = null;
         }
-        const scrollY = window.scrollY || window.pageYOffset || 0;
-        const deg = (scrollY / maxScroll) * 360;
-        back.style.transform = `translateZ(0) rotate(${deg}deg)`;
-        ticking = false;
       };
 
       const onScroll = () => {
-        if (ticking || !active) return;
-        ticking = true;
-        window.requestAnimationFrame(update);
-      };
-
-      const onResize = () => {
-        measure();
-        onScroll();
+        if (!active) return;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        targetDeg = (scrollY / maxScroll) * 360;
+        if (rafId === null) {
+          rafId = requestAnimationFrame(animate);
+        }
       };
 
       measure();
-      update();
+      onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onResize, { passive: true });
+      window.addEventListener("resize", () => { measure(); onScroll(); }, { passive: true });
 
       if ("IntersectionObserver" in window) {
         const figure = back.closest(".intro-media") ?? back;
@@ -336,6 +345,6 @@ const capabilities = [
         );
         observer.observe(figure);
       }
-    }
+    })();
   </script>
 </Layout>
