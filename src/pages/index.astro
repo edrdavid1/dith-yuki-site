@@ -285,13 +285,7 @@ const capabilities = [
       const reduceMotion = window.matchMedia(
         "(prefers-reduced-motion: reduce)",
       ).matches;
-      const supportsScrollTimeline =
-        typeof CSS !== "undefined" &&
-        typeof CSS.supports === "function" &&
-        CSS.supports("animation-timeline: scroll()");
-
-      // CSS compositor path handles it natively — no JS needed.
-      if (reduceMotion || supportsScrollTimeline) return;
+      if (reduceMotion) return;
 
       const back = document.querySelector<HTMLElement>(".intro-media-back");
       if (!back) return;
@@ -312,7 +306,7 @@ const capabilities = [
       const animate = () => {
         const diff = targetDeg - currentDeg;
         currentDeg += diff * 0.12;
-        back.style.transform = `translateZ(0) rotate(${currentDeg}deg)`;
+        back.style.transform = `translate3d(0, 0, 0) rotate(${currentDeg}deg)`;
         if (Math.abs(diff) > 0.05 && active) {
           rafId = requestAnimationFrame(animate);
         } else {
@@ -332,7 +326,14 @@ const capabilities = [
       measure();
       onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", () => { measure(); onScroll(); }, { passive: true });
+      window.addEventListener(
+        "resize",
+        () => {
+          measure();
+          onScroll();
+        },
+        { passive: true },
+      );
 
       if ("IntersectionObserver" in window) {
         const figure = back.closest(".intro-media") ?? back;
@@ -341,7 +342,7 @@ const capabilities = [
             active = Boolean(entry?.isIntersecting);
             if (active) onScroll();
           },
-          { rootMargin: "20% 0px" },
+          { rootMargin: "25% 0px" },
         );
         observer.observe(figure);
       }

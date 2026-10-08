@@ -435,8 +435,8 @@ function initCompareSlider(root: HTMLElement) {
   after.width = ditherWidth;
   after.height = ditherHeight;
 
-  const bctx = before.getContext('2d', { willReadFrequently: true })!;
-  const actx = after.getContext('2d', { willReadFrequently: true })!;
+  const bctx = before.getContext('2d')!;
+  const actx = after.getContext('2d')!;
 
   let algo: Algo = 'floyd';
   let ditherSource: ImageData | null = null;
@@ -496,8 +496,8 @@ function initOrderedDemo(root: HTMLElement) {
   const h = 120;
   none.width = bayer.width = w;
   none.height = bayer.height = h;
-  const nctx = none.getContext('2d', { willReadFrequently: true })!;
-  const bctx = bayer.getContext('2d', { willReadFrequently: true })!;
+  const nctx = none.getContext('2d')!;
+  const bctx = bayer.getContext('2d')!;
 
   let colors = 4;
   let source: ImageData | null = null;
@@ -610,6 +610,7 @@ function initErrorAnim(root: HTMLElement) {
   let i = 0;
   let raf = 0;
   let playing = true;
+  let inView = true;
   let kernel = ERROR_KERNELS.floyd;
   let pulseTimer = 0;
 
@@ -745,7 +746,7 @@ function initErrorAnim(root: HTMLElement) {
     window.clearTimeout(pulseTimer);
     pulseTimer = window.setTimeout(() => pulseDiagram(false), 120);
     i += 1;
-    if (playing) raf = window.setTimeout(step, 55);
+    if (playing && inView) raf = window.setTimeout(step, 55);
   };
 
   const reset = (animate = !reduce) => {
@@ -792,6 +793,22 @@ function initErrorAnim(root: HTMLElement) {
     if (playing) step();
     else window.clearTimeout(raf);
   });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = Boolean(entry?.isIntersecting);
+        if (inView && playing && i < cols * rows) {
+          window.clearTimeout(raf);
+          step();
+        } else if (!inView) {
+          window.clearTimeout(raf);
+        }
+      },
+      { rootMargin: '100px 0px' },
+    );
+    observer.observe(root);
+  }
 
   applyKernel('floyd');
 }

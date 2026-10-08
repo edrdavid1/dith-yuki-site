@@ -162,13 +162,7 @@ const year = new Date().getFullYear();
 
       const reveal = (node: HTMLElement) => {
         if (node.classList.contains('is-visible')) return;
-        node.style.willChange = 'opacity, transform';
         node.classList.add('is-visible');
-        const clear = () => {
-          node.style.willChange = 'auto';
-        };
-        node.addEventListener('transitionend', clear, { once: true });
-        window.setTimeout(clear, 1400);
       };
 
       const revealPlanted = () => {
@@ -217,12 +211,14 @@ const year = new Date().getFullYear();
 
       const homeHero = document.querySelector<HTMLElement>('.home-page .hero');
       if (homeHero) {
+        let lastVisible: boolean | null = null;
         const updateHomeNav = () => {
           const isMobile = window.matchMedia('(max-width: 720px)').matches;
-          document.body.classList.toggle(
-            'home-nav-visible',
-            !isMobile || window.scrollY > 0,
-          );
+          const visible = !isMobile || window.scrollY > 0;
+          if (visible !== lastVisible) {
+            lastVisible = visible;
+            document.body.classList.toggle('home-nav-visible', visible);
+          }
         };
         updateHomeNav();
         window.addEventListener('scroll', updateHomeNav, { passive: true });
