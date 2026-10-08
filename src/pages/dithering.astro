@@ -106,7 +106,6 @@ const schema = [
 
     <article class="editorial-copy dithering-copy">
       <section class="reveal" aria-labelledby="history-title">
-        <p class="dither-section-index">01 — Origins</p>
         <h2 id="history-title">From vibration to digital images</h2>
         <p>The word <em>dither</em> is related to the Middle English <em>didderen</em> — “to tremble” or “to shake.”</p>
         <p>One of the well-known early applications of this principle dates back to World War II. Mechanical computing devices used in aviation could operate more accurately because of vibration: it reduced the effects of friction and “sticking” between moving parts. Small vibration motors were later used to create this effect.</p>
@@ -126,7 +125,6 @@ const schema = [
       </div>
 
       <section class="reveal" aria-labelledby="colors-title">
-        <p class="dither-section-index">02 — Ordered patterns</p>
         <h2 id="colors-title">When the colors ran out</h2>
         <p>In 1973, Bryce Bayer introduced his method of <strong>ordered dithering</strong>. Instead of using random noise, the image is processed with a predefined threshold matrix. The matrix repeats across the image and determines where different pixel values should appear.</p>
         <p>The result is that a limited set of colors can visually produce a much wider range of shades.</p>
@@ -161,7 +159,6 @@ const schema = [
       </figure>
 
       <section class="reveal" aria-labelledby="error-title">
-        <p class="dither-section-index">03 — Error diffusion</p>
         <h2 id="error-title">An error that becomes an image</h2>
         <p>In 1976, Robert Floyd and Louis Steinberg introduced <strong>Floyd–Steinberg dithering</strong>. Instead of processing each pixel independently, the algorithm calculates the quantization error and distributes it to neighboring pixels.</p>
         <p>If a pixel should be gray but the device can only display black or white, the difference does not simply disappear. It becomes information for the pixels that follow.</p>
@@ -204,7 +201,6 @@ const schema = [
       </figure>
 
       <section class="reveal" aria-labelledby="atkinson-title">
-        <p class="dither-section-index">04 — A Macintosh signature</p>
         <h2 id="atkinson-title">Apple and Atkinson</h2>
         <p>In the early 1980s, Bill Atkinson developed his own dithering algorithm for the Macintosh. It distributed only part of the error — six eighths — leaving the remaining 25% undistributed. This helped produce the distinctive high-contrast and textured look of the Macintosh's monochrome display.</p>
         <p>Dithering was no longer just a way to compensate for hardware limitations. It was becoming part of a visual language.</p>
@@ -223,7 +219,6 @@ const schema = [
       </figure>
 
       <section class="reveal" aria-labelledby="style-title">
-        <p class="dither-section-index">05 — From tool to style</p>
         <h2 id="style-title">From limitation to style</h2>
         <p>During the era of EGA and other limited-color graphics systems, dithering became an important tool for artists. One well-known example is the work of Mark Ferrari for Lucasfilm Games, where limited palettes were transformed into much richer-looking images through dithering.</p>
         <p>Later, the technique outlived the hardware limitations that created the need for it.</p>
@@ -231,7 +226,6 @@ const schema = [
       </section>
 
       <section class="reveal" aria-labelledby="perception-title">
-        <p class="dither-section-index">06 — The perceptual trick</p>
         <h2 id="perception-title">Why does it work?</h2>
         <p>An image may contain fewer available colors or shades than needed for an exact reproduction. Dithering distributes those limited values across space so that, over a small area, the image is perceived as something in between.</p>
         <p>Two colors can become a third color in perception.</p>
@@ -257,7 +251,6 @@ const schema = [
       </figure>
 
       <section class="reveal" aria-labelledby="approaches-title">
-        <p class="dither-section-index">07 — A family of methods</p>
         <h2 id="approaches-title">The main approaches</h2>
 
         <div class="dither-method-grid">
@@ -328,7 +321,6 @@ const schema = [
       </figure>
 
       <section class="dithering-conclusion reveal" aria-labelledby="why-yuki-title">
-        <p class="dither-section-index">08 — Make it your own</p>
         <h2 id="why-yuki-title">So why Dither Yuki?</h2>
         <p>Because dithering stopped being just a way to “cheat” limited hardware a long time ago.</p>
         <p>Today, it is a visual tool in its own right.</p>

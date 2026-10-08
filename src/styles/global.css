@@ -20,7 +20,7 @@
   --accent-brown: #b99d6b;
   --accent-forest: #19241e;
   --hero-shade: #2a2e27;
-  --display: "Syne", "Arial Rounded MT Bold", "Arial", sans-serif;
+  --display: "Space Grotesk", sans-serif;
   --hero-logo: "ChicagoFLF", "Chicago", "Charcoal", "Geneva", sans-serif;
   /* ChicagoFLF glyphs include side bearings; keep optical pull light. */
   --chicago-bearing: 0.079em;
@@ -766,7 +766,6 @@ summary:focus-visible {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.1fr);
   grid-template-areas:
-    "kicker media"
     "title media"
     "body media"
     "cta media";
@@ -775,10 +774,6 @@ summary:focus-visible {
   align-items: start;
   margin-top: clamp(3rem, 7vw, 5rem);
   overflow: visible;
-}
-
-.about > .kicker {
-  grid-area: kicker;
 }
 
 .about > h2 {

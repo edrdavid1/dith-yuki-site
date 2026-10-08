@@ -27,6 +27,19 @@ type Entry = {
  */
 const entries: Entry[] = [
   {
+    id: "000",
+    dateLabel: "Note 000",
+    title: "Why Tauri, Not GPUI",
+    tag: "Stack",
+    status: "published",
+    paragraphs: [
+      "I chose Tauri rather than GPUI or similar Rust UI frameworks for a pretty simple reason: I'm a frontend developer. React, TypeScript, and CSS are the tools I already know, so I can focus on building Dither Yuki instead of spending most of my time learning a completely new way to build interfaces.",
+      "GPUI is an interesting approach, but when I started this project, the ecosystem was still fairly young. It's a low-level UI framework, which means that a lot of the interface layer that comes built into the web has to be designed and implemented yourself.",
+      "Tauri lets me split the work: Rust handles the engine and heavy computations, while React handles the interface. This lets me use a familiar stack where it makes sense without having to build my own UI framework alongside the application.",
+      "Maybe I'll try building something with GPUI one day. But for Dither Yuki, I needed a tool that would let me spend my time building the product itself, rather than the infrastructure around it.",
+    ],
+  },
+  {
     id: "001",
     dateLabel: "Note 001",
     title: "The third attempt",
