@@ -1,9 +1,8 @@
 /* TEAM */
-Developer: David Murashka
-Studio: L'eco non di Bergamo.¹
+Studio: Vasdas
 Site: Dither Yuki
 Contact: support@ditheryuki.com
-Telegram: https://t.me/leco_di_Bergamo
+Web: https://vasdas.studio
 GitHub: https://github.com/edrdavid1/dith-yuki
 
 /* SITE */

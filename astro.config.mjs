@@ -11,7 +11,10 @@ export default defineConfig({
   trailingSlash: 'always',
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/404') && !page.endsWith('/404/'),
+      filter: (page) =>
+        !page.includes('/404') &&
+        !page.endsWith('/404/') &&
+        !page.includes('/diary'),
       changefreq: 'weekly',
       lastmod: new Date(),
       serialize(item) {
@@ -19,7 +22,6 @@ export default defineConfig({
         const priority =
           path === '/' ? 1.0
           : path.startsWith('/dithering') || path.startsWith('/review') ? 0.9
-          : path.startsWith('/diary') ? 0.8
           : 0.5;
         return { ...item, priority };
       },

@@ -1,10 +1,9 @@
 ---
 interface Props {
   platform: 'mac' | 'windows';
-  href: string;
 }
 
-const { platform, href } = Astro.props;
+const { platform } = Astro.props;
 const isMac = platform === 'mac';
 const titleId = `download-${platform}-title`;
 ---
@@ -22,43 +21,21 @@ const titleId = `download-${platform}-title`;
       </h2>
 
       <div class="dl-dialog-copy">
-        {isMac ? (
-          <>
-            <p>
-              I'm sorry for the extra step. Dither Yuki is currently not signed with an Apple Developer certificate, so macOS may show a security warning when you try to open the app.
-            </p>
-            <p>
-              This does not mean the application contains a virus. Dither Yuki is an independent project with publicly available source code under a source-available license. You can <a href="https://github.com/edrdavid1/dith-yuki" target="_blank" rel="noopener noreferrer">review the source on GitHub</a> and read the terms on our <a href="/license/">License page</a>.
-            </p>
-            <p>
-              If macOS blocks the application, you can allow it in:<br />
-              System Settings → Privacy &amp; Security → Security → Open Anyway
-            </p>
-            <p>Thank you for your patience and for giving Dither Yuki a try.</p>
-          </>
-        ) : (
-          <>
-            <p>
-              I'm sorry for the extra step. Dither Yuki is currently not signed with a code-signing certificate, so Windows Defender or SmartScreen may show a security warning when you try to run the application.
-            </p>
-            <p>
-              This does not mean the application contains a virus. Dither Yuki is an independent project with publicly available source code under a source-available license. You can <a href="https://github.com/edrdavid1/dith-yuki" target="_blank" rel="noopener noreferrer">review the source on GitHub</a> and read the terms on our <a href="/license/">License page</a>.
-            </p>
-            <p>
-              If Windows blocks the application, you can usually continue by clicking:<br />
-              More info → Run anyway
-            </p>
-          </>
-        )}
+        <p>
+          {isMac
+            ? 'The macOS build of Dither Yuki is coming soon.'
+            : 'The Windows build of Dither Yuki is coming soon.'}
+        </p>
+        <p>
+          We’re finishing distribution setup so you can install without extra
+          security hurdles. Check back shortly.
+        </p>
       </div>
 
       <div class="dl-dialog-actions">
         <button type="button" class="dl-btn dl-btn-cancel" data-close-dialog>
           Cancel
         </button>
-        <a class="dl-btn dl-btn-download" href={href}>
-          Download
-        </a>
       </div>
     </div>
   </div>

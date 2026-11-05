@@ -9,12 +9,11 @@ type SchemaNode = {
 };
 
 export const SITE_NAME = 'Dither Yuki';
-export const ORG_NAME = "L'eco non di Bergamo";
-export const ORG_NAME_MARK = "L'eco non di Bergamo.¹";
-export const PERSON_NAME = 'David Murashka';
-export const PERSON_ALIAS = 'Dave';
+export const ORG_NAME = 'Vasdas';
+export const ORG_NAME_MARK = 'Vasdas studio';
+export const ORG_URL = 'https://vasdas.studio';
 export const DEFAULT_IMAGE_ALT =
-  'Dither Yuki — desktop image dithering and ASCII art studio by David Murashka / L\'eco non di Bergamo';
+  'Dither Yuki — desktop image dithering and ASCII art studio by Vasdas';
 
 /** Core topical terms for meta keywords + schema.keywords */
 export const DITHERING_KEYWORDS = [
@@ -58,36 +57,17 @@ export const DITHERING_KEYWORDS = [
   'image processing',
   'graphics application',
   'Dither Yuki',
-  'David Murashka',
-  "L'eco non di Bergamo",
-  "L'eco non di Bergamo.¹",
+  'Vasdas',
+  'Vasdas studio',
   'macOS dithering app',
   'Windows dithering software',
 ].join(', ');
 
 export const DEFAULT_SITE_DESCRIPTION =
-  'Dither Yuki is a desktop image dithering and ASCII art studio by David Murashka / L\'eco non di Bergamo.¹ Use Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, Burkes, Riemersma, halftone, stipple, CRT, and palette tools on macOS and Windows.';
+  'Dither Yuki is a desktop image dithering and ASCII art studio by Vasdas. Use Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, Burkes, Riemersma, halftone, stipple, CRT, and palette tools on macOS and Windows.';
 
 export function originOf(site: URL | undefined) {
   return site ?? new URL('https://ditheryuki.com');
-}
-
-export function personSchema(): SchemaNode {
-  return {
-    '@type': 'Person',
-    name: PERSON_NAME,
-    alternateName: [PERSON_ALIAS, ORG_NAME, ORG_NAME_MARK],
-    jobTitle: 'Artist and indie developer',
-    url: 'https://ditheryuki.com/',
-    sameAs: [
-      'https://github.com/edrdavid1/dith-yuki',
-      'https://t.me/leco_di_Bergamo',
-    ],
-    worksFor: {
-      '@type': 'Organization',
-      name: ORG_NAME,
-    },
-  };
 }
 
 export function organizationSchema(site: URL | undefined): SchemaNode {
@@ -95,18 +75,12 @@ export function organizationSchema(site: URL | undefined): SchemaNode {
   return {
     '@type': 'Organization',
     name: ORG_NAME,
-    alternateName: [ORG_NAME_MARK, 'Leco non di Bergamo'],
-    url: origin.href,
-    logo: new URL('/android-chrome-512.png', origin).href,
-    founder: {
-      '@type': 'Person',
-      name: PERSON_NAME,
-      alternateName: PERSON_ALIAS,
-    },
-    sameAs: [
-      'https://github.com/edrdavid1/dith-yuki',
-      'https://t.me/leco_di_Bergamo',
-    ],
+    alternateName: [ORG_NAME_MARK, 'Vasdas Studio'],
+    description:
+      'A small studio in Lithuania. We build and ship our own apps, where engineering, design and play meet.',
+    url: ORG_URL,
+    logo: new URL('/studio-logo.svg', origin).href,
+    sameAs: [ORG_URL, 'https://github.com/edrdavid1/dith-yuki'],
   };
 }
 
@@ -128,6 +102,7 @@ export function softwareApplicationSchema(
   description: string,
 ): SchemaNode {
   const origin = originOf(site);
+  const org = organizationSchema(site);
   return {
     '@type': 'SoftwareApplication',
     name: SITE_NAME,
@@ -151,9 +126,9 @@ export function softwareApplicationSchema(
       price: '0',
       priceCurrency: 'USD',
     },
-    author: personSchema(),
-    creator: personSchema(),
-    publisher: organizationSchema(site),
+    author: org,
+    creator: org,
+    publisher: org,
     url: origin.href,
     downloadUrl: 'https://github.com/edrdavid1/dith-yuki/releases',
     softwareVersion: '1.0.5-beta',

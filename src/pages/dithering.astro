@@ -5,12 +5,12 @@ import {
   DEFAULT_IMAGE_ALT,
   breadcrumbSchema,
   organizationSchema,
-  personSchema,
 } from '../lib/seo';
 
 const description =
-  'Learn image dithering with Dither Yuki: Floyd–Steinberg, Atkinson, Bayer ordered dithering, Jarvis–Judice–Ninke, Stucki, Sierra, Burkes, error diffusion, halftone, stipple, ditherpunk, and ASCII art — by David Murashka / L\'eco non di Bergamo.¹';
+  'Learn image dithering with Dither Yuki: Floyd–Steinberg, Atkinson, Bayer ordered dithering, Jarvis–Judice–Ninke, Stucki, Sierra, Burkes, error diffusion, halftone, stipple, ditherpunk, and ASCII art — by Vasdas.';
 const pageUrl = new URL('/dithering/', Astro.site ?? 'https://ditheryuki.com').href;
+const org = organizationSchema(Astro.site);
 
 const schema = [
   breadcrumbSchema(Astro.site, [
@@ -24,7 +24,7 @@ const schema = [
     inLanguage: 'en',
     mainEntityOfPage: pageUrl,
     keywords:
-      'Floyd-Steinberg, Atkinson dithering, Bayer dithering, Jarvis Judice Ninke, Stucki, Sierra, Burkes, error diffusion, ordered dithering, ditherpunk, ASCII art, David Murashka, L\'eco non di Bergamo',
+      'Floyd-Steinberg, Atkinson dithering, Bayer dithering, Jarvis Judice Ninke, Stucki, Sierra, Burkes, error diffusion, ordered dithering, ditherpunk, ASCII art, Vasdas, Vasdas studio',
     about: [
       { '@type': 'Thing', name: 'Floyd–Steinberg dithering' },
       { '@type': 'Thing', name: 'Atkinson dithering' },
@@ -32,9 +32,9 @@ const schema = [
       { '@type': 'Thing', name: 'Error diffusion' },
       { '@type': 'Thing', name: 'Ditherpunk' },
     ],
-    author: personSchema(),
-    creator: personSchema(),
-    publisher: organizationSchema(Astro.site),
+    author: org,
+    creator: org,
+    publisher: org,
     image: new URL('/social-card.png', Astro.site ?? 'https://ditheryuki.com').href,
   },
 ];

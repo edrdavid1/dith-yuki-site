@@ -5,11 +5,10 @@ import {
   DEFAULT_IMAGE_ALT,
   breadcrumbSchema,
   organizationSchema,
-  personSchema,
 } from "../lib/seo";
 
 const description =
-  "Project diary for Dither Yuki by David Murashka / L'eco non di Bergamo.¹ Notes on dithering engines, Floyd–Steinberg tiling, palette mapping, architecture, and building an independent image-dithering studio.";
+  "Project diary for Dither Yuki by Vasdas. Notes on dithering engines, Floyd–Steinberg tiling, palette mapping, architecture, and building an independent image-dithering studio.";
 
 type Entry = {
   id: string;
@@ -197,9 +196,9 @@ const schema = [
     url: pageUrl,
     inLanguage: "en",
     keywords:
-      "Dither Yuki diary, dithering engine, Floyd-Steinberg tiles, palette mapping, David Murashka, L'eco non di Bergamo",
-    author: personSchema(),
-    creator: personSchema(),
+      "Dither Yuki diary, dithering engine, Floyd-Steinberg tiles, palette mapping, Vasdas, Vasdas studio",
+    author: organizationSchema(Astro.site),
+    creator: organizationSchema(Astro.site),
     publisher: organizationSchema(Astro.site),
     blogPost: entries
       .filter((entry) => entry.status === "published")
@@ -208,8 +207,8 @@ const schema = [
         headline: entry.title,
         url: `${pageUrl}#note-${entry.id}`,
         articleSection: entry.tag,
-        author: personSchema(),
-        creator: personSchema(),
+        author: organizationSchema(Astro.site),
+        creator: organizationSchema(Astro.site),
         publisher: organizationSchema(Astro.site),
       })),
   },
@@ -219,12 +218,13 @@ const schema = [
 <Layout
   variant="diary"
   type="article"
-  title="Project Diary — Dither Yuki by David Murashka / L'eco non di Bergamo"
+  title="Project Diary — Dither Yuki by Vasdas"
   description={description}
   canonical="/diary/"
   image="/social-card.png"
   imageAlt={DEFAULT_IMAGE_ALT}
   schema={schema}
+  robots="noindex,follow"
 >
   <div class="diary-shell">
     <PageHero

@@ -57,7 +57,7 @@ const capabilities = [
   <div
     class="home-mobile-actions"
     role="group"
-    aria-label="Download Dither Yuki and visit GitHub"
+    aria-label="Download Dither Yuki"
   >
     <button
       type="button"
@@ -89,20 +89,6 @@ const capabilities = [
         height="42"
       />
     </button>
-    <a
-      class="nav-btn"
-      href="https://github.com/edrdavid1/dith-yuki"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span>GitHub</span>
-      <svg viewBox="0 0 42 42" aria-hidden="true"
-        ><path
-          fill="currentColor"
-          d="M21 4.5a16.7 16.7 0 0 0-5.3 32.6c.8.2 1.1-.3 1.1-.8v-3c-4.5 1-5.5-1.9-5.5-1.9-.7-1.8-1.8-2.3-1.8-2.3-1.5-1 .1-1 .1-1 1.6.1 2.4 1.7 2.4 1.7 1.5 2.4 3.8 1.7 4.8 1.3.2-1 .6-1.7 1-2.1-3.6-.4-7.4-1.8-7.4-8.1 0-1.8.6-3.2 1.7-4.4-.2-.4-.7-2.1.2-4.4 0 0 1.4-.4 4.6 1.7a16 16 0 0 1 8.4 0c3.2-2.1 4.6-1.7 4.6-1.7.9 2.3.4 4 .2 4.4 1.1 1.2 1.7 2.6 1.7 4.4 0 6.3-3.8 7.7-7.4 8.1.6.5 1.1 1.5 1.1 3v4.4c0 .5.3 1 1.1.8A16.7 16.7 0 0 0 21 4.5Z"
-        ></path></svg
-      >
-    </a>
   </div>
 
   <div class="page">
@@ -185,74 +171,9 @@ const capabilities = [
       <h2 id="about-title">Who we are</h2>
       <div class="about-body">
         <p>
-          Hi, I'm Dave — an artist and indie developer behind L'eco non di
-          Bergamo.¹ I couldn't find a convenient tool for image dithering that
-          suited my needs, so I decided to make my own. This project started as
-          a personal tool that I want to keep developing and improving over
-          time.
+          A small studio in Lithuania. We build and ship our own apps, where
+          engineering, design and play meet.
         </p>
-        <p id="license">
-          Right now, my budget is very limited, so I can't afford the necessary
-          developer accounts and licenses for macOS and Windows. Because of
-          this, installing the app may come with additional security warnings.
-        </p>
-        <p>
-          If you like the project and want to help me make it better and keep
-          developing it, you can support me through Ko-fi. Thanks for trying out
-          my project!
-        </p>
-      </div>
-      <div class="support-cta">
-        <a
-          class="coffee-link"
-          href="https://ko-fi.com/ditheryuki"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true"
-            ><path
-              d="M4 8h13v7a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Zm13 2h2a2 2 0 1 1 0 4h-2M7 4c0 1 1 1 1 2m4-2c0 1 1 1 1 2"
-            ></path></svg
-          >
-          Ko-fi
-        </a>
-        <details class="support-notice">
-          <summary>
-            <span class="support-notice-icon" aria-hidden="true">
-              <svg viewBox="0 0 16 16" width="14" height="14">
-                <circle
-                  cx="8"
-                  cy="8"
-                  r="6.25"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.25"></circle>
-                <path
-                  d="M8 7.25v3.5M8 5.2v.2"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.35"
-                  stroke-linecap="round"></path>
-              </svg>
-            </span>
-            <span>Terms &amp; Non-Commercial Notice</span>
-          </summary>
-          <div class="support-notice-body">
-            <p>
-              This is a personal, non-commercial source-available project. The
-              source code is licensed under the{" "}
-              <a href="/license/">L'eco non di Bergamo Software License</a>,
-              which restricts commercial redistribution and incorporation into
-              other products.
-            </p>
-            <p>
-              All contributions through Ko-fi (or PayPal) are voluntary,
-              non-refundable gifts supporting this free tool; no goods, premium
-              services, hidden features, or exclusive benefits are provided in
-              return. Thank you for keeping this project alive!
-            </p>
-          </div>
-        </details>
       </div>
       <figure class="about-media">
         <img
@@ -267,15 +188,20 @@ const capabilities = [
     </section>
 
     <p class="signature reveal">
-      <span class="flag" aria-hidden="true"
-        ><i class="blue"></i><i class="brown"></i><i class="dark"></i></span
-      >
       <a
-        href="https://t.me/leco_di_Bergamo"
+        class="studio-mark"
+        href="https://vasdas.studio"
         target="_blank"
         rel="noopener noreferrer"
       >
-        L'eco non di Bergamo.<sup>1</sup>
+        <img
+          src="/studio-logo.svg"
+          alt=""
+          width="40"
+          height="40"
+          decoding="async"
+        />
+        <span>Vasdas studio</span>
       </a>
     </p>
   </div>

@@ -5,10 +5,8 @@ import {
   DEFAULT_SITE_DESCRIPTION,
   ORG_NAME,
   ORG_NAME_MARK,
-  PERSON_NAME,
   SITE_NAME,
   organizationSchema,
-  personSchema,
 } from '../lib/seo';
 
 interface SchemaNode {
@@ -52,6 +50,7 @@ const canonicalUrl = canonical ? new URL(canonical, siteUrl) : new URL(Astro.url
 // Strip cache-busting query params from share images.
 const imagePath = image.split('?')[0] || '/social-card.png';
 const imageUrl = new URL(imagePath, siteUrl);
+const org = organizationSchema(Astro.site);
 
 const websiteSchema: SchemaNode = {
   '@type': 'WebSite',
@@ -61,8 +60,8 @@ const websiteSchema: SchemaNode = {
   description: DEFAULT_SITE_DESCRIPTION,
   inLanguage: 'en',
   keywords: DITHERING_KEYWORDS,
-  creator: personSchema(),
-  publisher: organizationSchema(Astro.site),
+  creator: org,
+  publisher: org,
   about: {
     '@type': 'Thing',
     name: 'Image dithering',
@@ -84,10 +83,10 @@ const webPageSchema: SchemaNode = {
     url: siteUrl.href,
   },
   inLanguage: 'en',
-  author: personSchema(),
-  creator: personSchema(),
-  publisher: organizationSchema(Astro.site),
-  copyrightHolder: organizationSchema(Astro.site),
+  author: org,
+  creator: org,
+  publisher: org,
+  copyrightHolder: org,
   copyrightYear: new Date().getFullYear(),
   primaryImageOfPage: {
     '@type': 'ImageObject',
@@ -101,8 +100,7 @@ const webPageSchema: SchemaNode = {
 const schemas = [
   websiteSchema,
   webPageSchema,
-  personSchema(),
-  organizationSchema(Astro.site),
+  org,
   ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
 ];
 
@@ -114,10 +112,10 @@ const jsonLd = (value: SchemaNode) =>
 <meta name="keywords" content={keywords} />
 <meta name="robots" content={robots} />
 <meta name="googlebot" content={robots} />
-<meta name="author" content={`${PERSON_NAME} / ${ORG_NAME}`} />
-<meta name="creator" content={PERSON_NAME} />
+<meta name="author" content={ORG_NAME_MARK} />
+<meta name="creator" content={ORG_NAME_MARK} />
 <meta name="publisher" content={ORG_NAME_MARK} />
-<meta name="copyright" content={`© ${new Date().getFullYear()} ${PERSON_NAME}, ${ORG_NAME_MARK}`} />
+<meta name="copyright" content={`© ${new Date().getFullYear()} ${ORG_NAME_MARK}`} />
 <meta name="application-name" content={SITE_NAME} />
 <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 <meta name="generator" content={Astro.generator} />
@@ -147,7 +145,7 @@ const jsonLd = (value: SchemaNode) =>
 <meta property="og:type" content={type} />
 <meta property="og:locale" content={locale} />
 <meta property="og:site_name" content={SITE_NAME} />
-<meta property="article:author" content={PERSON_NAME} />
+<meta property="article:author" content={ORG_NAME_MARK} />
 <meta property="article:publisher" content={ORG_NAME} />
 
 <meta name="twitter:card" content="summary_large_image" />
@@ -155,9 +153,7 @@ const jsonLd = (value: SchemaNode) =>
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl.href} />
 <meta name="twitter:image:alt" content={imageAlt} />
-<meta name="twitter:label1" content="Creator" />
-<meta name="twitter:data1" content={PERSON_NAME} />
-<meta name="twitter:label2" content="Studio" />
-<meta name="twitter:data2" content={ORG_NAME_MARK} />
+<meta name="twitter:label1" content="Studio" />
+<meta name="twitter:data1" content={ORG_NAME_MARK} />
 
 {schemas.map((item) => <script type="application/ld+json" set:html={jsonLd(item)} />)}

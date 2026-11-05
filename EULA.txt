@@ -2,7 +2,7 @@ DITHER YUKI — END USER LICENSE AGREEMENT
 
 Last updated: September 22, 2026
 
-This End User License Agreement ("Agreement") is between you and David Murashka, an independent developer operating under the name "L'eco non di Bergamo" ("we", "us"), and governs your use of the Dither Yuki application ("the Software"), including alpha and beta versions.
+This End User License Agreement ("Agreement") is between you and Vasdas ("we", "us"), and governs your use of the Dither Yuki application ("the Software"), including alpha and beta versions.
 
 1. ACCEPTANCE
 
@@ -12,7 +12,7 @@ By downloading, installing, or using the Software, you agree to this Agreement. 
 
 Subject to this Agreement, we grant you a personal, non-exclusive, non-transferable, revocable license to install and use the Software on devices you own or control, for both personal and commercial use.
 
-The source code of the Software, where made available, is licensed separately under the L'eco non di Bergamo Software License (see LICENSE file). This Agreement governs your use of the compiled application.
+The source code of the Software, where made available, is licensed separately under the Vasdas Software License (see LICENSE file). This Agreement governs your use of the compiled application.
 
 You are fully authorized to use the Software to create commercial products. However, you are strictly prohibited from selling, renting, repackaging, or monetizing the Software itself or its underlying source code.
 
