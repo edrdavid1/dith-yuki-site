@@ -3,6 +3,8 @@ import {
   DITHERING_KEYWORDS,
   DEFAULT_IMAGE_ALT,
   DEFAULT_SITE_DESCRIPTION,
+  DEFAULT_SOCIAL_DESCRIPTION,
+  DEFAULT_SOCIAL_TITLE,
   ORG_NAME_MARK,
   ORG_URL,
   SITE_NAME,
@@ -22,6 +24,10 @@ interface SchemaNode {
 interface Props {
   title: string;
   description: string;
+  /** Short messenger/social title (avoids repeating site name). */
+  socialTitle?: string;
+  /** Short messenger/social description. */
+  socialDescription?: string;
   canonical?: string;
   image?: string;
   imageAlt?: string;
@@ -37,6 +43,8 @@ interface Props {
 const {
   title,
   description,
+  socialTitle = DEFAULT_SOCIAL_TITLE,
+  socialDescription = DEFAULT_SOCIAL_DESCRIPTION,
   canonical,
   image = SOCIAL_CARD_PATH,
   imageAlt = DEFAULT_IMAGE_ALT,
@@ -166,8 +174,8 @@ const jsonLd = (value: SchemaNode) =>
 */}
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={SITE_NAME} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={socialTitle} />
+<meta property="og:description" content={socialDescription} />
 <meta property="og:url" content={canonicalUrl.href} />
 <meta property="og:locale" content={locale} />
 <meta property="og:image" content={imageUrl.href} />
@@ -182,16 +190,12 @@ const jsonLd = (value: SchemaNode) =>
 
 {/* Twitter / X + Discord; Telegram also falls back to these */}
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:title" content={socialTitle} />
+<meta name="twitter:description" content={socialDescription} />
 <meta name="twitter:url" content={canonicalUrl.href} />
 <meta name="twitter:image" content={imageUrl.href} />
 <meta name="twitter:image:src" content={imageUrl.href} />
 <meta name="twitter:image:alt" content={imageAlt} />
-<meta name="twitter:label1" content="Studio" />
-<meta name="twitter:data1" content={ORG_NAME_MARK} />
-<meta name="twitter:label2" content="Platform" />
-<meta name="twitter:data2" content="macOS & Windows" />
 
 <meta itemprop="name" content={title} />
 <meta itemprop="description" content={description} />

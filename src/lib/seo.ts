@@ -69,8 +69,14 @@ export const DITHERING_KEYWORDS = [
   'Windows dithering software',
 ].join(', ');
 
+/** Longer copy for <meta name="description"> / schema (search engines). */
 export const DEFAULT_SITE_DESCRIPTION =
   'Dither Yuki is a desktop image dithering and ASCII art studio by Vasdas Studio. Use Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, Burkes, Riemersma, halftone, stipple, CRT, and palette tools on macOS and Windows.';
+
+/** Short share text for Telegram / WhatsApp / Discord — no brand repetition. */
+export const DEFAULT_SOCIAL_TITLE = 'Image dithering & ASCII art studio';
+export const DEFAULT_SOCIAL_DESCRIPTION =
+  'Desktop dithering tools for macOS and Windows.';
 
 export function originOf(site: URL | undefined) {
   return site ?? new URL('https://ditheryuki.com');

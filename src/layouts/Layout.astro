@@ -13,6 +13,8 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
+  socialTitle?: string;
+  socialDescription?: string;
   canonical?: string;
   image?: string;
   imageAlt?: string;
@@ -28,6 +30,8 @@ interface Props {
 const {
   title,
   description,
+  socialTitle,
+  socialDescription,
   canonical,
   image,
   imageAlt,
@@ -50,6 +54,8 @@ const SHOW_DIARY = false;
     <SEO
       title={title}
       description={description}
+      socialTitle={socialTitle}
+      socialDescription={socialDescription}
       canonical={canonical}
       image={image}
       imageAlt={imageAlt}
