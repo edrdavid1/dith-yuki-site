@@ -3,9 +3,13 @@ import {
   DITHERING_KEYWORDS,
   DEFAULT_IMAGE_ALT,
   DEFAULT_SITE_DESCRIPTION,
-  ORG_NAME,
   ORG_NAME_MARK,
+  ORG_URL,
   SITE_NAME,
+  SOCIAL_CARD_HEIGHT,
+  SOCIAL_CARD_PATH,
+  SOCIAL_CARD_TYPE,
+  SOCIAL_CARD_WIDTH,
   organizationSchema,
 } from '../lib/seo';
 
@@ -34,10 +38,10 @@ const {
   title,
   description,
   canonical,
-  image = '/social-card.png',
+  image = SOCIAL_CARD_PATH,
   imageAlt = DEFAULT_IMAGE_ALT,
-  imageWidth = 1200,
-  imageHeight = 630,
+  imageWidth = SOCIAL_CARD_WIDTH,
+  imageHeight = SOCIAL_CARD_HEIGHT,
   type = 'website',
   locale = 'en_US',
   robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
@@ -47,13 +51,22 @@ const {
 
 const siteUrl = Astro.site ?? new URL(Astro.url.origin);
 const canonicalUrl = canonical ? new URL(canonical, siteUrl) : new URL(Astro.url.pathname, siteUrl);
-// Strip cache-busting query params from share images.
-const imagePath = image.split('?')[0] || '/social-card.png';
+// Absolute share image URL (messengers/social scrapers require a full https URL).
+const imagePath = image.split('?')[0] || SOCIAL_CARD_PATH;
 const imageUrl = new URL(imagePath, siteUrl);
+const imageType = imagePath.endsWith('.jpg') || imagePath.endsWith('.jpeg')
+  ? 'image/jpeg'
+  : imagePath.endsWith('.webp')
+    ? 'image/webp'
+    : SOCIAL_CARD_TYPE;
 const org = organizationSchema(Astro.site);
+const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+const yandexVerification = import.meta.env.PUBLIC_YANDEX_VERIFICATION;
 
 const websiteSchema: SchemaNode = {
   '@type': 'WebSite',
+  '@id': `${siteUrl.href}#website`,
   name: SITE_NAME,
   alternateName: ['Dith Yuki', 'DitherYuki'],
   url: siteUrl.href,
@@ -62,6 +75,7 @@ const websiteSchema: SchemaNode = {
   keywords: DITHERING_KEYWORDS,
   creator: org,
   publisher: org,
+  image: imageUrl.href,
   about: {
     '@type': 'Thing',
     name: 'Image dithering',
@@ -77,11 +91,7 @@ const webPageSchema: SchemaNode = {
   name: title,
   description,
   keywords,
-  isPartOf: {
-    '@type': 'WebSite',
-    name: SITE_NAME,
-    url: siteUrl.href,
-  },
+  isPartOf: { '@id': `${siteUrl.href}#website` },
   inLanguage: 'en',
   author: org,
   creator: org,
@@ -90,6 +100,16 @@ const webPageSchema: SchemaNode = {
   copyrightYear: new Date().getFullYear(),
   primaryImageOfPage: {
     '@type': 'ImageObject',
+    '@id': `${canonicalUrl.href}#primaryimage`,
+    url: imageUrl.href,
+    contentUrl: imageUrl.href,
+    width: imageWidth,
+    height: imageHeight,
+    caption: imageAlt,
+    encodingFormat: imageType,
+  },
+  image: {
+    '@type': 'ImageObject',
     url: imageUrl.href,
     width: imageWidth,
     height: imageHeight,
@@ -97,9 +117,22 @@ const webPageSchema: SchemaNode = {
   },
 };
 
+const imageObjectSchema: SchemaNode = {
+  '@type': 'ImageObject',
+  '@id': `${imageUrl.href}#social`,
+  url: imageUrl.href,
+  contentUrl: imageUrl.href,
+  width: imageWidth,
+  height: imageHeight,
+  caption: imageAlt,
+  encodingFormat: imageType,
+  representativeOfPage: true,
+};
+
 const schemas = [
   websiteSchema,
   webPageSchema,
+  imageObjectSchema,
   org,
   ...(schema ? (Array.isArray(schema) ? schema : [schema]) : []),
 ];
@@ -112,6 +145,7 @@ const jsonLd = (value: SchemaNode) =>
 <meta name="keywords" content={keywords} />
 <meta name="robots" content={robots} />
 <meta name="googlebot" content={robots} />
+<meta name="bingbot" content={robots} />
 <meta name="author" content={ORG_NAME_MARK} />
 <meta name="creator" content={ORG_NAME_MARK} />
 <meta name="publisher" content={ORG_NAME_MARK} />
@@ -120,40 +154,63 @@ const jsonLd = (value: SchemaNode) =>
 <meta name="apple-mobile-web-app-title" content={SITE_NAME} />
 <meta name="generator" content={Astro.generator} />
 <meta name="format-detection" content="telephone=no,address=no,email=no" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <link rel="canonical" href={canonicalUrl.href} />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#ddd9ce" />
 <meta name="color-scheme" content="light" />
-<link rel="sitemap" href="/sitemap-index.xml" />
+
+{/*
+  Open Graph first — Telegram’s scraper is picky and reads these early.
+  Absolute HTTPS JPEG URL + width/height/type is what makes the large preview stick.
+*/}
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl.href} />
+<meta property="og:locale" content={locale} />
+<meta property="og:image" content={imageUrl.href} />
+<meta property="og:image:url" content={imageUrl.href} />
+<meta property="og:image:secure_url" content={imageUrl.href} />
+<meta property="og:image:type" content={imageType} />
+<meta property="og:image:width" content={String(imageWidth)} />
+<meta property="og:image:height" content={String(imageHeight)} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta property="article:author" content={ORG_NAME_MARK} />
+<meta property="article:publisher" content={ORG_URL} />
+
+{/* Twitter / X + Discord; Telegram also falls back to these */}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:url" content={canonicalUrl.href} />
+<meta name="twitter:image" content={imageUrl.href} />
+<meta name="twitter:image:src" content={imageUrl.href} />
+<meta name="twitter:image:alt" content={imageAlt} />
+<meta name="twitter:label1" content="Studio" />
+<meta name="twitter:data1" content={ORG_NAME_MARK} />
+<meta name="twitter:label2" content="Platform" />
+<meta name="twitter:data2" content="macOS & Windows" />
+
+<meta itemprop="name" content={title} />
+<meta itemprop="description" content={description} />
+<meta itemprop="image" content={imageUrl.href} />
+<link rel="image_src" href={imageUrl.href} />
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="author" href="/humans.txt" />
+<link rel="me" href={ORG_URL} />
+
+{googleVerification && <meta name="google-site-verification" content={googleVerification} />}
+{bingVerification && <meta name="msvalidate.01" content={bingVerification} />}
+{yandexVerification && <meta name="yandex-verification" content={yandexVerification} />}
 
 <link rel="icon" href="/favicon.ico" sizes="48x48" />
 <link rel="icon" href="/android-chrome-192.png" type="image/png" sizes="192x192" />
 <link rel="icon" href="/android-chrome-512.png" type="image/png" sizes="512x512" />
 <link rel="apple-touch-icon" href="/favicon/180x180.png" sizes="180x180" />
-
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
-<meta property="og:image" content={imageUrl.href} />
-<meta property="og:image:secure_url" content={imageUrl.href} />
-<meta property="og:image:alt" content={imageAlt} />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content={String(imageWidth)} />
-<meta property="og:image:height" content={String(imageHeight)} />
-<meta property="og:url" content={canonicalUrl.href} />
-<meta property="og:type" content={type} />
-<meta property="og:locale" content={locale} />
-<meta property="og:site_name" content={SITE_NAME} />
-<meta property="article:author" content={ORG_NAME_MARK} />
-<meta property="article:publisher" content={ORG_NAME} />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={imageUrl.href} />
-<meta name="twitter:image:alt" content={imageAlt} />
-<meta name="twitter:label1" content="Studio" />
-<meta name="twitter:data1" content={ORG_NAME_MARK} />
 
 {schemas.map((item) => <script type="application/ld+json" set:html={jsonLd(item)} />)}

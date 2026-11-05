@@ -1,7 +1,7 @@
 {
   "name": "Dither Yuki",
   "short_name": "Dither Yuki",
-  "description": "Desktop image dithering and ASCII art studio by Vasdas. Floyd–Steinberg, Atkinson, Bayer, palettes, and more.",
+  "description": "Desktop image dithering and ASCII art studio by Vasdas Studio. Floyd–Steinberg, Atkinson, Bayer, palettes, and more.",
   "start_url": "/",
   "display": "browser",
   "background_color": "#ddd9ce",

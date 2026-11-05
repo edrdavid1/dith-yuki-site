@@ -1,5 +1,5 @@
 /* TEAM */
-Studio: Vasdas
+Studio: Vasdas Studio
 Site: Dither Yuki
 Contact: support@ditheryuki.com
 Web: https://vasdas.studio
@@ -9,3 +9,4 @@ GitHub: https://github.com/edrdavid1/dith-yuki
 Standards: HTML5, CSS, Astro
 Software: Dither Yuki — image dithering, Floyd-Steinberg, Atkinson, Bayer, ASCII art
 Language: English
+Location: Lithuania, Europe

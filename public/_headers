@@ -25,8 +25,9 @@
   Cache-Control: public, max-age=604800
   Content-Type: application/manifest+json
 
-/social-card.png
+/images/social-card.jpg
   Cache-Control: public, max-age=604800
+  Content-Type: image/jpeg
 
 /sitemap-index.xml
   Cache-Control: public, max-age=3600
@@ -43,3 +44,15 @@
 /robots.txt
   Cache-Control: public, max-age=3600
   Content-Type: text/plain; charset=utf-8
+
+/llms.txt
+  Cache-Control: public, max-age=3600
+  Content-Type: text/plain; charset=utf-8
+
+/sitemap.md
+  Cache-Control: public, max-age=3600
+  Content-Type: text/markdown; charset=utf-8
+
+/BingSiteAuth.xml
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml; charset=utf-8

@@ -10,10 +10,16 @@ type SchemaNode = {
 
 export const SITE_NAME = 'Dither Yuki';
 export const ORG_NAME = 'Vasdas';
-export const ORG_NAME_MARK = 'Vasdas studio';
+export const ORG_NAME_MARK = 'Vasdas Studio';
 export const ORG_URL = 'https://vasdas.studio';
 export const DEFAULT_IMAGE_ALT =
-  'Dither Yuki — desktop image dithering and ASCII art studio by Vasdas';
+  'Dither Yuki — dithered classical painting with the Yuki mascot, by Vasdas Studio';
+
+/** Absolute OG/Twitter/Telegram share image path (1200×630 JPEG). */
+export const SOCIAL_CARD_PATH = '/images/social-card.jpg';
+export const SOCIAL_CARD_WIDTH = 1200;
+export const SOCIAL_CARD_HEIGHT = 630;
+export const SOCIAL_CARD_TYPE = 'image/jpeg';
 
 /** Core topical terms for meta keywords + schema.keywords */
 export const DITHERING_KEYWORDS = [
@@ -58,13 +64,13 @@ export const DITHERING_KEYWORDS = [
   'graphics application',
   'Dither Yuki',
   'Vasdas',
-  'Vasdas studio',
+  'Vasdas Studio',
   'macOS dithering app',
   'Windows dithering software',
 ].join(', ');
 
 export const DEFAULT_SITE_DESCRIPTION =
-  'Dither Yuki is a desktop image dithering and ASCII art studio by Vasdas. Use Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, Burkes, Riemersma, halftone, stipple, CRT, and palette tools on macOS and Windows.';
+  'Dither Yuki is a desktop image dithering and ASCII art studio by Vasdas Studio. Use Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, Burkes, Riemersma, halftone, stipple, CRT, and palette tools on macOS and Windows.';
 
 export function originOf(site: URL | undefined) {
   return site ?? new URL('https://ditheryuki.com');
@@ -77,10 +83,16 @@ export function organizationSchema(site: URL | undefined): SchemaNode {
     name: ORG_NAME,
     alternateName: [ORG_NAME_MARK, 'Vasdas Studio'],
     description:
-      'A small studio in Lithuania. We build and ship our own apps, where engineering, design and play meet.',
+      'Vasdas Studio is an independent software studio based in Lithuania, Europe. We create software for creative work, digital exploration and new ways of working with visual media.',
     url: ORG_URL,
-    logo: new URL('/studio-logo.svg', origin).href,
+    logo: new URL('/android-chrome-512.png', origin).href,
+    image: new URL(SOCIAL_CARD_PATH, origin).href,
     sameAs: [ORG_URL, 'https://github.com/edrdavid1/dith-yuki'],
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'LT',
+      addressRegion: 'Europe',
+    },
   };
 }
 
@@ -130,6 +142,8 @@ export function softwareApplicationSchema(
     creator: org,
     publisher: org,
     url: origin.href,
+    image: new URL(SOCIAL_CARD_PATH, origin).href,
+    screenshot: new URL(SOCIAL_CARD_PATH, origin).href,
     downloadUrl: 'https://github.com/edrdavid1/dith-yuki/releases',
     softwareVersion: '1.0.5-beta',
   };

@@ -24,7 +24,7 @@ const schema = [
     inLanguage: 'en',
     mainEntityOfPage: pageUrl,
     keywords:
-      'Floyd-Steinberg, Atkinson dithering, Bayer dithering, Jarvis Judice Ninke, Stucki, Sierra, Burkes, error diffusion, ordered dithering, ditherpunk, ASCII art, Vasdas, Vasdas studio',
+      'Floyd-Steinberg, Atkinson dithering, Bayer dithering, Jarvis Judice Ninke, Stucki, Sierra, Burkes, error diffusion, ordered dithering, ditherpunk, ASCII art, Vasdas, Vasdas Studio',
     about: [
       { '@type': 'Thing', name: 'Floyd–Steinberg dithering' },
       { '@type': 'Thing', name: 'Atkinson dithering' },
@@ -35,7 +35,7 @@ const schema = [
     author: org,
     creator: org,
     publisher: org,
-    image: new URL('/social-card.png', Astro.site ?? 'https://ditheryuki.com').href,
+    image: new URL('/images/social-card.jpg', Astro.site ?? 'https://ditheryuki.com').href,
   },
 ];
 ---
@@ -46,7 +46,7 @@ const schema = [
   title="Dithering Algorithms Guide — Floyd–Steinberg, Bayer, Atkinson | Dither Yuki"
   description={description}
   canonical="/dithering/"
-  image="/social-card.png"
+  image="/images/social-card.jpg"
   imageAlt={DEFAULT_IMAGE_ALT}
   schema={schema}
 >

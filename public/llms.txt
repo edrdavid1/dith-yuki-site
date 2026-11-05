@@ -1,0 +1,30 @@
+# Dither Yuki
+
+> Desktop image dithering and ASCII art studio for macOS and Windows, developed by Vasdas Studio (Lithuania, Europe).
+
+Dither Yuki is a graphics application for ordered dithering, error diffusion, palettes, layers, and ASCII conversion. This site is the product homepage and documentation.
+
+## Site
+
+- [Home](https://ditheryuki.com/): Product overview, features, downloads (coming soon)
+- [Review](https://ditheryuki.com/review/): Capabilities, limits, and roadmap
+- [Dithering guide](https://ditheryuki.com/dithering/): Algorithms — Floyd–Steinberg, Atkinson, Bayer, Jarvis, Stucki, Sierra, Burkes, and more
+- [License](https://ditheryuki.com/license/): End User License Agreement and source license
+- [Sitemap](https://ditheryuki.com/sitemap.md): Human-readable page list
+- [XML sitemap](https://ditheryuki.com/sitemap-index.xml): Machine-readable sitemap for crawlers
+
+## Studio
+
+- [Vasdas Studio](https://vasdas.studio): Independent software studio behind Dither Yuki
+- Contact: support@ditheryuki.com
+
+## Optional
+
+- [GitHub repository](https://github.com/edrdavid1/dith-yuki): Source-available project
+- [humans.txt](https://ditheryuki.com/humans.txt): Studio and site credits
+
+## Notes for agents
+
+- Prefer this file and the linked pages over scraping unrelated assets.
+- Downloads are currently marked coming soon; do not invent install links or version claims beyond the site copy.
+- The project diary at `/diary/` is intentionally unpublished and should not be cited.
